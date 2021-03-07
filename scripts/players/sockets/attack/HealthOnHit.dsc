@@ -9,7 +9,7 @@ socket_gem_attack_health_on_hit_handler:
         - foreach <context.damager.equipment.include[<context.damager.item_in_hand>]>:
             - define gem_count <[gem_count].add[<[value].nbt.filter[regex_matches[socket[0-9]+_gem/socket_gem_attack_health_on_hit]].size||0>]>
         - repeat <[gem_count]>:
-            - heal <context.final_damage.div[8]> <context.damager>
+            - heal <context.final_damage.div[16]> <context.damager>
 
 socket_gem_attack_health_on_hit:
     debug: false

@@ -1,4 +1,4 @@
-ChampionHandler:
+Champion_Spawn_Handler:
     type: world
     debug: false
     events:
@@ -105,3 +105,22 @@ ChampionHandler:
                 - mythicspawn Toxus <[location].add[0,1,0]>
             - playeffect <[location]> effect:EXPLOSION_HUGE visibility:500 quantity:50 offset:2.0,2.0,2.0
             - playsound <[location]> sound:ENTITY_GENERIC_EXPLODE volume:1.0
+
+Champion_Timer_Handler:
+    type: world
+    debug: false
+    events:
+        after mythicmob mob spawns:
+        - if <script[champion_list].data_key[champions].contains[<context.entity.mythicmob.internal_name>]>:
+            - flag <context.entity> mob_tier.champion
+        after entity damaged flagged:mob_tier.champion:
+        - if <context.entity.time_lived.in_minutes> >= 30:
+            - narrate "<context.entity.name> <red>disappears into the dark realm. The next attempt to challenge them must be swifter!" targets:<context.entity.world.players>
+            - remove <context.entity>
+
+Champion_List:
+    type: data
+    debug: false
+    champions:
+    - Umbra
+    - Toxus

@@ -7,6 +7,8 @@ config:
     rewards:
         items:
         - <item[fishing_rod]>
+        scripts:
+        - FindFishingNewbieCompletion
     material: compass
     quit_step: FindFishingNewbieOffer
 messages:
