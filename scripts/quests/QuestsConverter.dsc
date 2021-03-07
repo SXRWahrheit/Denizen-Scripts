@@ -1,5 +1,5 @@
 QuestDataConverter:
-    debug: true
+    debug: false
     type: world
     events:
         on player joins:
@@ -23,7 +23,7 @@ QuestDataConverter:
 
 QuestsDataConverterTaskUnsafe:
     type: task
-    debug: true
+    debug: false
     script:
     - define data <player.uuid>_quest_data
     - define olddata <player.uuid>_quest_data_old
@@ -42,7 +42,7 @@ QuestsDataConverterTaskUnsafe:
 
 QuestsDataConverterTask:
     type: task
-    debug: true
+    debug: false
     script:
     - define data <player.uuid>_quest_data
     - define olddata <player.uuid>_quest_data_old
@@ -61,7 +61,7 @@ QuestsDataConverterTask:
 
 Converter_Flag_Clear:
     type: task
-    debug: true
+    debug: false
     script:
     - foreach <server.players_flagged[old_quests_data_converted]>:
         - flag <[value]> old_quests_data_converted:!
@@ -75,7 +75,7 @@ Quest_Data_Clear:
     permission message: No.
     tab completion:
         1: <server.online_players.parse[name]>
-    debug: true
+    debug: false
     script:
     - define player <server.match_player[<context.args.get[1]>]>
     - define data <[player].uuid>_quest_data

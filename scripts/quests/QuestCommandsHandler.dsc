@@ -19,7 +19,7 @@ QuestsCommand:
 
 QuestDetail:
     type: task
-    debug: true
+    debug: false
     speed: 0
     definitions: quest
     script:
@@ -36,7 +36,7 @@ QuestDetail:
 
 
 QuestQuitCommand:
-    debug: true
+    debug: false
     type: command
     name: questquit
     description: Quit a specified quest
@@ -74,7 +74,7 @@ QuestQuitCommand:
 
 Quest_Quit_Detail:
     type: task
-    debug: true
+    debug: false
     speed: 0
     definitions: quest_internalname|quest
     script:

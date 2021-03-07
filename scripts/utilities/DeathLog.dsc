@@ -1,6 +1,6 @@
 Player_Death_Logger_Monitor:
     type: world
-    debug: true
+    debug: false
     events:
         on player dies bukkit_priority:monitor:
         - announce to_console "Moniotr Logger - <player.name> died, dObject <player>"
@@ -13,7 +13,7 @@ Player_Death_Logger_Monitor:
 
 Player_Death_logger_lowest:
     type: world
-    debug: true
+    debug: false
     events:
         on player dies bukkit_priority:lowest:
         - announce to_console "Lowest Logger - <player.name> died, dObject <player>"

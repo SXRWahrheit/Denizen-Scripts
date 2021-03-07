@@ -18,7 +18,7 @@
 
 RDM_Events:
     type: world
-    debug: true
+    debug: false
     events:
         on player death:
         - choose "<context.message>":

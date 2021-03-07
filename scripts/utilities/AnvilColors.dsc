@@ -1,6 +1,6 @@
 Anvil_Color_Fixer:
     type: world
-    debug: true
+    debug: false
     events:
         on player prepares anvil craft item:
         - if !<context.item.has_nbt[item_tier]>:

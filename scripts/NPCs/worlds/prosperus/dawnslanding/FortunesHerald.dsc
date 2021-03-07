@@ -16,7 +16,7 @@ FortunesHeraldformat:
 
 FortunesHeraldInteract:
     type: interact
-    debug: true
+    debug: false
     steps:
         Greeting*:
             proximity trigger:

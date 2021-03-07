@@ -34,7 +34,7 @@ ExperienceBooster4x:
 
 exp_booster_handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player consumes ExperienceBooster2x:
         - take ExperienceBooster2x

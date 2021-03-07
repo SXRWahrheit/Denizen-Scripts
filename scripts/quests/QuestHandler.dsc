@@ -45,7 +45,7 @@ QuestRequirementsHandler:
     - determine true
 
 QuestAcceptHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname|quest
@@ -66,7 +66,7 @@ QuestAcceptHandler:
         - narrate "• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>"
 
 QuestObjectiveProgressHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname|objective
@@ -85,7 +85,7 @@ QuestObjectiveProgressHandler:
         - inject QuestProgressHandler
 
 QuestStageProgressHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname|objective
@@ -151,7 +151,7 @@ QuestItemDeliveryHandler:
         - inject QuestStageProgressHandler
 
 QuestProgressHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname
@@ -171,7 +171,7 @@ QuestProgressHandler:
         - narrate "• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>"
 
 QuestStageAdvanceHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname
@@ -262,7 +262,7 @@ QuestRepeatableHandler:
         #        - determine false
 
 QuestRewardHandler:
-    debug: true
+    debug: false
     type: task
     speed: 0
     definitions: quest_internalname
@@ -398,7 +398,7 @@ QuestInventorySelectionHandler:
         - determine cancelled
 
 QuestGUIItemBuilder:
-    debug: true
+    debug: false
     type: procedure
     definitions: quest_internalname
     # Constructs the item entries in an inventory GUI
@@ -435,7 +435,7 @@ QuestGUIItemBuilder:
 
 ResetQuestInteract:
     type: command
-    debug: true
+    debug: false
     name: questinteractreset
     description: Resets the interact script for the given NPC and player. Defaults to the current player if no player is specified.
     usage: /questinteractreset [NPC] [player]

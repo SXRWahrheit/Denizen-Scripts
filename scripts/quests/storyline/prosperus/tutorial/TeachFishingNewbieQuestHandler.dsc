@@ -1,6 +1,6 @@
 TeachFishingNewbieFishHandler:
     type: world
-    debug: true
+    debug: false
     events:
         on player fishes while caught_fish:
         - define data <player.uuid>_quest_data

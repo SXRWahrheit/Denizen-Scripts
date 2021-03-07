@@ -5,7 +5,7 @@
 
 QuestMasterAssignment:
     type: assignment
-    debug: true
+    debug: false
     interact scripts:
     - QuestMasterInteract
     actions:
@@ -240,7 +240,7 @@ QuestMaster_Check_WoodTools_Available:
 
 QuestMaster_Check_WoodTools_Available_Interact:
     type: task
-    debug: true
+    debug: false
     definitions: data
     script:
     - if <yaml[<[data]>].contains[quests.completed.SwabbyDelivery]> && <yaml[<[data]>].contains[quests.active.WoodTools].not> && <yaml[<[data]>].contains[quests.completed.WoodTools].not>:
@@ -260,7 +260,7 @@ QuestMaster_Check_WoodTools_Active:
 
 QuestMaster_Check_SetHome_Available:
     type: task
-    debug: true
+    debug: false
     definitions: data
     script:
     - if <yaml[<[data]>].contains[quests.completed.SetHome].not> && <yaml[<[data]>].contains[quests.active.SetHome].not>:
@@ -464,7 +464,7 @@ QuestMaster_Check_NoActiveQuest:
 
 QuestMaster_GeneralDialogue:
     type: task
-    debug: true
+    debug: false
     script:
     - define data <player.uuid>_quest_data
     - if <player.has_flag[QuestMasterSeen].not>:
@@ -518,7 +518,7 @@ QuestMaster_GeneralDialogue:
 
 QuestMasterInteract:
     type: interact
-    debug: true
+    debug: false
     speed: 0
     steps:
         Greeting*:

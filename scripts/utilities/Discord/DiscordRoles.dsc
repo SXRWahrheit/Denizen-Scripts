@@ -1,6 +1,6 @@
 PatreonRoleSync:
     type: world
-    debug: true
+    debug: false
     events:
         on discord message received channel:191040977652285450:
         - if <context.new_message.text> != !rolesync && <context.new_message.text.split[<&sp>].get[1]> != !linkminecraft:

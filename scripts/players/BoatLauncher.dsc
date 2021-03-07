@@ -1,6 +1,6 @@
 boatlauncher:
     type: world
-    debug: true
+    debug: false
     events:
         on player enters notable cuboid:
         - if <context.cuboids.contains_text[boatlauncher2]>:

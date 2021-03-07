@@ -154,7 +154,7 @@ link_inventory_events:
 
 #link_chat_events:
 #    type: world
-#    debug: true
+#    debug: false
 #    events:
 #        on player chats:
 #        - if <player.item_in_hand> == i@air:

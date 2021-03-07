@@ -16,7 +16,7 @@ tribute_npc_format:
 
 "TributeNPC":
     type: interact
-    debug: true
+    debug: false
     steps:
         General*:
             proximity trigger:
@@ -116,7 +116,7 @@ Tribute_Inventory:
 
 Tribute_Inventory_Handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player clicks Tribute_mcMMO in Tribute_Inventory:
         - determine passively cancelled

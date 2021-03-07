@@ -1,6 +1,6 @@
 save_bolstered_items_handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player dies:
         - define bolstered_items <player.inventory.list_contents.filter_tag[has_nbt[bolstered]]>

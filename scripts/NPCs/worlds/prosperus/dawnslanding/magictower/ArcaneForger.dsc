@@ -15,7 +15,7 @@ ArcaneForgerFormat:
 
 ArcaneForgerInteract:
     type: interact
-    debug: true
+    debug: false
     steps:
         "Player Seen*":
             proximity trigger:
@@ -124,7 +124,7 @@ EliteWeaponForge:
 
 ArcaneForgerInventoryHandler:
     type: world
-    debug: true
+    debug: false
     events:
         on server start:
         - flag server VeteranToolForgeCost:150

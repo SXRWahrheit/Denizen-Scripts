@@ -6,7 +6,7 @@ LichHuntCompletion:
 
 LichHuntHandler:
     type: world
-    debug: true
+    debug: false
     events:
         on player kills entity:
         - define data <player.uuid>_quest_data

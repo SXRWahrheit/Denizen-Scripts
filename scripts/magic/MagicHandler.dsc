@@ -1,7 +1,7 @@
 # Use with PAPI placeholders of the relevant magic type e.g. %denizen_<proc[Magic_Power_Handler].context[fire]>%
 Magic_Power_Handler:
     type: procedure
-    debug: true
+    debug: false
     definitions: magic_type
     script:
     - define set_list <player.equipment.parse[nbt[armor_set]||null].deduplicate>
@@ -35,7 +35,7 @@ Spell_Loader:
 
 #Spell_Power_Handler:
 #    type: world
-#    debug: true
+#    debug: false
 #    events:
 #        on magicspells player casts spell:
 #        - if <yaml[spells-elemental].read[<context.spell>.spell-magic-type]||null> == null:

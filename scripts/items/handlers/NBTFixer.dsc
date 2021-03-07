@@ -1,13 +1,13 @@
 Item_Tier_Fixer_Join:
     type: world
-    debug: true
+    debug: false
     events:
         after player joins:
         - inject Item_Tier_Fixer
 
 Item_Tier_Fixer:
     type: task
-    debug: true
+    debug: false
     script:
     - foreach <player.inventory.list_contents.filter_tag[<[filter_value].lore.contains_any_text[Veteran|Elite|Champion]||null>].filter_tag[<[filter_value].has_nbt[item_tier].not>]>:
         - if <[value].lore.contains_text[Veteran]>:

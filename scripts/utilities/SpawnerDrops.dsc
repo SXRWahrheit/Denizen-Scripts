@@ -10,7 +10,7 @@ spawner_block_loot:
 
 spawner_self_nuke:
     type: world
-    debug: true
+    debug: false
     events:
         on entity spawns because spawner:
         - if <context.location.find.blocks[spawner].within[5].size> == 0:

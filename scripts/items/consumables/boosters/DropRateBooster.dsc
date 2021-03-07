@@ -34,7 +34,7 @@ DropRateBooster4x:
 
 drop_rate_booster_handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player consumes DropRateBooster2x:
         - take DropRateBooster2x

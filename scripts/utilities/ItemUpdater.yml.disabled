@@ -1,6 +1,6 @@
 #"Attribute Updater":
 #    type: world
-#    debug: true
+#    debug: false
 #    events:
 ##        on player opens inventory:
 ##        - foreach <context.inventory.list_contents>

@@ -34,7 +34,7 @@ GoldBooster4x:
 
 gold_booster_handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player consumes GoldBooster2x:
         - take GoldBooster2x

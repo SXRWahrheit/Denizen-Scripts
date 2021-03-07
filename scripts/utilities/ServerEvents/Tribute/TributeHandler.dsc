@@ -1,6 +1,6 @@
 Tribute_Task:
     type: task
-    debug: true
+    debug: false
     script:
     - yaml set id:events tribute.active:false
     - yaml set id:events tribute.mcmmo.rate:1
@@ -20,7 +20,7 @@ Tribute_Task:
 
 Tribute_Activate_Task:
     type: task
-    debug: true
+    debug: false
     script:
     - yaml set id:events tribute.active:true
     - yaml set id:rates drops.active:true

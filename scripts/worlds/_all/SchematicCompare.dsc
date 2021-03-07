@@ -60,7 +60,7 @@ schematic_check_evt:
 # - flag server schem_check:!
 schematic_checker:
     type: procedure
-    debug: true
+    debug: false
     definitions: location|schematic|ignore_air
     speed: 0
     script:

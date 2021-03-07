@@ -33,7 +33,7 @@ RedstoneFinderBooster4x:
 
 redstone_finder_booster_handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player consumes RedstoneFinderBooster2x:
         - take RedstoneFinderBooster2x

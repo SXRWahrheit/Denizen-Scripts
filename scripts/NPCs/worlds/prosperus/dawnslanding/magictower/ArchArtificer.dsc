@@ -113,7 +113,7 @@ ArtificingInventory:
 
 ArtificingSliver:
     type: item
-    debug: true
+    debug: false
     material: emerald
     display name: <&a>Sliver of Crystallized Experience
     lore_list:

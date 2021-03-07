@@ -54,7 +54,7 @@ WoodToolsQuestCraftingHandler:
 
 WoodToolsQuestDeliveryHandler:
     type: task
-    debug: true
+    debug: false
     definitions: data
     script:
     - define quest_internalname:WoodTools
