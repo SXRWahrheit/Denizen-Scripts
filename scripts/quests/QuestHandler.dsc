@@ -19,7 +19,7 @@ QuestDataHandler:
             - yaml create id:<[data]>
             - yaml id:<[data]> set player_uuid:<player.uuid>
             - ~yaml id:<[data]> savefile:playerdata/<player.uuid>/quest_data.yml
-        - yaml set id:<[data]> set player_last_known_name:<player.name>
+        - yaml id:<[data]> set player_last_known_name:<player.name>
         on player quits:
         - define data <player.uuid>_quest_data
         - ~yaml id:<[data]> savefile:playerdata/<player.uuid>/quest_data.yml
@@ -297,8 +297,12 @@ QuestLoginResetHandler:
         - define data <player.uuid>_quest_data
         - if <yaml[<[data]>].read[quests.active].size||0> == 0:
             - stop
+        - if <yaml[<[data]>].read[quests.active].is_empty>:
+            - stop
         - foreach <yaml[<[data]>].read[quests.active]> as:quest_internalname:
-            - define reset_time:<yaml[<[data]>].read[quests.active.<[quest_internalname]>.reset_time]>
+            - if <yaml[<[data]>].read[quests.active.<[quest_internalname]>.reset_time]||null> == null:
+                - foreach skip
+            - define reset_time <yaml[<[data]>].read[quests.active.<[quest_internalname]>.reset_time]>
             - if <util.time_now> >= <[reset_time]>:
                 - yaml id:<[data]> set quests.active.<[quest_internalname]>:!
                 - narrate "<red>QUEST EXPIRED: <yaml[<[quest_internalname]>].read[player_data.<[quest_internalname]>.name]>"
