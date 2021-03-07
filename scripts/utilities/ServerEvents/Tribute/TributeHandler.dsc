@@ -168,6 +168,8 @@ Tribute_Drops_Harvesting:
             - stop
         - if !<yaml[harvesting].read[materials].contains[<context.material.name>]>:
             - stop
+        - if <context.material.age||0> != <context.material.maximum_age||null>:
+            - stop
         - if <util.random.int[1].to[200]> <= 1:
             - announce to_console "Tribute drop for <player.name> caused by gaining harvesting exp"
             - if <server.has_flag[tribute_power_hour]>:
