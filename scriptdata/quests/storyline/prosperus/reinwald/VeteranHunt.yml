@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 190
+        offering_npc: WarmasterReinwald
     requirements:
         quests_completed:
         - "SkeletalRogueHunt"

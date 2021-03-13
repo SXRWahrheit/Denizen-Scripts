@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 37
+        offering_npc: TimbervalePostmaster
     requirements:
         quests_completed:
         - "VisitTimbervale"
@@ -8,6 +8,7 @@ config:
         money: 50
         quest_points: 1
     material: compass
+    quit_step: Greeting
 messages:
     offer: "<dark_green>Vale Postmaster<white>: Now that you're here, why don't you go find the town's waypoint? Once you unlock it, you can visit whenever you like."
     completion: "<dark_green>Vale Postmaster<white>: Great job! Use /ftw to view the waypoints you've unlocked. To return to Timbervale at any time, just type /ftw timbervale."

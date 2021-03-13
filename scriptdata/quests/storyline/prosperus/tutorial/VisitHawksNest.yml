@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 63
+        offering_npc: Postmaster
     requirements:
         quests_completed:
         - "MeetPostmaster"
@@ -10,6 +10,7 @@ config:
         items:
         - diamond[quantity=3]
     material: paper
+    quit_step: Greeting
 messages:
     offer: "<dark_green>Dawn Postmaster<white>: We need a package delivered to the post office in Hawk's Nest! Can you take care of it? Be sure to find and unlock the waypoint while you're there! You can find it here: <&a>http://bit.ly/1tA3mLm"
     completion: "<dark_green>Dawn Postmaster<white>: Thanks so much! Here's a little payment for your hard work."

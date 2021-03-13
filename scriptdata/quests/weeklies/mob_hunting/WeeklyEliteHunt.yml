@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 190
+        offering_npc: WarmasterReinwald
     reset:
         period: 7d
         day: friday

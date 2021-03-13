@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 27
+        SirFirestride
     reset:
         period: 7d
         day: friday

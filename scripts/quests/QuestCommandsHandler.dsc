@@ -36,7 +36,7 @@ QuestDetail:
 
 
 QuestQuitCommand:
-    debug: false
+    debug: true
     type: command
     name: questquit
     description: Quit a specified quest

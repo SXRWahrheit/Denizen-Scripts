@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 193
+        offering_npc: MagnificentMage
     requirements:
         quests_completed:
         - "UnlockBlink"

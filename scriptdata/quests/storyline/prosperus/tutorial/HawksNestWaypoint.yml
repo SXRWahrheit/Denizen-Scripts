@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 70
+        offering_npc: HawksPostmaster
     requirements:
         quests_completed:
         - "VisitHawksNest"

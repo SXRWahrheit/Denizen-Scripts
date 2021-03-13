@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 39
+        offering_npc: QuestMaster
     rewards:
         money: 50
         quest_points: 1

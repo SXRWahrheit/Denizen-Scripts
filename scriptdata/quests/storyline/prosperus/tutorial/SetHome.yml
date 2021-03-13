@@ -1,13 +1,13 @@
 config:
     availability:
-        offering_npc: 39
+        offering_npc: QuestMaster
     rewards:
         money: 50
         quest_points: 1
         scripts:
         - QuestMaster_Check_Both_FirstQuests_Completed
     material: compass
-    quit_Step: FirstQuestsActive
+    quit_step: FirstQuestsActive
 messages:
     offer: "<dark_green>Quest Master<white>: You'll need more than just a sharp head on your shoulders to survive the wild - let me teach you a trick to help you out. First, set your home with /sethome. Then, go to spawn - either walk or use /spawn - then use /home to get back. I'll give you another quest."
     completion: "<dark_green>Quest Master<white>: Great job! You can use /sethome and /home as often as you like, and you can have one home on each world."

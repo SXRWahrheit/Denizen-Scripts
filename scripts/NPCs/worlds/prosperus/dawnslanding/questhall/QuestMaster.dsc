@@ -51,9 +51,9 @@ QuestMaster_Check_SwabbyDelivery_Active:
     debug: false
     definitions: data
     script:
-    # Swabby package quest active
+    # Swabby password quest active
     - if <yaml[<[data]>].contains[quests.active.SwabbyDelivery]>:
-        - narrate format:QuestMasterFormat "Have you got something for me?"
+        - narrate format:QuestMasterFormat "Did Swabby send you?"
         - wait 0.5s
         - title "subtitle:<&a>Right-click the Quest Master!"
         - zap QuestMasterInteract SwabbyDeliveryActive
@@ -64,8 +64,6 @@ QuestMaster_Dialogue_FirstQuestIntroduction:
     debug: false
     definitions: data
     script:
-    - narrate format:QuestMasterFormat "Thanks for delivering that package from Swabby!"
-    - wait 0.7s
     - narrate format:QuestMasterFormat "Say, I think you're ready for something more exciting. How about it?"
     - wait 0.7s
     - narrate format:QuestMasterFormat "I've got your first real get-out-in-the-world quest for you as soon as you're ready."
@@ -231,7 +229,7 @@ QuestMaster_Check_WoodTools_Available:
     script:
     # Wood tools quest offer
     - if <yaml[<[data]>].contains[quests.completed.SwabbyDelivery]> && <yaml[<[data]>].contains[quests.active.WoodTools].not> && <yaml[<[data]>].contains[quests.completed.WoodTools].not>:
-        - narrate format:QuestMasterFormat "Thanks for delivering that package from Swabby!"
+        - narrate format:QuestMasterFormat "Thanks for running that errand for Swabby!"
         - wait 0.7s
         - narrate format:QuestMasterFormat "Say, I think you're ready for something more exciting. How about it?"
         - wait 0.7s
@@ -473,7 +471,7 @@ QuestMaster_GeneralDialogue:
     - else:
         - narrate format:QuestMasterFormat "Good to see you, <player.name>!"
         - wait 0.7s
-    # Swabby package quest active
+    # Swabby password quest active
     - inject QuestMaster_Check_SwabbyDelivery_Active
     # Wood tools quest offer
     - inject QuestMaster_Check_WoodTools_Available
@@ -553,6 +551,7 @@ QuestMasterInteract:
             click trigger:
                 script:
                 - define quest_internalname SwabbyDelivery
+                - narrate format:PlayerChatFormat "Swabby sent me! He asked me to tell you that the password is <player.flag[swabby_password]>."
                 - inject QuestCompletionHandler instantly
                 - inject QuestMaster_Dialogue_FirstQuestIntroduction
                 - zap FirstQuests

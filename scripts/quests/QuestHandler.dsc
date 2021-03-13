@@ -195,7 +195,7 @@ QuestStageAdvanceHandler:
         - narrate "• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>"
 
 QuestQuitHandler:
-    debug: false
+    debug: true
     type: task
     speed: 0
     definitions: quest|quest_internalname

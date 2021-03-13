@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 39
+        offering_npc: QuestMaster
     requirements:
         quests_completed:
         - "Mining"
@@ -11,6 +11,7 @@ config:
         - diamond
         - emerald
     material: compass
+    quit_step: MeetSkillTrainersOffer
 messages:
     offer: "<dark_green>Quest Master<white>: Have you noticed yourself learning any skills while you're out adventuring? Well, we've got some trainers here around Dawn's Landing that will share their knowledge of those arts with you - for some coin, of course. Go meet the lot of them, and I'll give you a reward for your troubles."
     completion: "<dark_green>Quest Master<white>: Great job! Remember where they are, and visit them if you need help with your skills. There are a few others around, too, if you want to go find them on your own time."

@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 191
+        offering_npc: WiseWizard
     requirements:
         quests_completed:
         - "UnlockBlink"

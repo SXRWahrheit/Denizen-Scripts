@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 31
+        offering_npc: LadyBrightsword
     reset:
         period: 7d
         day: friday

@@ -7,15 +7,15 @@ config:
     material: potion[color=242,142,28]
     quit_step: AdventurePrompt
 messages:
-    offer: "<dark_green>Swabby<white>: Can you take this package to the Quest Master in the questing hall for me? I owe him a bottle of rum!"
-    completion: "<dark_green>Quest Master<white>: Hey, thanks! I'm out of rum. This'll be real good. Say, you look like the adventuring type. You up for some quests?"
+    offer: "<dark_green>Swabby<white>: Can you tell the Quest Master today's password for the secret speakeasy under Dawn's Landing? I forgot to tell him earlier!"
+    completion: "<dark_green>Quest Master<white>: Hey, thanks! That'll be useful for later. Say, you look like the adventuring type. You up for some quests?"
 player_data:
     SwabbyDelivery:
         name: Deliver the Swabby's package to the Quest Master
-        description: "The Swabby on The Coming Sunrise, the ship you came into port on, gave you a package to take to the Quest Master. Head to the Questing Hall to deliver it. The Questing Hall is to your right if you're looking off the plank of the ship, or to the left from /spawn."
+        description: "The Swabby on The Coming Sunrise, the ship you came into port on, gave you the password for a speakeasy. Head to the Questing Hall to tell the Quest Master. The Questing Hall is to your right if you're looking off the plank of the ship, or to the left from /spawn."
         stages:
             1:
-                description: "Find the Quest Master and deliver Swabby's package."
+                description: "Find the Quest Master and tell him the password."
                 objectives:
                     1:
                         name: "Speak to the Quest Master"

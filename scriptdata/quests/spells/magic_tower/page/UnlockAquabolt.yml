@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 192
+        offering_npc: StoicSage
     requirements:
         quests_completed:
         - "UnlockBlink"

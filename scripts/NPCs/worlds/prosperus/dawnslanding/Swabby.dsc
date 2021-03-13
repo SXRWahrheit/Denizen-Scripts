@@ -14,6 +14,7 @@ SwabbyFormat:
 
 SwabbyInteract:
     type: interact
+    debug: true
     steps:
         WakingUp*:
             proximity trigger:
@@ -61,13 +62,6 @@ SwabbyInteract:
                     - wait 0.7s
                     - narrate format:SwabbyFormat "He's not very far, just over there in the Questing Hall. You can see it on the right when you stand on the ship's plank. Just past the inn. <green>Think you can make some time for me?"
                     - zap SwabbyDeliveryOffer
-                Fallback:
-                    trigger: /*/
-                    hide trigger message: true
-                    show as normal chat: true
-                    script:
-                    - narrate format:SwabbyFormat "Hmm... I thought you were here for an adventure, but maybe not."
-                    - narrate "<gray>Right-click Swabby or say <&dq>yes<&dq> while looking at him to show him you've come to Prosperus for adventure!"
             click trigger:
                 script:
                 - cooldown 3s
@@ -92,8 +86,10 @@ SwabbyInteract:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate format:PlayerChatFormat "<green>Sure, I'll deliver your package to the Quest Master."
+                - narrate format:PlayerChatFormat "<green>Sure, I'll go meet the Quest Master."
                 - run QuestAcceptHandler def:SwabbyDelivery instantly
+                - flag player swabby_password:<proc[dictionary_generator].context[4].space_separated>
+                - narrate format:SwabbyFormat "Today's password is <player.flag[swabby_password]>. Don't forget it!"
                 - zap SwabbyDeliveryActive
             chat trigger:
                 SwabbyAcceptance:
@@ -101,16 +97,11 @@ SwabbyInteract:
                     hide trigger message: true
                     script:
                     - cooldown 3s
-                    - narrate format:PlayerChatFormat "<green>Sure, I'll deliver your package to the Quest Master."
+                    - narrate format:PlayerChatFormat "<green>Sure, I'll go meet the Quest Master."
                     - run QuestAcceptHandler def:SwabbyDelivery instantly
+                    - flag player swabby_password:<proc[dictionary_generator].context[4].space_separated>
+                    - narrate format:SwabbyFormat "Today's password is <player.flag[swabby_password]>. Don't forget it!"
                     - zap SwabbyDeliveryActive
-                Fallback:
-                    trigger: /*/
-                    hide trigger message: true
-                    show as normal chat: true
-                    script:
-                    - narrate format:SwabbyFormat "Hmm... I thought you were here for an adventure, but maybe not."
-                    - narrate "<gray>Right-click Swabby or say <&dq>yes<&dq> while looking at him to accept his quest!"
             proximity trigger:
                 exit:
                     script:

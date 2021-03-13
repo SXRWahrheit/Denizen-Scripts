@@ -2,6 +2,13 @@
 
 Stuff I come up with on lunch breaks.
 
+## Utilities
+
+### Daily roll rework
+
+* Prizes spin around the player before landing on the final prize
+
+
 ## Economy
 
 ### Villager trades at spawn

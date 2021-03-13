@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 39
+        offering_npc: QuestMaster
     requirements:
         quests_completed:
         - "MeetSkillTrainers"
@@ -8,6 +8,7 @@ config:
         money: 50
         quest_points: 1
     material: compass
+    quit_step: MeetPostmasterOffer
 messages:
     offer: "<dark_green>Quest Master<white>: The post office has some directions to other towns. Why don't you go find the postmaster?"
     completion: "<dark_green>Quest Master<white>: Well done, that wasn't so bad."

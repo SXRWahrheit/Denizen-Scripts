@@ -1,6 +1,6 @@
 config:
     availability:
-        offering_npc: 194
+        offering_npc: SkilledSorcerer
     requirements:
         quests_completed:
         - "UnlockBlink"
