@@ -79,6 +79,6 @@ LeatherArmorQuestDeliveryHandler:
                 - narrate format:QuestMasterFormat "Leather boots! They won't help you run any faster, but you'll be glad you have them."
                 - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:1
                 - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]> instantly
-        - case default:
+        - default:
             - narrate format:QuestMasterFormat "Bring me that leather armor!"
             - run QuestProgressHandler def:<[quest_internalname]> instantly

@@ -10,6 +10,7 @@ config:
         money: 100
         quest_points: 3
     material: brown_mushroom
+    quit_step: BlinkUnlocked
 messages:
     offer: "<dark_green>Wise Wizard<white>: The Confusion spell is powerful, but volatile. If you can gather me the magical ingredients, I can teach it to you. It will cause monsters in a small area around you to begin attacking each other."
     completion: "<dark_green>Wise Wizard<white>: Congratulations, you're ready to learn Confusion! Give it a try with <&dq>/cast confusion.<&dq>"
@@ -32,7 +33,7 @@ player_data:
                     3:
                         name: "Deliver magma cream"
                         progress: 0
-                        tota: 128
+                        total: 128
                     4:
                         name: "Deliver gold ingots"
                         progress: 0

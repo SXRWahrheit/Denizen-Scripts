@@ -21,7 +21,7 @@ UnlockFoodQuestDeliveryHandler:
             - define objective:7
         - case gold_ingot:
             - define objective:8
-        - case default:
+        - default:
             - narrate format:WiseWizardFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockFood
     - inject QuestItemDeliveryHandler

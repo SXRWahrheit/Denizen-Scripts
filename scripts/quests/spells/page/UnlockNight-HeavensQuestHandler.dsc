@@ -9,7 +9,7 @@ UnlockNight-HeavensQuestDeliveryHandler:
             - define objective:1
         - case gold_ingot:
             - define objective:2
-        - case default:
+        - default:
             - narrate format:StoicSageFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockNight-Heavens
             - stop

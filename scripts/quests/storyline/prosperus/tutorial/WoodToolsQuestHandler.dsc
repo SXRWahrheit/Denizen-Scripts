@@ -98,5 +98,5 @@ WoodToolsQuestDeliveryHandler:
                 - narrate format:QuestMasterFormat "A wooden hoe! Farming is a great way to build a life for yourself out there."
                 - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:1
                 - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]> instantly
-        - case default:
+        - default:
             - narrate format:QuestMasterFormat "Still waiting on that set of wood tools! You crafted them, didn't you?"

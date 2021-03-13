@@ -13,7 +13,7 @@ UnlockSafefallQuestDeliveryHandler:
             - define objective:3
         - case gold_ingot:
             - define objective:4
-        - case default:
+        - default:
             - narrate format:SkilledSorcererFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockSafefall
             - stop

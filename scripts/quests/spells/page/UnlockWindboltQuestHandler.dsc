@@ -13,7 +13,7 @@ UnlockWindboltQuestDeliveryHandler:
             - define objective:3
         - case gold_ingot:
             - define objective:4
-        - case default:
+        - default:
             - narrate format:StoicSageFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockWindbolt
             - stop

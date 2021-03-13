@@ -13,7 +13,7 @@ UnlockAvenfeldQuestDeliveryHandler:
             - define objective:3
         - case slime_ball:
             - define objective:4
-        - case default:
+        - default:
             - narrate format:RoyalGeographerFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockAvenfeld
     - inject QuestItemDeliveryHandler

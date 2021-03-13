@@ -7,7 +7,6 @@ WiseWizardAssignment:
     - WiseWizardInteract
     actions:
         on assignment:
-        - teleport npc location:<npc.anchor[WiseWizard]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
 
@@ -18,7 +17,8 @@ WiseWizardFormat:
 
 WiseWizardInteract:
     type: interact
-    debug: false
+    debug: true
+    speed: 0
     steps:
         Greeting*:
             proximity trigger:
@@ -28,9 +28,28 @@ WiseWizardInteract:
                     - if <yaml[<[data]>].contains[quests.completed.UnlockBlink]>:
                         - narrate format:WiseWizardFormat "Greetings, <player.name>."
                         - zap BlinkUnlocked
-                    - else:
+                    - else if <proc[QuestRequirementsHandler].context[UnlockBlink]>:
                         - narrate format:WiseWizardFormat "Greetings, <player.name>. Have you come to begin your journey of mastering the magical arts? The first spell I can teach you is Blink, and it allows you to teleport short distances."
                         - zap UnlockBlinkOffer
+                    - else:
+                        - narrate format:WiseWizardFormat "Greetings, <player.name>. You are not yet ready to learn what I have to teach."
+                        - if !<yaml[<[data]>].contains[quests.completed.IronTools]>:
+                            - wait 0.7s
+                            - narrate format:WiseWizardFormat "Be sure to visit the Quest Master and complete the quests he has to offer."
+                        - zap CheckQuestProgress
+        CheckQuestProgress:
+            proximity trigger:
+                entry:
+                    script:
+                    - define data <player.uuid>_quest_data
+                    - if <proc[QuestRequirementsHandler].context[UnlockBlink]>:
+                        - narrate format:WiseWizardFormat "Greetings, <player.name>. Have you come to begin your journey of mastering the magical arts? The first spell I can teach you is Blink, and it allows you to teleport short distances."
+                        - zap UnlockBlinkOffer
+                    - else:
+                        - narrate format:WiseWizardFormat "Greetings, <player.name>. You are not yet ready to learn what I have to teach."
+                        - if !<yaml[<[data]>].contains[quests.completed.IronTools]>:
+                            - wait 0.7s
+                            - narrate format:WiseWizardFormat "Be sure to visit the Quest Master and complete the quests he has to offer."
         UnlockBlinkOffer:
             proximity trigger:
                 entry:
@@ -40,6 +59,7 @@ WiseWizardInteract:
                 script:
                 - narrate format:PlayerChatFormat "Magic? Sounds awesome, I'm in!"
                 - run QuestAcceptHandler def:UnlockBlink
+                - zap UnlockBlinkActive
             chat trigger:
                 UnlockBlinkAcceptance:
                     trigger: /yes|sure|okay|great|yeah/
@@ -53,11 +73,11 @@ WiseWizardInteract:
                 entry:
                     script:
                     - narrate format:WiseWizardFormat "How's it going finding those magical materials?"
-                    - run QuestProgressHandler def:UnlockBlink
+                    - run QuestProgressHandler def:UnlockBlink instantly
             click trigger:
                 script:
                 - define data <player.uuid>_quest_data
-                - define quest_internalname:UnlockBlink
+                - define quest_internalname UnlockBlink
                 - if <yaml[<[data]>].read[quests.active.<[quest_internalname]>.current_stage]> == 1:
                     - inject UnlockBlinkQuestDeliveryHandler
                 - if <yaml[<[data]>].read[quests.active.<[quest_internalname]>.current_stage]> == 2:
@@ -70,12 +90,30 @@ WiseWizardInteract:
                     - narrate format:WiseWizardFormat "Greetings, <player.name>."
                     - if <proc[QuestsAvailableHandler].context[WiseWizard]>:
                         - narrate format:WiseWizardformat "Ready to learn some more spells?"
+                    - else if <yaml[quest_npc_list].read[WiseWizard].contains_any[<yaml[<[data]>].list_keys[quests.active]>]>:
+                        - foreach <yaml[quest_npc_list].read[WiseWizard].shared_contents[<yaml[<[data]>].list_keys[quests.active]>]>:
+                            - define quest_internalname <[value]>
+                            - inject QuestProgressHandler
+                        - narrate format:WiseWizardFormat "Keep up with gathering those reagents!"
                     - else:
                         - narrate format:WiseWizardFormat "For now, I've taught you all I can."
             click trigger:
                 script:
                 - define data <player.uuid>_quest_data
-                - if <proc[QuestsAvailableHandler].context[WiseWizard]>:
-                    - inject QuestInventoryGUIHandler def:WiseWizard
+#                - if <proc[QuestsAvailableHandler].context[WiseWizard]>:
+#                    - define npc_name WiseWizard
+#                    - inject QuestInventoryGUIHandler
+                - else if <yaml[quest_npc_list].read[WiseWizard].contains_any[<yaml[<[data]>].list_keys[quests.active]>]>:
+                    ## Maybe automate this part?
+                    - if <yaml[<[data]>].contains[quests.active.UnlockConfusion]>:
+                        - define quest_internalname UnlockConfusion
+                        - define quest <yaml[<[data]>].read[quests.active.<[quest_internalname]>]>
+                        - define current_stage <[quest].get[current_stage]>
+                        - if <[current_stage]> == 1:
+                            - inject UnlockConfusionQuestDeliveryHandler
+                            - if !<[undelivered]>:
+                                - stop
+                        - if <[current_Stage]> == 2:
+                            - inject UnlockConfusionQuestExperienceDeliveryHandler
                 - else:
                     - narrate format:WiseWizardFormat "I'm sorry, I don't have any quests available for you right now."

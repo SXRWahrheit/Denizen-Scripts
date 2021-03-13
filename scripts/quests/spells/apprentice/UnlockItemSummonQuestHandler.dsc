@@ -15,7 +15,7 @@ UnlockItemSummonQuestDeliveryHandler:
             - define objective:4
         - case gold_ingot:
             - define objective:5
-        - case default:
+        - default:
             - narrate format:MagnificentMageFormat "Whenever you've got the items I'm looking for, just hand them over."
             - run QuestProgressHandler def:UnlockItemSummon
             - stop

@@ -92,5 +92,5 @@ StoneToolsQuestDeliveryHandler:
                 - narrate format:QuestMasterFormat "A stone hoe! This should last quite a bit longer than that wooden one."
                 - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:1
                 - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]>
-        - case default:
+        - default:
             - narrate format:QuestMasterFormat "Bring me those stone tools!"

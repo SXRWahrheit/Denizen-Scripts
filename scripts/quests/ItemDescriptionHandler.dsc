@@ -73,7 +73,7 @@ ItemDescriptionHandler_Spells:
                 - determine "Iron ingots are versatile. They can be used to channel magic for hardiness in many forms!"
         - case granite:
             - random:
-                - deterine "Granite is beautiful and strong all at once. We can pull that essence out of it to teach you some incredible spells!"
+                - determine "Granite is beautiful and strong all at once. We can pull that essence out of it to teach you some incredible spells!"
         - case rabbit_foot:
             - random:
                 - determine "Rabbits' feet are full of luck. It takes a little skill - and a little luck yourself - to use them as reagents."

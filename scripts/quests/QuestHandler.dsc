@@ -26,26 +26,29 @@ QuestDataHandler:
 
 QuestRequirementsHandler:
     type: procedure
-    debug: false
+    debug: true
     definitions: quest_internalname
     script:
     - define data <player.uuid>_quest_data
     # Completed quests
-    - foreach <yaml[<[quest_internalname]>].read[config.requirements.quests_completed]> as:QuestsCompleted:
-        - if <yaml[<[data]>].contains[quests.completed.<[QuestsCompleted]>].not>:
-            - determine false
+    - if <yaml[<[quest_internalname]>].contains[config.requirements.quests_completed]>:
+        - foreach <yaml[<[quest_internalname]>].read[config.requirements.quests_completed]> as:QuestsCompleted:
+            - if <yaml[<[data]>].contains[quests.completed.<[QuestsCompleted]>].not>:
+                - determine false
     # Player groups
-    - foreach <yaml[<[quest_internalname]>].read[config.requirements.groups]> as:PlayerGroups:
-        - if <player.groups.contains[<[PlayerGroups]>].not>:
-            - determine false
+    - if <yaml[<[quest_internalname]>].contains[config.requirements.groups]>:
+        - foreach <yaml[<[quest_internalname]>].read[config.requirements.groups]> as:PlayerGroups:
+            - if <player.groups.contains[<[PlayerGroups]>].not>:
+                - determine false
     # Individual permissions
-    - foreach <yaml[<[quest_internalname]>].read[config.requirements.permissions]> as:PlayerPermissions:
-        - if <player.has_permission[<[PlayerPermissions]>].not>:
-            - determine false
+    - if <yaml[<[quest_internalname]>].contains[config.requirements.permissions]>:
+        - foreach <yaml[<[quest_internalname]>].read[config.requirements.permissions]> as:PlayerPermissions:
+            - if <player.has_permission[<[PlayerPermissions]>].not>:
+                - determine false
     - determine true
 
 QuestAcceptHandler:
-    debug: false
+    debug: true
     type: task
     speed: 0
     definitions: quest_internalname|quest
@@ -115,7 +118,7 @@ QuestStageProgressHandler:
         - narrate "• <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[name]>: <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[progress]>/<[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[total]>"
 
 QuestItemDeliveryHandler:
-    debug: false
+    debug: true
     type: task
     speed: 0
     definitions: objective|quest_internalname|stage
@@ -125,33 +128,36 @@ QuestItemDeliveryHandler:
     - define data <player.uuid>_quest_data
     - define quest <yaml[<[data]>].read[quests.active.<[quest_internalname]>]>
     #- define progress <yaml[<[data]>].read[quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress]>
+    - define current_stage <[quest].get[current_stage]>
     - define progress <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[progress]>
     #- define total <yaml[<[data]>].read[quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.total]>
     - define total <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[total]>
     - define delivery_quantity <player.item_in_hand.quantity>
-    #- define delivery_item:<player.item_in_hand.scriptname||<player.item_in_hand.material.name>>
+    - define delivery_item:<player.item_in_hand.scriptname||<player.item_in_hand.material.name>>
     # We only want to take items if items need to be taken
     - if <[progress]> < <[total]>:
         - define remainder <[total].sub[<[progress]>]>
         - if <[delivery_quantity]> >= <[remainder]>:
-            - take iteminhand quantity:<[delivery_quantity].sub[<[remainder]>]>
+            - take iteminhand quantity:<[remainder]>
             - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:<[total]>
+            - define Delivery_Success true
+            - define Enough_Items true
             # Advance a stage
             - inject QuestStageProgressHandler
         - else:
             - take iteminhand quantity:<[delivery_quantity]>
-            - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:<[progress].add[delivery_quantity]>
+            - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:<[progress].add[<[delivery_quantity]>]>
             # Show current progress
             - inject QuestProgressHandler
-            - define InProgress
+            - define Delivery_Success true
     # If the progress is somehow already more than the total, move on
-    - else:
+    - else if <[progress]> >= <[total]>:
         - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:<[total]>
-        # Advance a stage
-        - inject QuestStageProgressHandler
+        # Show quest progress
+        - inject QuestProgressHandler
 
 QuestProgressHandler:
-    debug: false
+    debug: true
     type: task
     speed: 0
     definitions: quest_internalname
@@ -204,7 +210,7 @@ QuestQuitHandler:
     - define data <player.uuid>_quest_data
     - define quest <yaml[<[data]>].read[quests.active.<[quest_internalname]>]>
     - yaml id:<[data]> set quests.active.<[quest_internalname]>:!
-    - if <yaml[<[quest_internalname]>].read[config.availability.offering_npc]||null>:
+    - if <yaml[<[quest_internalname]>].read[config.availability.offering_npc]||null> != null:
         - zap <yaml[<[quest_internalname]>].read[config.availability.offering_npc]>Interact <yaml[<[quest_internalname]>].read[config.quit_step]>
     - title "title:<red>QUEST QUIT" subtitle:<gold><[quest].get[name]> targets:<player>
     - narrate "<red>QUEST QUIT: <[quest].get[name]>"
@@ -348,7 +354,8 @@ QuestAvailabilityHandler:
     # Checks whether a quest is available
     script:
     - define data <player.uuid>_quest_data
-    - if <yaml[<[data]>].read[quests.completed.<[quest_internalname]>.reset_time]||null> > <util.time_now>:
+    - define reset_time <yaml[<[data]>].read[quests.completed.<[quest_internalname]>.reset_time]||<util.time_now>>
+    - if <[reset_time].is_after[<util.time_now>]>:
         - determine false
     - else:
         - determine true
@@ -369,7 +376,7 @@ QuestsAvailableHandler:
         - determine false
 
 QuestInventoryGUIHandler:
-    debug: false
+    debug: true
     type: task
     speed: 0
     definitions: npc_name
@@ -382,10 +389,22 @@ QuestInventoryGUIHandler:
         - if <proc[QuestAvailabilityHandler].context[<[value]>]> && <yaml[<[data]>].contains[quests.active.<[value]>].not>:
             - define inventory_list:<[inventory_list].include[<proc[QuestGUIItemBuilder].context[<[value]>]>]>
     - if <[inventory_list].size> > 0:
-        - note <inventory[generic[title=<&6><&l>Quests;size=27;contents=<[inventory_list]>]> as:available_quest_inventory.<[npc_name]>.<player.uuid>
+        - note <inventory[QuestInventoryGUIBase].include[<[inventory_list]>]> as:available_quest_inventory.<[npc_name]>.<player.uuid>
         - inventory open d:available_quest_inventory.<[npc_name]>.<player.uuid>
     - else:
         - narrate "<red>No quests available!"
+
+QuestInventoryGUIBase:
+    type: inventory
+    inventory: chest
+    title: <&6><&l>Quests
+    size: 45
+    slots:
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
 
 QuestInventorySelectionHandler:
     debug: false

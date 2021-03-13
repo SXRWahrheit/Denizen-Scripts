@@ -132,5 +132,5 @@ IronToolsArmorQuestDeliveryHandler:
                 - narrate format:QuestMasterFormat "An iron hoe! Why, I bet that if you use this, you can farm all the live-long day."
                 - yaml id:<[data]> set quests.active.<[quest_internalname]>.stages.<[stage]>.objectives.<[objective]>.progress:1
                 - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]>
-        - case default:
+        - default:
             - narrate format:QuestMasterFormat "Bring me that iron equipment! Remember, you'll need to both mine and smelt iron to make equipment with it."
