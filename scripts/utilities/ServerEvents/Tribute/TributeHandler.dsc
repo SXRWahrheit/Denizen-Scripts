@@ -121,9 +121,9 @@ Tribute_DropTable_Veteran:
             - stop
         - else if <context.entity.name.starts_with[<&9>]||null>:
             - if <server.has_flag[tribute_power_hour]>:
-                - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[4]>
-            - else:
                 - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[2]>
+            - else:
+                - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[1]>
 
 Tribute_DropTable_Elite:
     type: world
@@ -138,9 +138,9 @@ Tribute_DropTable_Elite:
             - stop
         - else if <context.entity.name.starts_with[<&d>]||null>:
             - if <server.has_flag[tribute_power_hour]>:
-                - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[8]>
-            - else:
                 - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[4]>
+            - else:
+                - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[2]>
 
 Tribute_Drops_Mining:
     type: world

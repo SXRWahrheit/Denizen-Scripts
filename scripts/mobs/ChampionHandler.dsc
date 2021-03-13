@@ -112,8 +112,8 @@ Champion_Timer_Handler:
     events:
         after mythicmob mob spawns:
         - if <script[champion_list].data_key[champions].contains[<context.entity.mythicmob.internal_name>]>:
-            - flag <context.entity> mob_tier.champion
-        after entity damaged flagged:mob_tier.champion:
+            - flag <context.entity> mob_tier_champion:true
+        after entity damaged flagged:mob_tier_champion:
         - if <context.entity.time_lived.in_minutes> >= 30:
             - narrate "<context.entity.name> <red>disappears into the dark realm. The next attempt to challenge them must be swifter!" targets:<context.entity.world.players>
             - remove <context.entity>
@@ -124,3 +124,10 @@ Champion_List:
     champions:
     - Umbra
     - Toxus
+
+#Drops_Narrate_Tester:
+#    type: world
+#    debug: false
+#    events:
+#        on mythicmob mob dies:
+#        - announce to_console "MythicMob <context.entity.name> died, drops were <context.drops>"
