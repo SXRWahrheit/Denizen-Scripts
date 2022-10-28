@@ -1,0 +1,65 @@
+config:
+    availability:
+        offering_npc: SkilledSorcerer
+    requirements:
+        quests_completed:
+        - "UnlockBlink"
+        permissions:
+        - magicspells.learn.escape
+    rewards:
+        money: 100
+        quest_points: 3
+    material: ender_pearl
+messages:
+    offer: "<dark_green>Skilled Sorcerer<white>: The Escape spell allows you to immediately escape to Dawn's Landing from wherever you are in the multiverse. When you're ready to learn it, bring me what I need so that I can teach you."
+    completion: "<dark_green>Skilled Sorcerer<white>: Congratulations, you're ready to learn Escape! Give it a try with <&dq>/cast escape.<&dq>"
+player_data:
+    UnlockEscape:
+        name: Learn the Escape spell
+        description: "Bring reagents to the Skilled Sorcerer and learn the Escape spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Skilled Sorcerer."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 512
+                        data:
+                            type: deliver_item
+                            material: redstone
+                    2:
+                        name: "Deliver ender pearls"
+                        progress: 0
+                        total: 512
+                        data:
+                            type: deliver_item
+                            material: ender_pearl
+                    3:
+                        name: "Deliver diamonds"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: diamond
+                    4:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 256
+                        data:
+                            type: deliver_item
+                            material: gold_ingot
+                progress: 0
+                total: 4
+            2:
+                description: "Bring crystallized experience to the Skilled Sorcerer."
+                objectives:
+                    1:
+                        name: "Deliver a billet of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: crystallizedexperiencebillet
+                progress: 0
+                total: 1

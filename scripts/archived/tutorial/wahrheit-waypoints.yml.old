@@ -1,0 +1,48 @@
+# This thing handles the waypoints info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Teaches You Elementary Teleportation":
+    type: assignment
+    interact scripts:
+    - Enderman Level Bullshit
+    actions:
+        on assignment:
+        - runtask 'script:Maximum Movement' instant
+        
+"Maximum Movement":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-waypoints]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Enderman Level Bullshit":
+    type: interact
+    steps:
+        'Waypoints*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Yo! <player.name>! This shiny thing is a waypoint!"
+                    - narrate "format:Tutorial Guide Format" "Once you find one, you can use it to warp around the world!"
+                    - narrate "format:Tutorial Guide Format" "It'll cost you a small fee, but you can go far really fast."
+                    - narrate "format:Tutorial Guide Format" "To see the waypoints you've found, use '<green>/ftw<white>'! It'll show you the price to go to each one from your location too."
+                    - narrate "format:Tutorial Guide Format" "When you're all ready to go on, just say '<green>ready<white>'."
+                    - zap 'step:Proceed'
+        'Proceed':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Just say <green>ready<white> when you want to go on."
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/, get me to the next part."
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Cool, let's get going."
+                    - execute as_server "warp <player.name> tut-map"
+                    - execute as_player "sethome"            

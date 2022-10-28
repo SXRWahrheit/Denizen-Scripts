@@ -1,0 +1,161 @@
+# This thing handles the boss in the fire temple
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated September 5 2013
+
+"Oracle of Flame":
+    type: assignment
+    interact scripts:
+    - Flame Savior
+    actions:
+        on assignment:
+        - run 'script:Redemption' instant
+        
+"Redemption":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[ftoracle]>
+    - trigger name:proximity toggle:true radius:3
+    
+"Oracle Format":
+    type: format
+    format: "<red>Oracle of Flame<white><&co> <[text]>"
+    
+"Fire Temple Complete":
+    type: task
+    script:
+    - give money qty:2500
+    - narrate "<yellow>You have received 2500 gold."
+    - give item:373,8259 qty:10 unlimit_stack_size
+    - give "item:Silk Touch Book" qty:1
+    - give item:384 qty:64
+    - give item:384 qty:64
+    - random 4
+    - give "item:Engulfed Helm" qty:1
+    - give "item:Engulfed Chestplate" qty:1
+    - give "item:Engulfed Leggings" qty:1
+    - give "item:Engulfed Boots" qty:1
+    - execute as_server "cast teach <player.name> explode"
+    - flag npcid:89 npc firetemple-challenger:!
+    - announce "<red><player.name> has successfully conquered the Fire Temple! The Gods smile upon them."
+    - flag <player> firetemplewins:++
+    - flag <player> firetemplecomplete:0
+    - flag npcid:89 npc firetempleclear:1
+    - queue <[1]> resume
+
+"Engulfed Helm":
+    type: item
+    material: diamond_helmet
+    lore:
+    - This blazing helm was
+    - obtained from the
+    - Fire Temple by
+    - <n@89.flag[firetemple-challenger]>.
+    display name: "Engulfed Helm"
+    enchantments:
+    - protection_fire:4
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+    
+"Engulfed Chestplate":
+    type: item
+    material: diamond_chestplate
+    lore:
+    - This blazing plate was
+    - obtained from the
+    - Fire Temple by
+    - <n@89.flag[firetemple-challenger]>.
+    display name: "Engulfed Chestplate"
+    enchantments:
+    - protection_fire:4
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+
+"Engulfed Leggings":
+    type: item
+    material: diamond_leggings
+    lore:
+    - These blazing leggings were
+    - obtained from the
+    - Fire Temple by
+    - <n@89.flag[firetemple-challenger]>.
+    display name: "Engulfed Leggings"
+    enchantments:
+    - protection_fire:4
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+
+"Engulfed Boots":
+    type: item
+    material: diamond_boots
+    lore:
+    - These blazing boots were
+    - obtained from the
+    - Fire Temple by
+    - <n@89.flag[firetemple-challenger]>.
+    display name: "Engulfed Boots"
+    enchantments:
+    - protection_fire:4
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1    
+    
+"Silk Touch Book":
+    type: item
+    material: enchanted_book
+    lore:
+    - This book of magic
+    - was obtained from the
+    - Fire Temple by
+    - <n@89.flag[firetemple-challenger]>.
+    display name: "Engulfed Book of Silk Touch"
+    enchantments:
+    - silk_touch:1    
+    
+"Flame Savior":
+    type: interact
+    steps:
+        'Before Fight*':
+            click trigger:
+                script:
+                - narrate "format:Oracle Format" "You shouldn't be able to see this, it's a debug message!"
+                
+        'Congratulations':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Oracle Format" "You have defeated the evil Lord Emfyrius, well done <player.name>!"
+                    - narrate "format:Oracle Format" "When you are ready to return to Prosperus, right click me."
+                    - narrate "format:Oracle Format" "I will bestow your rewards upon you and return you to the Altar of Flame."
+            click trigger:
+                script:
+                - engage
+                - if <flag.p:firetemplecomplete> == 1 {
+                  - narrate "format:Oracle Format" "Okay, here are your rewards."
+                  - run "script:Fire Temple Complete" def:<queue>
+                  - queue pause
+                  - narrate "Format:Oracle Format" "Best of luck on your future travels!"
+                  - execute as_npc "warp <player.name> firealtar"
+                  - disengage
+                  }
+                  else {
+                  - narrate "format:Oracle Format" "It looks like I've already rewarded you."
+                  - narrate "format:Oracle Format" "Best of luck on your future travels!"
+                  - execute as_npc "warp <player.name> firealtar"
+                  - disengage
+                  }
+                  
+        'After Warp':
+            click trigger:
+                script:
+                - narrate "format:Oracle Format" "This is a debug message that you shouldn't be seeing!"
+                   

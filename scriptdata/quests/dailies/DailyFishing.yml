@@ -1,0 +1,33 @@
+config:
+    availability:
+        offering_npc: FishingNewbie
+    reset:
+        period: 1d
+        time: "19:00"
+    requirements:
+        quests_completed:
+        - "TeachFishingNewbie"
+    rewards:
+        money: 50
+        quest_points: 1
+    material: fishing_rod
+messages:
+    offer: "<gray>Fishing Newbie<white>: Show me some more of your fishing skills!"
+    completion: "<gray>Fishing Newbie<white>: Awesome! Maybe someday I'll be as good as you are!"
+player_data:
+    DailyFishing:
+        name: Demonstrate your fishing skills (Daily)
+        description: "The Fishing Newbie is looking for someone to teach him to fish. Do a little fishing and he'll give you some gold!"
+        stages:
+            1:
+                description: "Teach the Newbie to fish."
+                objectives:
+                    1:
+                        name: "Catch 16 fish"
+                        progress: 0
+                        total: 16
+                        data:
+                            type: catch_fish
+                            material: fishing_rod
+                progress: 0
+                total: 1

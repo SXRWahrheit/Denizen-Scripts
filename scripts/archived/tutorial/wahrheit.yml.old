@@ -1,0 +1,107 @@
+# This thing handles the god damn tittyfucking tutorial introduction
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.3
+# @last-updated November 12 2014
+#
+# 1.0 - implement test and stuff
+# 1.1 - implement nagging scripts, replace massive amounts of text with individual format tag
+# 1.2 - move test to separate script, change to welcome/help because less intimidating and stuff
+# 1.3 - Strip features for now, redirect to teleport
+
+"Wahrheit Bothers You":
+    type: assignment
+    interact scripts:
+    - Introductions
+    actions:
+        on assignment:
+        - runtask 'script:Break In Them Newbies' instant
+    default constants:
+        Stuck: "Are you stuck or confused <player.name>?<&nl>"
+        Outside 1: "Why don't you go outside? I'll teach you a bit about our server."
+        Outside 2: "It's a bit dark and gloomy in here - let's go outside!"
+        Outside 3: "Don't you want to get started? Let's go outside!"
+
+"Wahrheit Format":
+    type: format
+    format: "<gold>Tutorial Guide<white><&co> <[text]>"
+
+"Break In Them Newbies":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[tutwahrheit]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Nagging":
+    type: task
+    script:
+    - narrate "format:Wahrheit Format" "<flag.p:Current Moan>"
+    - runtask "script:New Nag"
+
+"New Nag":
+    type: task
+    script:
+    - runtask "script:Nagging" delay:5 "queue:Moan at <player.name>"
+
+"Introductions":
+    type: interact
+    steps:
+        'Welcome*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                     - execute as_server "warp <player.name> newPlayerSpawn"
+#                    - narrate "format:Wahrheit Format" "Welcome to the Summa Crossroads Minecraft server, <player.name>!"
+#                    - narrate "format:Wahrheit Format" "Let me give you a tour! Head on outside."
+#                    - flag <player> "Current Moan:<cons:Outside <util.random.int[1].to[3]>>"
+#                    - runtask "script:Nagging" delay:30 "queue:Moan at <player.name>"
+                exit:
+                    radius: 3
+                    script:
+                     - execute as_server "warp <player.name> newPlayerSpawn"
+#                    - narrate "format:Wahrheit Format" "Keep going!"
+#
+#                    - zap 'step:Cleared'
+#            chat trigger:
+#                'Cactus':
+#                    trigger: 'Give me the /cactus/!'
+#                    script:
+#                    - narrate "format:Wahrheit Format" "Cactus, you say? Cactus you shall have!"
+#                    - execute as_server "warp <player.name> cactus"
+#                'Hi':
+#                    trigger: "/Hi/, who are you?"
+#                    script:
+#                    - narrate "format:Wahrheit Format" "I am Wahrheit, god of these realms and protector of all living things. I have summoned you to become a hero and achieve your true potential!"
+#                    - narrate "format:Wahrheit Format" "<green>Head outside so we can get started!"
+#                    - flag <player> "Current Moan:<cons:Outside <util.random.int[1].to[3]>>"
+#
+#                    - runtask "script:Nagging" delay:30 "queue:Moan at <player.name>"
+#                'Hello':
+#                    trigger: "/Hello/, who are you?"
+#                    script:
+#                    - narrate "format:Wahrheit Format" "I am Wahrheit, god of these realms and protector of all living things. I have summoned you to become a hero and achieve your true potential!"
+#                    - narrate "format:Wahrheit Format" "<green>Head outside so we can get started!"
+#                    - flag <player> "Current Moan:<cons:Outside <util.random.int[1].to[3]>>"
+#
+#                    - runtask "script:Nagging" delay:30 "queue:Moan at <player.name>"
+        'Cleared':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                     - execute as_server "warp <player.name> newPlayerSpawn"
+                exit:
+                    radius: 3
+                    script:
+            click trigger:
+                script:
+                - execute as_server "warp <player.name> newPlayerSpawn"
+                - zap step:Introductions
+#            chat trigger:
+#                'Cactus':
+#                    trigger: 'Give me the /cactus/!'
+#                    script:
+#                    - narrate "format:Wahrheit Format" "Cactus, you say? Cactus you shall have!"
+#                    - execute as_server "warp <player.name> cactus#"

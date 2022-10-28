@@ -1,0 +1,166 @@
+config:
+    availability:
+        offering_npc: QuestMaster
+    requirements:
+        quests_completed:
+        - "FindReinwald"
+    rewards:
+        money: 50
+        items:
+        - <item[iron_helmet].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_chestplate].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_leggings].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_boots].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_axe].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_pickaxe].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_shovel].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_sword].with[enchantments=<map[unbreaking=1]>]>
+        - <item[iron_hoe].with[enchantments=<map[unbreaking=1]>]>
+        scripts:
+        - IronToolsArmorCompletion
+    material: iron_chestplate
+    quit_step: IronToolsArmorOffer
+messages:
+    offer: "<dark_green>Quest Master<white>: You've got some stone tools and some leather armor. Ready for an upgrade to both of those? That's right - it's time for you to hunt down some iron. You'll need to mine iron ore, smelt it in a furnace, and craft it into tools and armor. Bring me a full set of armor and some iron tools to prove you know what you're doing. As usual, I'll enchant them to reward you for your trouble."
+    completion: "<dark_green>Quest Master<white>: Well, would you look at that? You're really making your way out there. Here's all your stuff, plus the enchantments - as promised. Now get out there and use it! Don't forget to keep checking in with Warmaster Reinwald."
+player_data:
+    IronToolsArmor:
+        name: The iron price
+        description: "Now that you're more established, the Quest Master wants you to mine and smelt iron ore. Use it to craft armor and tools, then bring them to him and he'll enchant them for you."
+        stages:
+            1:
+                description: "Craft iron armor and tools."
+                objectives:
+                    1:
+                        name: "Craft an iron helmet"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_helmet
+                    2:
+                        name: "Craft an iron chestplate"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_chestplate
+                    3:
+                        name: "Craft iron leggings"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_leggings
+                    4:
+                        name: "Craft iron boots"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_boots
+                    5:
+                        name: "Craft an iron axe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_axe
+                    6:
+                        name: "Craft an iron pickaxe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_pickaxe
+                    7:
+                        name: "Craft an iron shovel"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_shovel
+                    8:
+                        name: "Craft an iron sword"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_sword
+                    9:
+                        name: "Craft an iron hoe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: iron_hoe
+                progress: 0
+                total: 9
+            2:
+                description: "Bring iron tools and armor to the Quest Master."
+                objectives:
+                    1:
+                        name: "Bring an iron helmet to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_helmet
+                    2:
+                        name: "Bring an iron chestplate to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_chestplate
+                    3:
+                        name: "Bring iron leggings to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_leggings
+                    4:
+                        name: "Bring iron boots to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_boots
+                    5:
+                        name: "Bring an iron axe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_axe
+                    6:
+                        name: "Bring an iron pickaxe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_pickaxe
+                    7:
+                        name: "Bring an iron shovel to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_shovel
+                    8:
+                        name: "Bring an iron sword to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_sword
+                    9:
+                        name: "Bring an iron hoe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: iron_hoe
+                progress: 0
+                total: 9

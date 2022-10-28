@@ -1,0 +1,61 @@
+config:
+    availability:
+        offering_npc: WiseWizard
+    requirements:
+        quests_completed:
+        - "IronToolsArmor"
+        permissions:
+        - magicspells.learn.blink
+    rewards:
+        money: 100
+        quest_points: 3
+        scripts:
+        - UnlockBlinkCompletion
+    material: ender_pearl
+    quit_step: UnlockBlinkOffer
+messages:
+    offer: "<dark_green>Wise Wizard<white>: You look like you'd like to get your feet wet dabbling in practical magic, does that sound about right? Great. I can teach you your first spell, Blink. It'll let you teleport small distances!"
+    completion: "<dark_green>Wise Wizard<white>: Congratulations, you're ready to learn Blink! Give it a try with <&dq>/cast blink.<&dq>"
+player_data:
+    UnlockBlink:
+        name: Learn the Blink spell
+        description: "Bring reagents to the Wise Wizard and learn the Blink spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Wise Wizard."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: redstone
+                    2:
+                        name: "Deliver enderpearls"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: ender_pearl
+                    3:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: gold_ingot
+                progress: 0
+                total: 3
+            2:
+                description: "Bring crystallized experience to the Wise Wizard."
+                objectives:
+                    1:
+                        name: "Deliver a sliver of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: crystallizedexperiencesliver
+                progress: 0
+                total: 1

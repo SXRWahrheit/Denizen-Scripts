@@ -1,0 +1,148 @@
+# This thing handles the dude that sits at the entrance to the fire temple portal
+# @author Wahrheit
+# @version 2.1
+# @last-updated July 14th 2018
+
+"Sage of Flame":
+    type: assignment
+    interact scripts:
+    - Fire Temple Challenger
+    actions:
+        on assignment:
+        - run "script:Flame Gate" instant
+"Fire Sage Format":
+    type: format
+    format: "<red>Sage of Flame<white><&co> <[text]>"
+"Flame Gate":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[ftsage]>
+    - trigger name:proximity toggle:true radius:3
+    - flag server firetempleclear:true
+    - flag server firetemplechallenger:!
+    - flag server firetemplechallenger-name:!
+"Fire Temple Tracker":
+    type: world
+    debug: false
+    events:
+        on server start:
+        - flag server firetempleclear:true
+        - flag server firetemplechallenger:!
+        - flag server firetemplechallenger-name:!
+        on player dies:
+        - if !<server.has_flag[firetemple-challenger]>
+        {
+            - stop
+        }
+        - if <player.location.world.name> == 'ultimatus' && <server.has_flag[firetemple-challenger]> && <server.flag[firetemple-challenger]> == <player>
+        {
+            - flag server firetempleclear:true
+            - announce "<red><player.name> has been conquered by the Fire Temple. It is now clear."
+            - flag server firetemple-challenger:!
+            - flag server firetemple-challenger-name:!
+        }
+        on player changes world from ultimatus:
+        - if <player.location.world.name> != 'ultimatus' && <server.has_flag[firetemple-challenger]> && server.flag[firetemple-challenger]> == <player>
+        {
+            - flag server firetempleclear:true
+            - announce "<red><player.name> has abandoned the Fire Temple. It is now clear."
+            - flag server firetemple-challenger:!
+            - flag server firetemple-challenger-name:!
+        }
+        on player quits:
+        - if !<server.has_flag[firetemple-challenger]>
+        {
+            - stop
+        }
+        - if <server.has_flag[firetemple-challenger]> && <server.flag[firetemple-challenger]> == <player>
+        {
+            - flag server firetempleclear:true
+            - flag server firetemple-challenger:!
+            - flag server firetemplechallenger-name:!
+            - determine passive "<red><player.name> has vanished into the mists and abandoned the Fire Temple. It is now clear."
+            - flag server "firetemple-abandoner:->:<player>"
+        }
+        on player joins:
+        - if <server.has_flag[firetemple-abandoner]> && <server.flag[firetemple-abandoner].contains[<player>]>
+        {
+            - execute as_server "warp <player.name> spawn"
+            - flag server "firetemple-abandoner:<-:<player>"
+            - narrate "<red>You disconnected while in the Fire Temple and have been returned to spawn."
+        }
+"FireTemple-Reset":
+    type: task
+    script:
+    # Miniboss Gate / Bridge
+    - switch state:off location:-4,74,1,ultimatus
+    # Upstairs Bridges
+    - switch state:off location:-1,74,1,ultimatus
+    # West Stairs
+    - switch state:off location:2,74,1,ultimatus
+    # West Key
+    - switch state:off location:-1,74,4,ultimatus
+    # East Key
+    - switch state:off location:1,74,4,ultimatus
+    # Spawns boss at entry point
+    - execute as_server "npc spawn 88 --at 0,119,-30,ultimatus"
+    - execute as_server "npc select 88"
+    - execute as_server "npc anchor --assume 'ftboss1'"
+    - execute as_server "npc spawn 87 --at 56,29,-26,ultimatus"
+    - execute as_server "npc select 87"
+    - execute as_server "npc anchor --assume 'ftminiboss'"
+    - execute as_server "npc despawn 93"
+    - zap "script:Great Balls of Fire" "step:Miniboss"
+    - zap "script:Get Out My House" "step:Boss Battle"
+    - zap "script:Flame Savior" "step:Before Fight"
+    - zap "script:Player Approaches" "step:Entry"
+    - remove <l@0,74,4,ultimatus.find.entities[wither].within[400]>
+
+"Fire Temple Challenger":
+    type: interact
+    steps:
+        'Greeting*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Fire Sage Format" "Hello, <player.name>. Welcome to the Altar of Flame. Unfortunately, intense evil magic has overtaken the world, and I am not currently able to send you to the Fire Temple. Please return soon, I will keep working to break through."
+#                    - zap 'step:Entrance'
+#            click trigger:
+#                script:
+#                - narrate "format:Fire Sage Format" "You're at the step 'Greeting'! This is a debug message!"
+
+        'Entrance':
+            click trigger:
+                script:
+                - narrate "format:Fire Sage Format" "The vile and wretched Lord Emfyrius has established a corrupted domain in an effort to challenge the God of Flame."
+                - narrate "format:Fire Sage Format" "We need a bold, powerful adventurer to challenge him and end his heresy. Are you up to the challenge?"
+                - zap 'step:Verify'
+            proximity trigger:
+                exit:
+                    radius: 3
+                    script:
+                    - zap 'step:Greeting'
+        'Verify':
+            click trigger:
+                script:
+                - if <server.has_flag[firetempleclear]>
+                {
+                    - narrate "format:Fire Sage Format" "Very well. I wish you the very best of luck in your efforts."
+                    - flag server firetempleclear:!
+                    - flag server firetemple-challenger:<player>
+                    - flag server firetemple.challenger-name:<player.name>
+#                      - narrate "Flag firetemple-challenger is <server.flag[firetemple-challenger]>"
+#                      - narrate "Flag firetemple-challenger-name is <server.flag[firetemple-challenger-name]>"
+                    - narrate "<yellow>The Sage of Flame begins chanting a spell..."
+                    - run "script:FireTemple-Reset"
+                    - execute as_npc "warp <player.name> firetemple"
+                    - announce "<red><player.name> is challenging the Fire Temple."
+                }
+                else
+                {
+                    - narrate "format:Fire Sage Format" "Sorry, it appears the temple is currently being challenged by <server.flag[firetemple-challenger-name]>. You will have to wait."
+                }
+            proximity trigger:
+                exit:
+                    radius: 3
+                    script:
+                    - zap 'step:Greeting'

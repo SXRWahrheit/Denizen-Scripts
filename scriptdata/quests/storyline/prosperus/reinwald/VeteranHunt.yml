@@ -1,0 +1,38 @@
+config:
+    availability:
+        offering_npc: WarmasterReinwald
+    requirements:
+        quests_completed:
+        - "SkeletalRogueHunt"
+    rewards:
+        money: 500
+        quest_points: 5
+        items:
+        - <item[diamond[quantity=64]]>
+        - <mythic_item[ImbuedHelm]>
+        - <mythic_item[ImbuedChest]>
+        - <mythic_item[ImbuedLegs]>
+        - <mythic_item[ImbuedBoots]>
+        script:
+        - VeteranHuntCompletion
+    material: iron_sword
+    quit_step: VeteranHuntOffer
+messages:
+    offer: "<dark_green>Warmaster Reinwald<white>: Your initial assault against the Skeletal Rogues was a success, and for that, we thank you. You're now ready to take on more intense challenges. Accordingly, your next task is to eliminate the rising squadrons of Veteran-level monsters that have been appearing across the land."
+    completion: "<dark_green>Warmaster Reinwald<white>: Fantastic work. You stand as a bulwark against the darkness."
+player_data:
+    VeteranHunt:
+        name: Hunt down the Veteran monsters
+        description: "Hunt down Veteran monsters for Warmaster Reinwald."
+        stages:
+            1:
+                description: "Hunt Veterans in the Prosperus wilderness and beyond. You can  find them in greater numbers in other dimensions, but beware! The forces of darkness are stronger in those realms, and your foes will come for your with all their might."
+                objectives:
+                    1:
+                        name: "Kill Veteran monsters"
+                        progress: 0
+                        total: 25
+                        data:
+                            type: quest_veteranhunt
+                progress: 0
+                total: 1

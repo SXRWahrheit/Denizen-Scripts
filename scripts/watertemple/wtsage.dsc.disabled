@@ -1,0 +1,150 @@
+# This thing handles the dude that sits at the entrance to the water temple portal
+# @author Wahrheit
+# @version 2.1
+# @last-updated July 14th 2018
+
+"Sage of Water":
+    type: assignment
+    interact scripts:
+    - Water Temple Challenger
+    actions:
+        on assignment:
+        - run "script:Water Gate" instant
+"Water Sage Format":
+    type: format
+    format: "<red>Sage of Water<white><&co> <[text]>"
+"Water Gate":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wtsage]>
+    - trigger name:proximity toggle:true radius:3
+    - flag server watertempleclear:true
+    - flag server watertemple-challenger:!
+    - flag server watertemple-challenger-name:!
+"Water Temple Tracker":
+    type: world
+    debug: false
+    events:
+        on server start:
+        - flag server watertempleclear:true
+        - flag server watertemplechallenger:!
+        - flag server watertemplechallenger-name:!
+        on player dies:
+        - if !<server.has_flag[watertemple-challenger]>
+        {
+            - stop
+        }
+        - if <player.location.world.name> == 'ultimatus' && <server.has_flag[watertemple-challenger]> && <server.flag[watertemple-challenger]> == <player>
+        {
+            - flag server watertempleclear:true
+            - announce "<red><player.name> has been conquered by the Water Temple. It is now clear."
+            - flag server watertemple-challenger:!
+            - flag server watertemple-challenger-name:!
+        }
+        on player changes world from ultimatus:
+        - if <player.location.world.name> != 'ultimatus' && <server.has_flag[watertemple-challenger]> && <server.flag[watertemple-challenger]> == <player>
+        {
+            - flag server watertempleclear:true
+            - announce "<red><player.name> has abandoned the Water Temple. It is now clear."
+            - flag server watertemple-challenger:!
+            - flag server watertemple-challenger-name:!
+        }
+        on player quits:
+        - if !<server.has_flag[watertemple-challenger]>
+        {
+            - stop
+        }
+        - if <server.has_flag[watertemple-challenger]> && <server.flag[watertemple-challenger]> == <player>
+        {
+            - flag server watertempleclear:true
+            - flag server watertemple-challenger:!
+            - flag server watertemplechallenger-name:!
+            - determine passive "<red><player.name> has vanished into the mists and abandoned the Water Temple. It is now clear."
+            - flag server "watertemple-abandoner:->:<player>"
+        }
+        on player joins:
+        - if <server.has_flag[watertemple-abandoner]> && <server.flag[watertemple-abandoner].contains[<player>]>
+        {
+            - execute as_server "warp <player.name> spawn"
+            - flag server "watertemple-abandoner:<-:<player>"
+            - narrate "<red>You disconnected while in the Water Temple and have been returned to spawn."
+        }
+"WaterTemple-Reset":
+    type: task
+    script:
+    #J1-9
+    - switch state:off location:-14,68,183,ultimatus
+    - switch state:off location:7,71,199,ultimatus
+    - switch state:off location:45,53,240,ultimatus
+    - switch state:off location:9,73,296,ultimatus
+    - switch state:off location:-48,64,287,ultimatus
+    - switch state:off location:-53,71,240,ultimatus
+    - switch state:off location:13,32,237,ultimatus
+    - switch state:off location:-11,31,299,ultimatus
+    - switch state:off location:-33,43,229,ultimatus
+    #Basement Ice
+    - switch state:off location:-7,77,146,ultimatus
+    # Spawns boss at end of ice cave
+    - execute as_server "npc spawn 185 --at -11,103,242,ultimatus"
+    - execute as_server "npc select 185"
+    - execute as_server "npc anchor --assume 'wtboss1'"
+    - execute as_server "npc spawn 186 --at -11,45,237,ultimatus"
+    - execute as_server "npc select 186"
+    - execute as_server "npc anchor --assume 'wtminiboss1'"
+    - execute as_server "npc despawn 187"
+    - remove <l@-11,128,240,ultimatus.find.entities[guardian].within[500]>
+    - zap "script:Ice Spikes" "step:Water Miniboss"
+    - zap "script:Water Boss Fight" "step:Boss Battle"
+    - zap "script:Water Savior" "step:Before Fight"
+    - zap "script:Player Approaches" "step:Entry"
+
+"Water Temple Challenger":
+    type: interact
+    steps:
+        'Greeting*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Water Sage Format" "Hello, <player.name>. Welcome to the Altar of Water. Unfortunately, intense evil magic has overtaken the world, and I am not currently able to send you to the Water Temple. Please return soon, I will keep working to break through."
+#                    - zap 'step:Entrance'
+#            click trigger:
+#                script:
+#                - narrate "format:Water Sage Format" "You're at the step 'Greeting'! This is a debug message!"
+
+        'Entrance':
+            click trigger:
+                script:
+                - narrate "format:Water Sage Format" "The vile and wretched Emira Ivese has established a corrupted domain in an effort to challenge the God of Water."
+                - narrate "format:Water Sage Format" "We need a skilled, cunning adventurer to challenge her and end her heresy. Are you up to the challenge?"
+                - zap 'step:Verify'
+            proximity trigger:
+                exit:
+                    radius: 3
+                    script:
+                    - zap 'step:Greeting'
+        'Verify':
+            click trigger:
+                script:
+                - if <server.has_flag[watertempleclear]>
+                {
+                    - narrate "format:Water Sage Format" "Very well. I wish you the very best of luck in your efforts."
+                    - flag server watertempleclear:!
+                    - flag server watertemple-challenger:<player>
+                    - flag server watertemple-challenger-name:<player.name>
+#                      - narrate "Challenger flag set to <server.flag[watertemple-challenger]>"
+#                      - narrate "Challenger name flag set to <server.flag[watertemple-challenger-name]>"
+                    - narrate "<yellow>The Sage of Water begins chanting a spell..."
+                    - run "script:WaterTemple-Reset"
+                    - execute as_npc "warp <player.name> watertemple"
+                    - announce "<red><player.name> is challenging the Water Temple."
+                }
+                else
+                {
+                    - narrate "format:Water Sage Format" "Sorry, it appears the temple is currently being challenged by <server.flag[watertemple-challenger-name]>. You will have to wait."
+                }
+            proximity trigger:
+                exit:
+                    radius: 3
+                    script:
+                    - zap 'step:Greeting'

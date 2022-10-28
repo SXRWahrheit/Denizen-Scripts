@@ -1,0 +1,33 @@
+config:
+    availability:
+        offering_npc: FishingNewbie
+    requirements:
+        quests_completed:
+        - "FindFishingNewbie"
+    rewards:
+        money: 250
+        quest_points: 1
+        scripts:
+        - TeachFishingNewbieCompletion
+    material: fishing_rod
+    quit_step: TeachFishingNewbieOffer
+messages:
+    offer: "<gray>Fishing Newbie<white>: I'm trying to learn how to fish... if you can teach me, I'll give you a bunch of gold."
+    completion: "<gray>Fishing Newbie<white>: Thanks so much! I hope this gold helps you."
+player_data:
+    TeachFishingNewbie:
+        name: Teach the newbie to fish
+        description: "The Fishing Newbie is looking for someone to teach him to fish. Do a little fishing and he'll give you some gold!"
+        stages:
+            1:
+                description: "Teach the Newbie to fish"
+                objectives:
+                    1:
+                        name: "Catch 16 fish"
+                        progress: 0
+                        total: 16
+                        data:
+                            type: catch_fish
+                            material: fishing_rod
+                progress: 0
+                total: 1

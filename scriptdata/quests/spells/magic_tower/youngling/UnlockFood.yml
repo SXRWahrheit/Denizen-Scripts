@@ -1,0 +1,94 @@
+config:
+    availability:
+        offering_npc: WiseWizard
+    requirements:
+        quests_completed:
+        - "UnlockBlink"
+        permissions:
+        - magicspells.learn.food
+    rewards:
+        money: 100
+        quest_points: 3
+    material: wheat
+    quit_step: BlinkUnlocked
+messages:
+    offer: "<dark_green>Wise Wizard<white>: The Food spell is a must-have for an encumbrance-conscious adventurer. When cast, it will satiate your cravings! Bring me the items I need, and I can teach it to you."
+    completion: "<dark_green>Wise Wizard<white>: Congratulations, you're ready to learn Food! Give it a try with <&dq>/cast food.<&dq>"
+player_data:
+    UnlockFood:
+        name: Learn the Food spell
+        description: "Bring reagents to the Wise Wizard and learn the Food spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Wise Wizard."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: redstone
+                    2:
+                        name: "Deliver carrots"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: carrot
+                    3:
+                        name: "Deliver potatoes"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: potato
+                    4:
+                        name: "Deliver melon slices"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: melon
+                    5:
+                        name: "Deliver wheat"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: wheat
+                    6:
+                        name: "Deliver pumpkins"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: pumpkin
+                    7:
+                        name: "Deliver cocoa beans"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: cocoa_beans
+                    8:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: gold_ingot
+                progress: 0
+                total: 8
+            2:
+                description: "Bring crystallized experience to the Wise Wizard."
+                objectives:
+                    1:
+                        name: "Deliver a sliver of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: crystallizedexperiencesliver
+                progress: 0
+                total: 1

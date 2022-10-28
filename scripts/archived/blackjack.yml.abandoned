@@ -1,0 +1,55 @@
+# This thing plays blackjack so you can waste all your money
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 16 2013
+#
+# 1.0 Card games
+
+"Blackjack Bitches":
+    type: assignment
+    interact scripts:
+    - Dealer
+    actions:
+        on assignment:
+        - runtask 'script:52 Pickup' instant
+    default constants:
+        Format: "<dark_green>Blackjack Dealer<white><&co> "
+        NewGame: "It's time for another round of blackjack, who wants to play?"
+        Shuffling: "Let's shuffle!"
+        Dealing: "A card for me, a card for you..."
+        Bust: "Ooh, looks like you busted <player.name>. Thanks for the money!"
+        Choice: "Would you like to hit or stay?"
+        Reveal: "Alright, let's see what I've got!"
+        DealerBlackjack: "I've got blackjack!"
+        Over: "Looks like I'm sticking with this."
+        Under: "I'm going to hit!"
+        PlayerWin: "Looks like you win, <player.name>! Good job!"
+        PlayerBlackjack: "Wow, blackjack! You win big!"
+
+"Blackjack Format":
+    type: format
+    format: "<dark_green>Blackjack Dealer<white><&co> <[text]>"
+
+"52 Pickup":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[blackjack]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Dealer":
+    type: interact
+    steps:
+        'Welcome*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Blackjack Format" "Hey <player.name>, here for a little bit of blackjack?"
+                exit:
+                    radius: 3
+                    script:
+                    - narrate "format:Blackjack Format" "Keep going!"
+                    - stop
+                    - zap 'step:Cleared'

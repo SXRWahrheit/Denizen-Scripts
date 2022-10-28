@@ -1,0 +1,32 @@
+config:
+    availability:
+        SirFirestride
+    reset:
+        period: 7d
+        day: friday
+        time: "19:00"
+    rewards:
+        money: 250
+        quest_points: 3
+    material: iron_sword
+messages:
+    offer: "<dark_green>Sir Firestride<white>: We need assistance fighting the ghast flocks, take out 350 for us!"
+    completion: "<dark_green>Sir Firestride<white>: Well done citizen, your contributions are invaluable."
+player_data:
+    WeeklyGhasts:
+        name: Garble the ghasts (Weekly)
+        description: "Sir Firestride needs your help hunting down ghasts."
+        stages:
+            1:
+                description: "Cross the universe and hunt down ghasts wherever they are."
+                objectives:
+                    1:
+                        name: "Slay 350 ghasts"
+                        progress: 0
+                        total: 350
+                        data:
+                            type: kill_mobs
+                            mob: ghast
+                            material: ghast_tear
+                progress: 0
+                total: 1

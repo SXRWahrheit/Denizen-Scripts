@@ -1,0 +1,49 @@
+# This thing handles the giving newbies stuff
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 5 2013
+
+"Quest Master":
+    type: assignment
+    interact scripts:
+    - Claiming Prizes
+    actions:
+        on assignment:
+        - runtask 'script:Quests n Such' instant
+        
+"Quests n Such":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[questmaster]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+"Some Diamonds":
+    type: task
+    script:
+    - narrate "<dark_green>Quest Master<white><&co> Not quite all the Treasure Hunters, but here's what you've earned!"
+    - give item:264 "qty:<flag.p:npccount>"
+    - give item:388 "qty:<flag.p:npccount>"
+    - flag npccount:0
+"ALL THE DIAMONDS":
+    type: task
+    script:
+    - narrate "<dark_green>Quest Master<white><&co> Oh, I see you found all the Treasure Hunters! Here are your rewards!"
+    - give item:264 qty:8
+    - give item:388 qty:8
+    - give item:310 qty:1
+    - give item:311 qty:1
+    - give item:312 qty:1
+    - give item:313 qty:1
+    - flag npccount:0
+    
+"Claiming Prizes":
+    type: interact
+    steps:
+        'For Real Doe*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "<dark_green>Quest Master<white><&co> Hey there, how's it going? Talk to the guys nearby for some quests, we pay well!"                    
+                    - if "<flag.p:npccount || 0>"  == 8 runtask 'script:ALL THE DIAMONDS' instant
+                    - if "<flag.p:npccount || 0>"  < 8 && "<flag.p:npccount || 0>"  > 0 runtask 'script:Some Diamonds' instant

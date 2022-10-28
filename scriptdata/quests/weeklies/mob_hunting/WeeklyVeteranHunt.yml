@@ -1,0 +1,41 @@
+config:
+    availability:
+        offering_npc: WarmasterReinwald
+    quit_step: NoReinwaldStorylineQuests
+    reset:
+        period: 7d
+        day: friday
+        time: "19:00"
+    requirements:
+        quests_completed:
+        - "VeteranHunt"
+    rewards:
+        money: 500
+        quest_points: 3
+        items:
+        - diamond[quantity=16]
+        commands:
+        - "mm i give -s <player> QuestVeteranDrops 20"
+        - "mm i give -s <player> QuestVeteranMeleeDrops 10"
+        - "mm i give -s <player> QuestVeteranRangedDrops 10"
+    material: diamond_sword
+messages:
+    offer: "<dark_green>Warmaster Reinwald<white>: Veteran monsters continue to pose a threat. If you get out there and take them down, we'll give you some rewards from our supply cache."
+    completion: "<dark_green>Warmaster Reinwald<white>: Excellent work."
+player_data:
+    WeeklyVeteranHunt:
+        name: Vanquish Veterans (Weekly)
+        description: "Hunt down Veteran monsters for Warmaster Reinwald."
+        stages:
+            1:
+                description: "Hunt Veterans in the Prosperus wilderness and beyond. Veteran monsters are more common in other, more dangerous dimensions."
+                objectives:
+                    1:
+                        name: "Kill Veteran monsters"
+                        progress: 0
+                        total: 100
+                        data:
+                            type: quest_weeklyveteranhunt
+                            material: VeteranToken
+                progress: 0
+                total: 1

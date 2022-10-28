@@ -1,0 +1,47 @@
+# This thing handles the mcmmo info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Got Skills":
+    type: assignment
+    interact scripts:
+    - Muhmorpaguh
+    actions:
+        on assignment:
+        - runtask 'script:Playa' instant
+        
+"Playa":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-mcmmo]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Muhmorpaguh":
+    type: interact
+    steps:
+        'Farming*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Each of these walls has a little bit explaining our skills system setup."
+                    - narrate "format:Tutorial Guide Format" "You can check out information on each skill, as well as what rank unlocks it."
+                    - narrate "format:Tutorial Guide Format" "It's a really cool way to get bonuses for stuff you already do!"
+                    - narrate "format:Tutorial Guide Format" "When you're ready for the next part, just say 'ready'."
+                    - zap 'step:Proceed'                    
+        'Proceed':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Just say <green>ready<white> when you want to go on."     
+            chat trigger:
+                'Ready Up':
+                    trigger: "Okay, I'm /ready/ - teach me more things!"
+                    script:
+                    - narrate "format:Tutorial Guide Format" "YOU ARE SO CLOSE TO DONE!"
+                    - execute as_server "warp <player.name> tut-lwc"
+                    - execute as_player "sethome"

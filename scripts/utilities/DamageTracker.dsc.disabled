@@ -1,0 +1,37 @@
+# @name Damage Tracker
+# @description Tracks entities that have damaged a player and outputs to console on player death
+# @author Wahrheit
+# @version 1.0
+
+Damage_Tracker_Handler_Flags:
+    type: world
+    names:
+        contact: Cactus / contact
+        custom: Unknown (custom)
+        null: Unknown (custom)
+        magic: Magic (potion or spell)
+        melting: Snowman melting
+        fly_into_wall: Flying into a wall
+
+    events:
+        on player dies:
+        # Console
+        - announce to_console "<player.name> with UUID <player.uuid> was killed. Below is their damage report from the last 5 minutes:"
+        - foreach <player.flag[damagetracker_damagers]> as:damager:
+            - announce to_console "- <player.flag[damagetracker_<[damager]>_name]><reset>: <player.flag[damagetracker_<[damager]>_damage]> damage"
+        ## Player
+        #- narrate "<red><underline><bold>Damage taken in the last 5 minutes"
+        #- foreach <player.flag[damagetracker_damagers]> as:damager:
+        #    - narrate "- <player.flag[damagetracker_<[damager]>_name]><reset>: <player.flag[damagetracker_<[damager]>_damage]> damage"
+
+        on player damaged:
+        - if <context.damager||null> == null:
+            - define "name:<script.data_key[names.<context.cause||null>]||<context.cause.to_titlecase.replace[_].with[ ]>>"
+            - define cause:<context.cause>
+        - else:
+            - define cause:<context.damager>
+            - define name:<context.damager.name>
+        - flag <player> damagetracker_<[cause]>_damage:+:<context.final_damage> duration:5m
+        - flag <player> damagetracker_<[cause]>_name:<[name]> duration:5m
+        - flag <player> damagetracker_damagers:|:<[cause]> duration:5m
+

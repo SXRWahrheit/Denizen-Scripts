@@ -1,0 +1,668 @@
+# Some plugin is cancelling the native chat message or otherwise interfering with the death event. DiscordSRV picks it up fine but need to debug why it's happening and get rid of the announce lines
+
+Death_Message_Handler:
+    type: world
+    debug: true
+    events:
+        after player damaged:
+        - define target <context.entity>
+        - if <context.damager.exists>:
+            - define damager <context.damager>
+            - flag <[target]> last_damaged_by:<[damager]>
+        - else:
+            - flag <[target]> last_damaged_by:<context.cause>
+        on player dies:
+        - if <player.flag[last_damaged_by].is_player> || <context.damager.is_player.if_null[false]>:
+            - if <context.cause> == projectile:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by a shot from <context.damager.name>"
+                - determine passively <[message]>
+                - announce <[message]>
+                - stop
+            - else:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by <context.damager.name>"
+                - determine passively <[message]>
+                - announce <[message]>
+                - stop
+            - define cause_of_death <context.damager.entity_type>
+        - else:
+            - define cause_of_death <context.cause>
+        - choose <[cause_of_death]>:
+            - default:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> died from unknown causes"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> was killed by Herobrine"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> was found dead in a ditch"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> lost the game"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> should not drink moon rocks"
+                - announce <[message]>
+                - determine passively <[message]>
+                - ~discordmessage id:sxr channel:343105813293826059 "**<player.name> was slain** and the cause was <context.cause> which was unaccounted for"
+            - case contact:
+                # Add differentiation for blocks
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by touching something"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case cramming:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by being crushed"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case drowning:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>drowned"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is swimming with the fishes"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>took a long walk off a short pier"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to breathe water"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>couldn't find the white whale"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not scuba certified"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was lost in the bathtub"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot to flush"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not a mermaid"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case fall:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>fell to their death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>took a leap of faith"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>could use a lesson from the Death Tower"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not quite a ninja"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>broke their legs and quite a lot more"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't fly"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>thought they found the rabbit hole"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>attempted to think with portals - it did not work"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to be Wile E. Coyote"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>jumped a little too high"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>fell a little too fast"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>missed the repulsion gel"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>threw themself at the ground and didn't miss"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>came to a sudden stop"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name><red>'s favorite season is <&dq>fall<&dq>"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is falling without style"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>had a skill issue"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>slipped on a banana peel"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>did not hit the ground running"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case fire:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>burned to death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot how to stop, drop, and roll"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>could use a little less pyromaniacism"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't touch this"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a disco inferno without the disco"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>pissed off Cave Johnson"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a hunk-a hunk-a burnin' flesh"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is crispy and goes well with eggs"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>shouldn't play with matches"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case fire_tick:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>burned to death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot how to stop, drop, and roll"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>could use a little less pyromaniacism"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't touch this"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a disco inferno without the disco"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>pissed off Cave Johnson"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a hunk-a hunk-a burnin' flesh"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is crispy and goes well with eggs"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>shouldn't play with matches"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case fly_into_wall:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>flew headfirst into a wall"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case freeze:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>froze to death"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case hot_floor:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>burned to death"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case lava:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>melted to death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by lava"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>became obsidian"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>took a bath in a lake of fire"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not a dragon"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is crunchy and good with ketchup"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>became a test subject for combustible lemons"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>hasn't got all the strength of a raging fire"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't have the high ground"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>took a trip to Pompeii"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was melted with liquid hot 'magma'"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>se lava las manos"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>shouldn't dig straight down"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case lightning:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was struck by lightning"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got electrocuted"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>has an electrifying personality"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>made a suitable ground"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is shocking"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was turned to glass"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>angered the Gods"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case magic:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was killed by magic"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case melting:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>melted to death"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case poison:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>died from poison"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should not drink moon rocks"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case starvation:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>starved to death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot to eat"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case suffocation:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>suffocated to death"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is finding it harder to breathe"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should have looked up"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>doesn't like sand"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is six feet under"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>became buried treasure"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case suicide:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was their own cause of death"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case thorns:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>has learned that every rose has its thorn"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case void:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>fell into the void"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>burned up in the atmosphere"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>shouldn't skydive where there isn't any ground"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't grab the ledge in time"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>isn't as mysterious as the dark side of the moon"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>faded into darkness"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is lost in space"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is floating 'round their tin can"
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>throw themself at the ground and missed"
+                - determine passively <[message]>
+                - announce <[message]>
+            - case wither:
+                - random:
+                    - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>withered to death"
+                - determine passively <[message]>
+                - announce <[message]>
+            # Mobs
+            - case entity_attack entity_sweep_attack entity_explosion:
+                # MythicMobs
+                - if <context.damager.mythicmob.exists>:
+                    - random:
+                        - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a <context.damager.name>"
+                    - determine passively <[message]>
+                    - announce <[message]>
+                    - stop
+                - choose <context.damager.entity_type>:
+                    - case arrow:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was shot to death"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case axolotl:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an axlotl"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case bat:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a bat"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case bee:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a bee"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case blaze:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a blaze"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>went out in a blaze of something, but it wasn't glory"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name><red>'s body was found full of burning bullet holes"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>isn't quite ready to collect blaze rods"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case cat:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a cat"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case cave_spider:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a cave spider"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was poisoned by the dark arachnids"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should be more friendly to arthropods"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>needs more torches and less poison"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case chicken:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a chicken"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case cod:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a cod"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case cow:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a cow"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case creeper:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a creeper"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was creeper bombed"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>hugged a creeper"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>fed the creepers"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got a little too close to an explosive personality"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't look behind themselves"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>became bits and pieces"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case donkey:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a donkey"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case dragon_fireball:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a dragon fireball"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not ready to challenge the dragon"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not Dovahkiin"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot their armor in the End"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case drowned:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a drowned"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>met Davy Jones"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>has been dragged to the depths"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case elder_guardian:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an elder guardian"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case ender_crystal:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an ender crystal"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case ender_dragon:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a dragon fireball"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not ready to challenge the dragon"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not Dovahkiin"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>forgot their armor in the End"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case enderman:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an enderman"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>couldn't outrun an enderman"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>looked 'em dead in the eyes and didn't live to tell about it"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>met a tall dark stranger"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a victim of the men in black suits"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was corrupted by the cosmic darkness"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case endermite:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an endermite"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was corrupted by the cosmic darkness"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was nibbled to death"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case evoker:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an evoker"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case evoker_fangs:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an evoker"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case fox:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a fox"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case ghast:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a ghast"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case giant:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a giant"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was stepped on"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>sends tiny baby to fight big giant man"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is a tiny person in a giant's world"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not a King David"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to bring a knife to a giant fight"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was not up to size"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got squished"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case guardian:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a guardian"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case hoglin:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a hoglin"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case horse:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a horse"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case husk:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a husk"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case illusioner:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an illusioner"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case iron_golem:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an iron golem"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case llama:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a llama"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case magma_cube:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a magma cube"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is served with jello flambe"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should not hug things that are on fire"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to eat the burning cubes"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case mule:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a mule"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case mushroom_cow:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a mooshroom"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case ocelot:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by an ocelot"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case panda:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a panda"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case parrot:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a parrot"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case phantom:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a phantom"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case pig:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a pig"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case piglin:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a piglin"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case piglin_brute:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a piglin brute"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case polar_bear:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a polar bear"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case primed_tnt:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by TNT"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>blew up"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>apparently has an explosive personality"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>misjudged their explosive tendencies"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>dropped the bomb... on themself"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>exploded"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is tiny bits and pieces"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>won't have an open casket funeral"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is over there... and over there... and over there"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case pufferfish:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a pufferfish"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case rabbit:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a rabbit"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case ravager:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a ravager"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case salmon:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a salmon"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case sheep:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a sheep"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case shulker:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a shulker"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case shulker_bullet:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a shulker"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case silverfish:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a silverfish"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was annihilated by the small scaly horde"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should have bought insecticide"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>has a basement of swiss cheese"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got bedbugs"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case skeleton:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a skeleton"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was impaled"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was boned by a skeleton"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>wants to get off Mr. Bones' Wild Ride"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't get enough calcium"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>took an arrow to the knee"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case skeleton_horse:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a skeleton horse"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case slime:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a slime"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to eat poison jello"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was encased in jello"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got mobbed by animated goop"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should have called the Ghostbusters"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case snowman:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a snowman"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case spider:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a spider"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't build a roof on their house"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't do whatever a spider can"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>cannot shot web"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>got lost surfing the web"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>went up the water spout"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was bitten by a non-radioactive spider"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case squid:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a squid"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case stray:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a stray"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case trader_llama:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a trader's llama"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case tropical_fish:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a tropical fish"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case vex:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a vex"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case villager:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a villager"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case vindicator:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a vindicator"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case wandering_trader:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a wandering trader"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case witch:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a witch"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case wither:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a wither"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case wither_skeleton:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a wither skeleton"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case wolf:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a wolf"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>should not become a park ranger"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is not the alpha wolf"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case zombie:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a zombie"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is now a member of the hivemind"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>had their brain eaten"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't do the Thriller dance"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>doesn't get the brians joke"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>(extremely Caboose voice) briiiiiaaaaaaannnnnnnnsssssss"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>didn't head to the pub and wait for this to all blow over"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case zombie_horse:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a zombie horse"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case zombie_villager:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a zombie villager"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is now a member of the hivemind"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>had their brain eaten"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>can't do the Thriller dance"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>doesn't get the brians joke"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>(extremely Caboose voice) briiiiiaaaaaaannnnnnnnsssssss"
+                        - determine passively <[message]>
+                        - announce <[message]>
+                    - case zombified_piglin:
+                        - random:
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>was slain by a zombified piglin"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>will oink in hell"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>tried to eat undead bacon"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>has been had by the revenge of the pigs"
+                            - define message "☠ <player.chat_prefix.parse_color> <player.name> <red>is considering becoming a vegan"
+                        - determine passively <[message]>
+                        - announce <[message]>

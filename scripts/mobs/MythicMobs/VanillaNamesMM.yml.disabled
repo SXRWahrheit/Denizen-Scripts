@@ -1,0 +1,12 @@
+"Fix Vanilla Mob Names":
+    type: world
+    events:
+        on entity dies:
+            - if <entity.isactivemob> 
+            {
+                - if <entity.activemob.displayname> == null 
+                {
+                    - adjust <activemob.displayname>:<activemob.mobtype>
+                }
+                - narrate "<activemob.displayname>"
+            }

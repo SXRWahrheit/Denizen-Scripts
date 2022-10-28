@@ -1,0 +1,30 @@
+config:
+    availability:
+        offering_npc: 66
+    reset:
+        period: 1d
+        time: "19:00"
+    rewards:
+        money: 250
+        quest_points: 2
+    material: leather_boots
+messages:
+    offer: "<gray>He Jumps Death<white>: Go and make your way up the first five levels of the Death Tower."
+    completion: "<gray>He Jumped Death<white>: You're quite the climber! Here's some gold for your trouble."
+player_data:
+    DailyJQ_DeathTower:
+        name: Laugh in the face of death (Daily)
+        description: "Head to the Death Tower and make your way up the first five levels!"
+        stages:
+            1:
+                description: "Complete the first five levels of the Death Tower."
+                objectives:
+                    1:
+                        name: "Speak to He Jumped Death"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: npc_interaction
+                            npc: he_jumped_death
+                progress: 0
+                total: 1

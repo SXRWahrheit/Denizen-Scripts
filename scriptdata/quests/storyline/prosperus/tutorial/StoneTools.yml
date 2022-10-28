@@ -1,0 +1,107 @@
+config:
+    availability:
+        offering_npc: QuestMaster
+    requirements:
+        quests_completed:
+        - "WoodTools"
+    rewards:
+        money: 50
+        quest_points: 1
+        items:
+        - <item[stone_axe].with[enchantments=<map[unbreaking=1]>]>
+        - <item[stone_pickaxe].with[enchantments=<map[unbreaking=1]>]>
+        - <item[stone_shovel].with[enchantments=<map[unbreaking=1]>]>
+        - <item[stone_sword].with[enchantments=<map[unbreaking=1]>]>
+        - <item[stone_hoe].with[enchantments=<map[unbreaking=1]>]>
+        scripts:
+        - StoneToolsCompletion
+    material: stone_axe
+    quit_step: StoneToolsOffer
+messages:
+    offer: "<dark_green>Quest Master<white>: You had to break wood to get those tools - now it's time to use them to break some stone. Get back out there and get mining! Once you have some stone, use it to craft a set of stone tools, and bring them to me. I'll enchant them for you!"
+    completion: "<dark_green>Quest Master<white>: Hey, nicely done! Ready for your next step?"
+player_data:
+    StoneTools:
+        name: Breaking ground
+        description: "Now that you've got wood tools, you can mine some stone and craft stone tools. Craft them and bring a full set to the Quest Master."
+        stages:
+            1:
+                description: "Craft stone tools."
+                objectives:
+                    1:
+                        name: "Craft a stone axe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: stone_axe
+                    2:
+                        name: "Craft a stone pickaxe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: stone_pickaxe
+                    3:
+                        name: "Craft a stone shovel"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: stone_shovel
+                    4:
+                        name: "Craft a stone sword"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: stone_sword
+                    5:
+                        name: "Craft a stone hoe"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: craft_item
+                            material: stone_hoe
+                progress: 0
+                total: 5
+            2:
+                description: "Bring stone tools to the Quest Master."
+                objectives:
+                    1:
+                        name: "Bring a stone axe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: stone_axe
+                    2:
+                        name: "Bring a stone pickaxe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: stone_pickaxe
+                    3:
+                        name: "Bring a stone shovel to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: stone_shovel
+                    4:
+                        name: "Bring a stone sword to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: stone_sword
+                    5:
+                        name: "Bring a stone hoe to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: stone_hoe
+                progress: 0
+                total: 5

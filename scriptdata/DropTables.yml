@@ -1,0 +1,71 @@
+veteran_potential_drop_list:
+- ImbuedSword_sealed_potential
+- ImbuedHelm_sealed_potential
+- ImbuedChest_sealed_potential
+- ImbuedLegs_sealed_potential
+- ImbuedBoots_sealed_potential
+- ImbuedBow_sealed_potential
+- ImbuedShield_sealed_potential
+- ImbuedAxe_sealed_potential
+- ImbuedDagger_sealed_potential
+elite_potential_drop_list:
+- BurnishedSword_sealed_potential
+- BountifulBlade_sealed_potential
+- WitheringBlade_sealed_potential
+- BurnishedSword_sealed_potential
+- BurnishedHelm_sealed_potential
+- BurnishedChest_sealed_potential
+- BurnishedLegs_sealed_potential
+- BurnishedBoots_sealed_potential
+- BurnishedBow_sealed_potential
+- BurnishedShield_sealed_potential
+- BurnishedAxe_sealed_potential
+- BurnishedDagger_sealed_potential
+gem_drop_list:
+- socket_gem_attackdamage_mainhand
+- socket_gem_attackspeed_mainhand
+- socket_gem_attack_crit_chance
+- socket_gem_attack_health_on_hit
+- socket_gem_utility_speed_on_hit
+- socket_gem_defense_max_health_head
+- socket_gem_defense_max_health_chest
+- socket_gem_defense_max_health_legs
+- socket_gem_defense_max_health_feet
+- socket_gem_defense_armor_head
+- socket_gem_defense_armor_chest
+- socket_gem_defense_armor_legs
+- socket_gem_defense_armor_feet
+fire_mage_armor_drop_list_sealed_potential:
+- Veteran_Flame_Helm_sealed_potential
+- Veteran_Flame_Chest_sealed_potential
+- Veteran_Flame_Legs_sealed_potential
+- Veteran_Flame_Boots_sealed_potential
+fire_mage_armor_drop_list:
+- Veteran_Flame_Helm
+- Veteran_Flame_Chest
+- Veteran_Flame_Legs
+- Veteran_Flame_Boots
+fire_mage_weapon_drop_list:
+- ImbuedFlameboltWand
+- ImbuedFlameboltWand_sealed_potential
+- BurnishedFlameboltWand
+- BurnishedFlameboltWand_sealed_potential
+wind_mage_armor_drop_list_sealed_potential:
+- Veteran_Air_Helm_sealed_potential
+- Veteran_Air_Chest_sealed_potential
+- Veteran_Air_Legs_sealed_potential
+- Veteran_Air_Boots_sealed_potential
+wind_mage_armor_drop_list:
+- Veteran_air_Helm
+- Veteran_air_Chest
+- Veteran_air_Legs
+- Veteran_air_Boots
+- elite_windmage_elytra
+wind_mage_weapon_drop_list:
+- ImbuedWindboltWand
+- ImbuedWindboltWand_sealed_potential
+- BurnishedWindboltWand
+- BurnishedWindboltWand_sealed_potential
+consumable_drop_list:
+- DropRateBooster2x
+- GoldBooster2x

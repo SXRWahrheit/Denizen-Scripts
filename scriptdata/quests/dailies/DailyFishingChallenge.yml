@@ -1,0 +1,33 @@
+config:
+    availability:
+        offering_npc: FishingNewbie
+    reset:
+        period: 1d
+        time: "19:00"
+    requirements:
+        quests_completed:
+        - "TeachFishingNewbie"
+    rewards:
+        money: 100
+        quest_points: 1
+    material: fishing_rod
+messages:
+    offer: "<gray>Fishing Newbie<white>: You've been fishing for a little bit - I think you're ready for a challenge!"
+    completion: "<gray>Fishing Newbie<white>: Wow! Nice work!"
+player_data:
+    DailyFishingChallenge:
+        name: Beat the Fishing Newbie's challenge (Daily)
+        description: "The Fishing Newbie has a challenge for you - can you catch 32 fish in 10 minutes?"
+        stages:
+            1:
+                description: "Beat the Fishing Newbie's challenge."
+                objectives:
+                    1:
+                        name: "Catch 32 fish"
+                        progress: 0
+                        total: 32
+                        data:
+                            type: catch_fish
+                            material: fishing_rod
+                progress: 0
+                total: 1

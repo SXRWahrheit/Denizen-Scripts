@@ -1,0 +1,30 @@
+config:
+    availability:
+        offering_npc: 40
+    reset:
+        period: 1d
+        time: "19:00"
+    rewards:
+        money: 100
+        quest_points: 1
+    material: leather_boots
+messages:
+    offer: "<gray>He Jumps Twice<white>: Show me what you've got!"
+    completion: "<gray>He Jumped Twice<white>: You beat the heat! Nice job!"
+player_data:
+    DailyJQ2:
+        name: Beat the heat (Daily)
+        description: "Conquer the jumping challenge!"
+        stages:
+            1:
+                description: "Jump your way through the challenge."
+                objectives:
+                    1:
+                        name: "Speak to He Jumped Twice"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: npc_interaction
+                            npc: he_jumped_twice
+                progress: 0
+                total: 1

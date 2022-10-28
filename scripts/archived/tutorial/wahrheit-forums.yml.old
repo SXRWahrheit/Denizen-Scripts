@@ -1,0 +1,41 @@
+# This thing handles the forum info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Propagandizes You":
+    type: assignment
+    interact scripts:
+    - Join My Forums Bitch
+    actions:
+        on assignment:
+        - runtask 'script:Posting Contest' instant
+        
+"Posting Contest":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-forums]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+   
+"Join My Forums Bitch":
+    type: interact
+    steps:
+        'Forums*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Right on <player.name>, did you know we have awesome forums?"
+                    - narrate "format:Tutorial Guide Format" "You get gold for posting, so go check them out! It's also how you earn ranks."
+                    - narrate "format:Tutorial Guide Format" "Just head to <green>http://summaxr.com/join<white> and sign up!"
+                    - narrate "format:Tutorial Guide Format" "You really absolutely should, the more posters the more money and fun!"
+                    - execute as_player "sethome"         
+                    - zap 'step:Just In Case'
+        'Just In Case':
+            chat trigger:
+                'Stupid Numpty':
+                    trigger: "Hey, can you /help/ me figure out how to get up there?"
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Sure, just jump in that portal on the left - don't forget you can /sethome!"

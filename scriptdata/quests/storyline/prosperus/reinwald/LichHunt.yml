@@ -1,0 +1,36 @@
+config:
+    availability:
+        offering_npc: WarmasterReinwald
+    requirements:
+        quests_completed:
+        - "VeteranHunt"
+    rewards:
+        money: 250
+        quest_points: 5
+        items:
+        - <item[diamond[quantity=64]]>
+        - <mythic_item[BurnishedSword]>
+        scripts:
+        - LichHuntCompletion
+    material: diamond_sword
+    quit_step: LichHuntOffer
+messages:
+    offer: "<dark_green>Warmaster Reinwald<white>: The forces of darkness are strong, but I think you're ready for a bigger challenge. I want you to hunt your first Elite-level monster - a Lich."
+    completion: "<dark_green>Warmaster Reinwald<white>: I'm proud of you. Keep your wits about you, there's more work to do."
+player_data:
+    LichHunt:
+        name: Hunt down a Lich
+        description: "Hunt down a Lich for Warmaster Reinwald."
+        stages:
+            1:
+                description: "Hunt a Lich. You can find them rarely in Prosperus. Elite monsters are more common in other, more dangerous dimensions."
+                objectives:
+                    1:
+                        name: "Kill a Lich"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: kill_mobs
+                            mob: Lich
+                progress: 0
+                total: 1

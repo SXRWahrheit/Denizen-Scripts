@@ -1,0 +1,30 @@
+config:
+    availability:
+        offering_npc: HawksPostmaster
+    requirements:
+        quests_completed:
+        - "VisitHawksNest"
+    rewards:
+        money: 50
+        quest_points: 1
+    material: compass
+messages:
+    offer: "<dark_green>Hawk Postmaster<white>: Now that you're here, why don't you go find the town's waypoint? Once you unlock it, you can visit whenever you like."
+    completion: "<dark_green>Hawk Postmaster<white>: Great job! Use /ftw to view the waypoints you've unlocked. To return to Hawk's Nest at any time, just type /ftw hawksnest."
+player_data:
+    HawksNestWaypoint:
+        name: Unlock the Hawk's Nest waypoint
+        description: "Go find the Hawk's Nest waypoint. Once you've reached it, you can return to it any time."
+        stages:
+            1:
+                description: "Find the Hawk's Nest waypoint."
+                objectives:
+                    1:
+                        name: "Reach the waypoint"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: reach_location
+                            notable_name: waypoint_hawksnest_cuboid
+                progress: 0
+                total: 1

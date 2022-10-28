@@ -1,0 +1,161 @@
+# This thing handles the oracle after the boss in the water temple
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated January 19 2015
+
+"Oracle of Water":
+    type: assignment
+    interact scripts:
+    - Water Savior
+    actions:
+        on assignment:
+        - teleport npc location:<npc.anchor[wtoracle]>
+        - trigger name:proximity toggle:true
+    
+"Water Oracle Format":
+    type: format
+    format: "<red>Oracle of Water<white><&co> <[text]>"
+    
+"Water Temple Complete":
+    type: task
+    script:
+#    - narrate "Challenger flag read as <n@184.flag[watertemple-challenger]>"
+    - give money qty:2500
+    - narrate "<yellow>You have received 2500 gold."
+    - give item:373,8262 qty:6 unlimit_stack_size
+    - give item:373,8269 qty:6 unlimit_stack_size
+    - give item:373,8269 qty:6 unlimit_stack_size
+    - give "item:Water Temple Depth Strider book" qty:1
+    - give item:384 qty:64
+    - give item:384 qty:64
+    - random 4
+    - give "item:Drenched Helm" qty:1
+    - give "item:Drenched Chestplate" qty:1
+    - give "item:Drenched Leggings" qty:1
+    - give "item:Drenched Boots" qty:1
+    - execute as_server "cast teach <player.name> explode"
+    - flag npcid:184 npc watertemple-challenger:!
+    - announce "<red><player.name> has successfully conquered the Water Temple! The Gods smile upon them."
+    - flag <player> watertemplewins:++
+    - flag <player> watertemplecomplete:0
+    - flag npcid:184 npc watertempleclear:1
+    # now we just refer to the queue we want it to continue
+    - queue <[1]> resume
+
+"Drenched Helm":
+    type: item
+    material: diamond_helmet
+    lore:
+    - This soaked helm was
+    - obtained from the
+    - Water Temple by
+    - <n@184.flag[watertemple-challenger]>.
+    display name: "Drenched Helm"
+    enchantments:
+    - oxygen:3
+    - water_worker:1
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+    
+"Drenched Chestplate":
+    type: item
+    material: diamond_chestplate
+    lore:
+    - This soaked plate was
+    - obtained from the
+    - Water Temple by
+    - <n@184.flag[watertemple-challenger]>.
+    display name: "Drenched Chestplate"
+    enchantments:
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+
+"Drenched Leggings":
+    type: item
+    material: diamond_leggings
+    lore:
+    - These soaked leggings were
+    - obtained from the
+    - Water Temple by
+    - <n@184.flag[watertemple-challenger]>.
+    display name: "Drenched Leggings"
+    enchantments:
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1
+
+"Drenched Boots":
+    type: item
+    material: diamond_boots
+    lore:
+    - These soaked boots were
+    - obtained from the
+    - Water Temple by
+    - <n@184.flag[watertemple-challenger]>.
+    display name: "Drenched Boots"
+    enchantments:
+    - depth_strider:3
+    - protection_explosions:4
+    - protection_environmental:4
+    - thorns:3
+    - durability:1    
+    
+"Water Temple Depth Strider Book":
+    type: item
+    material: enchanted_book
+    lore:
+    - This book of magic
+    - was obtained from the
+    - Water Temple by
+    - <n@184.flag[watertemple-challenger]>.
+    display name: "Drenched Book of Depth Strider"
+    enchantments:
+    - depth_strider:3    
+    
+"Water Savior":
+    type: interact
+    steps:
+        'Before Fight*':
+            click trigger:
+                script:
+                - narrate "format:Water Oracle Format" "You shouldn't be able to see this, it's a debug message!"
+                
+        'Congratulations':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Water Oracle Format" "You have defeated the corrupted Emira Ivese, congratulations, <player.name>!"
+                    - narrate "format:Water Oracle Format" "When you are ready to return to Prosperus, right click me."
+                    - narrate "format:Water Oracle Format" "I will bestow your rewards upon you and return you to the Altar of Water."
+            click trigger:
+                script:
+                - engage
+                - if <player.flag[watertemplecomplete]> == 1 {
+                  - narrate "format:Water Oracle Format" "Okay, here are your rewards."
+                  # Run the task to wait for and tell it what queue to resume after with <queue>
+                  - run "script:Water Temple Complete" def:<queue>
+                  # pause the queue to wait for other task to finish
+                  - queue pause
+                  - narrate "Format:Water Oracle Format" "Best of luck on your future travels!"
+                  - execute as_npc "warp <player.name> wateraltar"
+                  - disengage
+                  }
+                  else {
+                  - narrate "format:Water Oracle Format" "It looks like I've already rewarded you."
+                  - narrate "format:Water Oracle Format" "Best of luck on your future travels!"
+                  - execute as_npc "warp <player.name> wateraltar"
+                  - disengage
+                  }
+                  
+        'After Warp':
+            click trigger:
+                script:
+                - narrate "format:Water Oracle Format" "This is a debug message that you shouldn't be seeing!"
+                   

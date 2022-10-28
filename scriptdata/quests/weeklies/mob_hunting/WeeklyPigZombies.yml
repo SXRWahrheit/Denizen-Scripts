@@ -1,0 +1,32 @@
+config:
+    availability:
+        SirFirestride
+    reset:
+        period: 7d
+        day: friday
+        time: "19:00"
+    rewards:
+        money: 250
+        quest_points: 3
+    material: iron_sword
+messages:
+    offer: "<dark_green>Sir Firestride<white>: We need assistance fighting the zombie piglin infestation, take out 350 for us!"
+    completion: "<dark_green>Sir Firestride<white>: Well done citizen, your contributions are invaluable."
+player_data:
+    WeeklyPigZombies:
+        name: Pulverize the zombie piglins (Weekly)
+        description: "Sir Firestride needs your help hunting down zombie piglins."
+        stages:
+            1:
+                description: "Cross the universe and hunt down zombie piglins wherever they are."
+                objectives:
+                    1:
+                        name: "Slay 350 zombie piglins"
+                        progress: 0
+                        total: 350
+                        data:
+                            type: kill_mobs
+                            mob: zombie_piglin
+                            material: gold_nugget
+                progress: 0
+                total: 1

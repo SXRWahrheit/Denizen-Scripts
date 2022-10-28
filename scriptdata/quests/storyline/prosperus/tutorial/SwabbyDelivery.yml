@@ -1,0 +1,28 @@
+config:
+    availability:
+        offering_npc: Swabby
+    rewards:
+        money: 100
+        quest_points: 1
+    material: potion[color=242,142,28]
+    quit_step: AdventurePrompt
+messages:
+    offer: "<dark_green>Swabby<white>: Can you tell the Quest Master today's password for the secret speakeasy under Dawn's Landing? I forgot to tell him earlier!"
+    completion: "<dark_green>Quest Master<white>: Hey, thanks! That'll be useful for later."
+player_data:
+    SwabbyDelivery:
+        name: Deliver the Swabby's package to the Quest Master
+        description: "The Swabby on The Coming Sunrise, the ship you came into port on, gave you the password for a speakeasy. Head to the Questing Hall to tell the Quest Master. The Questing Hall is to your right if you're looking off the plank of the ship, or to the left from /spawn."
+        stages:
+            1:
+                description: "Find the Quest Master and tell him the password."
+                objectives:
+                    1:
+                        name: "Speak to the Quest Master"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: npc_interaction
+                            npc: questmaster
+                progress: 0
+                total: 1

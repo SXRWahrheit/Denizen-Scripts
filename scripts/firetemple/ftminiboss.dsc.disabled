@@ -1,0 +1,67 @@
+# This thing handles mini-boss in the fire temple
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.1
+# @last-updated September 5 2013
+
+"Servant of Flame":
+    type: assignment
+    interact scripts:
+    - Great Balls of Fire
+    actions:
+        on assignment:
+        - runtask 'script:Kill Invaders' instant
+        
+"Kill Invaders":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[ftminiboss]>
+    - trigger name:proximity toggle:true radius:25
+"Servant Format":
+    type: format
+    format: "<red>Servant of Flame<white><&co> <[text]>"
+"Proceed":
+    type: task
+    script:
+    - narrate "format:Servant Format" "Master... I've failed you..."
+    - narrate "<yellow>You hear the sound of a large crash of stone above. It may be worth investigating."
+    - switch state:on location:-4,74,1,ultimatus
+    - switch state:on location:-1,74,1,ultimatus
+    - execute as_server "npc despawn 87"
+    - zap "script:Great Balls of Fire" "step:Leaving"
+"More Mobs":
+    type: task
+    script:
+    - execute as_npc "spawnmob blaze 5 56,34,-25"
+    
+"Great Balls of Fire":
+    type: interact
+    steps:
+        'Miniboss*':
+            proximity trigger:
+                entry:
+                    radius: 25
+                    script:
+                    - narrate "format:Servant Format" "I serve the great Lord Emfyrius! I will not allow you to defile him!"
+                    - narrate "format:Servant Format" "Your soul shall burn for all eternity. Minions of flame, destroy the infiltrator!"
+                    - listen kill "script:More Mobs" id:Miniboss type:entity target:Blaze qty:5
+                    - listen kill "script:More Mobs" id:Miniboss-2 type:entity target:Blaze qty:10
+                    - listen kill "script:More Mobs" id:Miniboss-3 type:entity target:Blaze qty:15
+                    - listen kill "script:More Mobs" id:Miniboss-4 type:entity target:Blaze qty:20
+                    - listen kill "script:Proceed" id:Miniboss-5 type:entity target:Blaze qty:25
+                    - execute as_npc "spawnmob blaze 5 56,34,-25"
+                    
+        'Leaving':
+            proximity trigger:
+                exit:
+                    radius: 25
+                    script:
+                    - narrate "format:Servant Format" "You'll never make it to the high chambers!"
+                    
+# Preserve this section for if we ever get mob-type npc pathing working right.                    
+#            Npcdeath Trigger:
+#                script:
+#                - narrate "format:Servant Format" "Master... I've failed you..."
+#                - DIE
+#                - switch state:on location:-4,74,1,ultimatus
+#                - switch state:on location:-1,74,1,ultimatus

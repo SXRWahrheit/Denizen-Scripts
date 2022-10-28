@@ -1,0 +1,65 @@
+config:
+    availability:
+        offering_npc: StoicSage
+    requirements:
+        quests_completed:
+        - "UnlockBlink"
+        permissions:
+        - magicspells.learn.cripple
+    rewards:
+        money: 100
+        quest_points: 3
+    material: soul_sand
+messages:
+    offer: "<dark_green>Stoic Sage<white>: The Cripple spell allows you to dramatically slow down an enemy. When you're ready to learn it, bring me what I need so that I can teach you."
+    completion: "<dark_green>Stoic Sage<white>: Congratulations, you're ready to learn Cripple! Give it a try with <&dq>/cast cripple.<&dq>"
+player_data:
+    UnlockCripple:
+        name: Learn the Cripple spell
+        description: "Bring reagents to the Stoic Sage and learn the Cripple spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Stoic Sage."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: redstone
+                    2:
+                        name: "Deliver soul sand"
+                        progress: 0
+                        total: 256
+                        data:
+                            type: deliver_item
+                            material: soul_sand
+                    3:
+                        name: "Deliver fermented spider eyes"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: fermented_spider_eye
+                    4:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: gold_ingot
+                progress: 0
+                total: 4
+            2:
+                description: "Bring crystallized experience to the Stoic Sage."
+                objectives:
+                    1:
+                        name: "Deliver a chunk of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: crystallizedexperiencechunk
+                progress: 0
+                total: 1

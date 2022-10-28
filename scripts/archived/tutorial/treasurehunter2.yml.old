@@ -1,0 +1,37 @@
+# This thing handles the treasure hunting 2 parkour for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 5 2013
+
+"Raiders Of The Lost Ark2":
+    type: assignment
+    interact scripts:
+    - Diamonds2
+    actions:
+        on assignment:
+        - runtask 'script:Emeralds2' instant
+        
+"Emeralds2":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[treasurehunter2]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    
+"Diamonds2":
+    type: interact
+    steps:
+        'And Beacons Oh My2*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "<dark_green>Treasure Hunter<white><&co> Cool, you made it! I'll tell the Quest Master. Keep it up!"
+                    - if "<flag.p:npccount || 0>"  >= 1 flag npccount:++ else flag npccount:1
+                    - zap 'step:Found2'
+        'Found2':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "<dark_green>Treasure Hunter<white><&co> Hey, you already found me! Get out of here!"

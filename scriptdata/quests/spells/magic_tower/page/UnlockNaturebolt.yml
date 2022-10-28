@@ -1,0 +1,65 @@
+config:
+    availability:
+        offering_npc: StoicSage
+    requirements:
+        quests_completed:
+        - "UnlockBlink"
+        permissions:
+        - magicspells.learn.naturebolt
+    rewards:
+        money: 100
+        quest_points: 3
+    material: oak_leaves
+messages:
+    offer: "<dark_green>Stoic Sage<white>: The Naturebolt spell hurls a bolt of nature magic ahead of you, damaging and briefly rooting the first enemy hit. When you're ready to learn it, bring me what I need so that I can teach you."
+    completion: "<dark_green>Stoic Sage<white>: Congratulations, you're ready to learn Naturebolt! Give it a try with <&dq>/cast naturebolt.<&dq>"
+player_data:
+    UnlockNaturebolt:
+        name: Learn the Naturebolt spell
+        description: "Bring reagents to the Stoic Sage and learn the Naturebolt spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Stoic Sage."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: redstone
+                    2:
+                        name: "Deliver oak saplings"
+                        progress: 0
+                        total: 128
+                        data:
+                            type: deliver_item
+                            material: oak_sapling
+                    3:
+                        name: "Deliver arrows"
+                        progress: 0
+                        total: 512
+                        data:
+                            type: deliver_item
+                            material: arrow
+                    4:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 64
+                        data:
+                            type: deliver_item
+                            material: gold_ingot
+                progress: 0
+                total: 4
+            2:
+                description: "Bring crystallized experience to the Stoic Sage."
+                objectives:
+                    1:
+                        name: "Deliver a chunk of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            material: crystallizedexperiencechunk
+                progress: 0
+                total: 1

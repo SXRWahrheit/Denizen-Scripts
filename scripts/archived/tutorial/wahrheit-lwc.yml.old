@@ -1,0 +1,49 @@
+# This thing handles the lwc info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Pop Lock":
+    type: assignment
+    interact scripts:
+    - And Drop It
+    actions:
+        on assignment:
+        - runtask 'script:Dougie' instant
+        
+"Dougie":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-lwc]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+    
+"And Drop It":
+    type: interact
+    steps:
+        'Locks On Locks On Locks*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "You can lock each of these with our protection plugin, as well as both kinds of door!"
+                    - narrate "format:Tutorial Guide Format" "To make something just for you type '<green>/cprivate<white>'."
+                    - narrate "format:Tutorial Guide Format" "Publicly locked stuff can be opened by anyone, but keeps it from breaking. That command is '<green>/cpublic<white>'."
+                    - narrate "format:Tutorial Guide Format" "Finally, you can add someone to a private lock with '<green>/cmodify TheirUsername<white>'."
+                    - narrate "format:Tutorial Guide Format" "If you want to learn more about this, type '<green>/lwc<white>'.
+                    - narrate "format:Tutorial Guide Format" "Say '<green>ready<white>' and you're on to the final challenge!"
+                    - zap 'step:Proceed'                    
+        'Proceed':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Just say <green>ready<white> when you want to go on."
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/ to face the final challenge!"
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Whoosh!"
+                    - execute as_server "warp <player.name> tut-test"
+                    - execute as_player "sethome"

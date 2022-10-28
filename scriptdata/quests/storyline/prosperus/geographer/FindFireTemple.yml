@@ -1,0 +1,40 @@
+config:
+    availability:
+        offering_npc: 33
+    requirements:
+        quests_completed:
+        - "HuntElites"
+    rewards:
+        money: 100
+        quest_points: 3
+    material: compass
+messages:
+    offer: "<dark_green>Royal Geographer<white>: The Altar of Flame is a sacred location, and the Sage is an important bastion against the darkness. Please, find the Altar and ensure the Sage is safe."
+    completion: "<dark_green>Royal Geographer<white>: Thank you so much for checking on the Sage of Flame!"
+player_data:
+    FindFireTemple:
+        name: Find the Altar of Flame
+        description: "The Royal Geographer asked that you go find the Altar of Flame and check on the Sage."
+        stages:
+            1:
+                description: "Reach the Altar of Flame"
+                objectives:
+                    1:
+                        name: "Altar of Flame reached"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: reach_location
+                            notable_name: quest_findfiretemple_altar
+                progress: 0
+                total: 1
+            2:
+                description: "Return to the Royal Geographer"
+                objectives:
+                    2:
+                        name: "Royal Geographer spoken to"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: npc_interaction
+                            npc: royal_geographer

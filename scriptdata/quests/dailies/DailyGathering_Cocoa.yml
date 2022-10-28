@@ -1,0 +1,30 @@
+config:
+    availability:
+        offering_npc: 25
+    reset:
+        period: 1d
+        time: "19:00"
+    rewards:
+        money: 50
+        quest_points: 1
+    material: cocoa_beans
+messages:
+    offer: "<gray>Cocoa Calvin<white>: Please bring me 5 stacks of cocoa today so we can feed the people of Dawn's Landing."
+    completion: "<gray>Cocoa Calvin<white>: Wow, thank you so much for your generosity! Now we can make some cookies!"
+player_data:
+    DailyGathering_Cocoa:
+        name: Cocoa for the countrymen (Daily)
+        description: "Cocoa Calvin needs cocoa for the people of Dawn's Landing!"
+        stages:
+            1:
+                description: "Bring cocoa to Cocoa Calvin in the Questing Hall."
+                objectives:
+                    1:
+                        name: "Deliver 320 cocoa"
+                        progress: 0
+                        total: 320
+                        data:
+                            type: deliver_item
+                            item: cocoa_beans
+                progress: 0
+                total: 1

@@ -1,0 +1,72 @@
+config:
+    availability:
+        offering_npc: MagnificentMage
+    requirements:
+        quests_completed:
+        - "UnlockBlink"
+        permissions:
+        - magicspells.learn.itemsummon
+    rewards:
+        money: 100
+        quest_points: 3
+    material: fishing_rod
+messages:
+    offer: "<dark_green>Magnificent Mage<white>: The Item Summon spell allows you to manipulate spacial magic and bring all nearby items on the ground to you. When you're ready to learn it, bring me what I need so that I can teach you."
+    completion: "<dark_green>Magnificent Mage<white>: Congratulations, you're ready to learn Item Summon! Give it a try with <&dq>/cast itemsummon.<&dq>"
+player_data:
+    UnlockItemSummon:
+        name: Learn the Item Summon spell
+        description: "Bring reagents to the Magnificent Mage and learn the Item Summon spell!"
+        stages:
+            1:
+                description: "Bring magical reagents to the Magnificent Mage."
+                objectives:
+                    1:
+                        name: "Deliver redstone"
+                        progress: 0
+                        total: 1024
+                        data:
+                            type: deliver_item
+                            item: redstone
+                    2:
+                        name: "Deliver ender pearls"
+                        progress: 0
+                        total: 512
+                        data:
+                            type: deliver_item
+                            item: ender_pearl
+                    3:
+                        name: "Deliver feathers"
+                        progress: 0
+                        total: 2048
+                        data:
+                            type: deliver_item
+                            item: feather
+                    4:
+                        name: "Deliver string"
+                        progress: 0
+                        total: 2048
+                        data:
+                            type: deliver_item
+                            item: string
+                    5:
+                        name: "Deliver gold ingots"
+                        progress: 0
+                        total: 512
+                        data:
+                            type: deliver_item
+                            item: gold_ingot
+                progress: 0
+                total: 5
+            2:
+                description: "Bring crystallized experience to the Magnificent Mage."
+                objectives:
+                    1:
+                        name: "Deliver a bloom of crystallized experience"
+                        progress: 0
+                        total: 1
+                        data:
+                            type: deliver_item
+                            item: crystallizedexperiencebloom
+                progress: 0
+                total: 1

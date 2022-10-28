@@ -1,0 +1,59 @@
+# This thing handles the map info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Explains Cartography":
+    type: assignment
+    interact scripts:
+    - Maptastic
+    actions:
+        on assignment:
+        - runtask 'script:Move Bitch' instant
+        
+"Move Bitch":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-map]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Tutorial Guide Format":
+    type: format
+    format: "<gold>Tutorial Guide<white><&co> <[text]>"    
+    
+"Maptastic":
+    type: interact
+    steps:
+        'Mapular*':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Do you like maps, <player.name>? We've got quite a big one!"
+                    - narrate "format:Tutorial Guide Format" "If you type '<green>/map<white>' at any time, you'll get a link to our live map."
+                    - narrate "format:Tutorial Guide Format" "If you use the '<green>/dynmap webregister<white>' command you can sign in and see where you are!"
+                    - narrate "format:Tutorial Guide Format" "It's really useful when you're out exploring the huge world."
+                    - narrate "format:Tutorial Guide Format" "When you're all ready to go on, just say '<green>ready<white>'."
+                    - zap 'step:Proceed'                   
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/, let's do this thing."
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Off we go!"
+                    - execute as_server "warp <player.name> tut-ranks"
+                    - execute as_player "sethome"                    
+        'Proceed':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Just say <green>ready<white> when you want to go on."
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/, let's do this thing."
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Off we go!"
+                    - execute as_server "warp <player.name> tut-ranks"
+                    - execute as_player "sethome"

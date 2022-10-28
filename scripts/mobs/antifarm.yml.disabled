@@ -1,0 +1,52 @@
+"No Farms For You":
+  type: world
+  events:
+    on entity dies:
+    - flag server spawnlimit.<context.entity.location.simple>:++ duration:30m
+    - if <server.flag[spawnlimit.<context.entity.location.simple>]> >= 3
+    {
+#      - announce to_console "Debug message normal mobs samelocation"
+      - determine NO_DROPS_OR_XP
+    }
+    on mm denizen death:
+    - flag server spawnlimit.<context.activemob.location.simple>:++ duration:30m
+    - if <server.flag[spawnlimit.<context.activemob.location.simple>]> >= 3
+    {
+#      - announce to_console "Debug message mythicmobs samelocation"
+      - determine drops:li@;money:0;exp:0
+    }
+    on player receives message:
+    - if <context.message> contains "dropped 0.0 gold"
+    {
+      - determine CANCELLED
+    }
+"No Spawners For You":
+  type: world
+  events:
+    on entity spawns:
+    - if <context.entity.is_player>
+    {
+      - stop
+    }
+    - if '<context.reason>' == 'SPAWNER'
+    {
+      - wait 1t
+      - flag '<context.entity>' 'is_spawned.spawner'
+    }
+    on entity dies:
+    - if <context.entity.is_player>
+    {
+      - stop
+    }
+    - if <context.entity.has_flag[is_spawned.spawner]>
+    {
+#      - announce to_console "Debug message normal mobs spawner entity flag"
+      - determine NO_DROPS_OR_XP
+    }
+
+    on mm denizen death:
+    - if '<context.activemob.entity.has_flag[is_spawned.spawner]>'
+    {
+#      - announce to_console "Debug message mythicmobs spawner"
+      - determine drops:li@;money:0;exp:0
+    }

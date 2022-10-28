@@ -1,0 +1,56 @@
+# This thing handles the parkour info for the server tutorial
+# It was written by Wahrheit and you better believe it
+# @author Wahrheit
+# @version 1.0
+# @last-updated March 4 2013
+
+"Wahrheit Says Jump You Say How High":
+    type: assignment
+    interact scripts:
+    - Jump
+    actions:
+        on assignment:
+        - runtask 'script:On Your Mark' instant
+
+"On Your Mark":
+    type: task
+    script:
+    - teleport npc location:<npc.anchor[wahrheit-parkour]>
+    - trigger name:proximity toggle:true cooldown:0.1s radius:3
+    - trigger name:chat toggle:true cooldown:0.1s radius:3
+
+"Jump":
+    type: interact
+    steps:
+        'Parkour*':
+            proximity trigger:
+                entry:
+                    radius: 16
+                    script:
+                    - execute as_player "sethome"
+                    - narrate "format:Tutorial Guide Format" "Okay <player.name>, let's learn about parkour!"
+                    - narrate "format:Tutorial Guide Format" "We have a good number of parkour challenges available, ranging from the mildly annoying to mind-numbingly crazy!"
+                    - narrate "format:Tutorial Guide Format" "To get those muscles moving, I've hidden 8 treasure hunters around this tutorial. There are even two on this island!"
+                    - narrate "format:Tutorial Guide Format" "You will get one diamond and one emerald for each one you find. If you find all 8, I'll also give you a kit of armor!"
+                    - narrate "format:Tutorial Guide Format" "When you're ready to move on, just say '<green>ready<white>'!"
+                    - zap 'step:Proceed'
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/, let's get going!"
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Very well! Onward and upward, don't forget to scout out the island!"
+                    - execute as_server "warp <player.name> tut-island"
+                    - execute as_player "sethome"
+        'Proceed':
+            proximity trigger:
+                entry:
+                    radius: 3
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Just say <green>ready<white> if you need to get up the stairs."
+            chat trigger:
+                'Ready Up':
+                    trigger: "I'm /ready/, let's get going!"
+                    script:
+                    - narrate "format:Tutorial Guide Format" "Very well! Onward and upward, don't forget to scout out the island!"
+                    - execute as_server "warp <player.name> tut-island"
+                    - execute as_player "sethome"

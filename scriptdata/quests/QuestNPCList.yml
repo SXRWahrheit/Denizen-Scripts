@@ -1,0 +1,77 @@
+Swabby:
+- SwabbyDelivery
+QuestMaster:
+- WoodTools
+- StoneTools
+- SetHome
+- FindFishingNewbie
+- FindReinwald
+FishingNewbie:
+- DailyFishing
+- DailyFishingChallenge
+WarmasterReinwald:
+- WeeklyVeteranHunt
+- WeeklyEliteHunt
+LadyBrightsword:
+- WeeklyCaveSpiders
+- WeeklyCreepers
+- WeeklyEndermen
+- WeeklySkeletons
+- WeeklySlimes
+- WeeklySpiders
+- WeeklyZombies
+SirFirestride:
+- WeeklyBlazes
+- WeeklyGhasts
+- WeeklyMagmaCubes
+- WeeklyPigZombies
+# Spells
+## Youngling
+WiseWizard:
+- UnlockConfusion
+- UnlockFood
+## Page
+StoicSage:
+- UnlockAquabolt
+- UnlockCripple
+- UnlockDeathgrip
+- UnlockEnchantArrows-Nature
+- UnlockFarm
+- UnlockFlamebolt
+- UnlockGills
+- UnlockGust
+- UnlockIceWall
+- UnlockLightwalk
+- UnlockNaturebolt
+- UnlockNight-Avenfeld
+- UnlockNight-Heavens
+- UnlockNight
+- UnlockRootbind
+- UnlockSun-Avenfeld
+- UnlockSun-Heavens
+- UnlockSun
+- UnlockWindbolt
+## Squire
+SkilledSorcerer:
+- UnlockCripplingWave
+- UnlockEscape
+- UnlockFarm-Carrots
+- UnlockFarm-Potatoes
+- UnlockFarm-Wheat
+- UnlockFireNova
+- UnlockFlamesurge
+- UnlockGustlaunch
+- UnlockGustleap
+- UnlockIceblock
+- UnlockRoar
+- UnlockRootsurge
+- UnlockSafefall
+- UnlockShockwave
+- UnlockTenacity
+## Apprentice
+MagnificentMage:
+- UnlockItemSummon
+- UnlockSearingFlames
+- UnlockShadowStun
+## Knight
+#ArchmageAlestra:

@@ -1,0 +1,265 @@
+
+# Random Death Messages
+#
+# Written by Mwthorn
+#   
+# This script overrides the normal death messages with some more interresting and fun messages.
+# Can be expandable for other deaths and more random messages.
+# If you have some good death messages, write to me in IRC and I might add them next version.
+#
+# Do note the death-reasons are in a specific order, this is because it checks for any specefic mobs before it checks for "players" because they are technical mobs too :P
+#
+# Thank You credits:
+# - Carisus 
+# - BlackCoyote
+#   
+# TODO:
+# - Add further deaths while player does anoher action (died while doing something)
+
+RDM_Events:
+    type: world
+    debug: false
+    events:
+        on player death:
+        - choose "<context.message>":
+            - case "<player.name> died":
+                - random {
+                    - determine "<player.name> died to something"
+                    - determine "<player.name> had an unknown death"
+                    - determine "<player.name> somehow died"
+                    - determine "<player.name> suddenly died"
+                    - determine "<player.name> must have died to something"
+                    #- determine "HAHAHA <player.name> is a deskchair!"
+                    # Used for testing... left if there cause it was the first one :P
+                }
+            - case "<player.name> fell out of the world":
+                - random {
+                    - determine "<player.name> might have fallen into the void"
+                    - determine "<player.name> had its legacy in the void"
+                    - determine "<player.name> took a peak into the fourth dimension"
+                    - determine "<player.name> tried to see what was under the world" 
+                    - determine "<player.name> discovered there was nothing to see under the world" 
+                    - determine "<player.name> now knows you can<&sq>t build a house under the world" 
+                    - determine "<player.name> found out the void has nothing in it" 
+                    - determine "<player.name> just voided there warranty" 
+                }
+            - case "<player.name> fell from a high place":
+                - random {
+                    - determine "<player.name> fell of cliff"
+                    - determine "<player.name> did not just break a leg"
+                    - determine "<player.name> did not bring a parachute"
+                    - determine "<player.name> tried to fly like a bird"
+                    - determine "<player.name> was on its way to hell"
+                    - determine "<player.name> underestimated gravity"
+                }
+            - case "<player.name> hit the ground too hard":
+                - random {
+                    - determine "<player.name> did not even care"
+                    - determine "<player.name> did not land properly"
+                    - determine "<player.name> tripped over and fell"
+                    - determine "<player.name> forgot to tuck and roll"
+                }
+            - case "<player.name> suffocated in a wall":
+                - random {
+                    - determine "<player.name> thought it was 9 3/4"
+                    - determine "<player.name> tried to be a block"
+                    - determine "<player.name> was squashed by a block"
+                    - determine "<player.name> tried to wanabe a worm"
+                    - determine "<player.name> forgot to look out for gravel" 
+                    - determine "<player.name> wanted to see what the inside of a block looked like" 
+                }
+            - case "<player.name> drowned":
+                - random {
+                    - determine "<player.name> tried to be a fish"
+                    - determine "<player.name> became seaweed"
+                    - determine "<player.name> could not breathe underwater"
+                    - determine "<player.name> forgot a divingsuit"
+                }
+            - case "<player.name> burned to death":
+                - random {
+                    - determine "<player.name> could not find water"
+                    - determine "<player.name> got burnt out"
+                    - determine "<player.name> was on fire"
+                    - determine "<player.name> was flamed on"
+                    - determine "<player.name> became a burning player"
+                }
+            - case "<player.name> blew up":
+                - random {
+                    - determine "<player.name> thought it was cake"
+                    - determine "<player.name> was blown to pieces"
+                    - determine "<player.name> stood too close to an explosion"
+                }
+            - case "<player.name> tried to swim in lava":
+                - random {
+                    - determine "<player.name> became obsidian"
+                    - determine "<player.name> tried to swim out of the lava"
+                    - determine "<player.name> had a hot bath"
+                }
+            - case "<player.name> went up in flames":
+                - random {
+                    - determine "<player.name> had a blast of fire"
+                    - determine "<player.name> stood still in the fire"
+                    - determine "<player.name> was cooked too long"
+                    - determine "<player.name> could not take the heat"
+                }
+            - case "<player.name> withered away":
+                - random {
+                    - determine "<player.name> withered into the abyss"
+                    - determine "<player.name> withered into the universe"
+                    - determine "<player.name> withered out of this world"
+                }
+            - case "<player.name> starved to death":
+                - random {
+                    - determine "<player.name> ate itself"
+                    - determine "<player.name> was now no longer hungry"
+                    - determine "<player.name> could not find any food"
+                    - determine "<player.name> sucks at Minecraft" 
+                }
+            - case "<player.name> was killed by magic":
+                - random {
+                    - determine "<player.name> turned to stone"
+                    - determine "<player.name> was magically killed"
+                    - determine "<player.name> was consumed by magic"
+                }
+            - case "<player.name> was pricked to death":
+                - random {
+                    - determine "<player.name> hugged a cactus"
+                    - determine "<player.name> was stung to death by a deadly cactus"
+                    - determine "<player.name> stood on a cactus"
+                    - determine "<player.name> was stabed to death by an angry plant" 
+                }
+            - case "<player.name> fell off ladder":
+                - random {
+                   - determine "<player.name> looked down" 
+                   - determine "<player.name> missed a rung" 
+                   - determine "<player.name> was drunk while climbing a ladder" 
+                }
+            - case "<player.name> fell off some vines":
+                - random {
+                    - determine "<player.name> was swinging like Tarzan, <&quo>was<&quo> swinging like Tarzan" 
+                }
+            - case "<player.name> fell out of the water":
+                - random {
+                   - determine "<player.name> found the bottom of the water" 
+                   - determine "<player.name> tried to swim into the air" 
+                   - determine "<player.name> didn<&sq>t know water had a bottom" 
+                }
+            - case "<player.name> was squashed by a falling anvil":
+                - random {
+                    - determine "<player.name> had an anvil fall on their head" 
+                    - determine "<player.name> tried to wear an anvil as a hat" 
+                    - determine "<player.name> forgot anvils are affected by gravity" 
+                }
+            - case "<player.name> fell into a patch of fire":
+                - random {
+                    - determine "<player.name> fell on some fire" 
+                    - determine "<player.name> is wondering where that fire came from" 
+                    - determine "<player.name> wanted to see if fire was hot"
+                }
+            - case "<player.name> fell into a patch of cacti":
+                - random {
+                    - determine "<player.name> jumped on some cacti" 
+                    - determine "<player.name> didn<&sq>t look before he jumped" 
+                    - determine "<player.name> fell on a plant with knives sticking out of it"
+                }
+            - case "<player.name> was struck by lightning":
+                - random {
+                    - determine "<player.name> discovered electricity" 
+                    - determine "<player.name> was killed by mother nature" 
+                    - determine "<player.name> thought playing in the rain was a grand idea" 
+                    - determine "<player.name> didn<&sq> see the lightning coming"
+                }
+            # Killed by mobs
+            - case "<player.name> was fireballed by Blaze":
+                - random {
+                    - determine "<player.name> was sprayed by Blaze"
+                    - determine "<player.name> got burnt by Blaze"
+                    - determine "<player.name> were hit hot by Blaze"
+                }
+            - case "<player.name> was fireballed by Ghast":
+                - random {
+                    - determine "<player.name> was sprayed by Ghast"
+                    - determine "<player.name> got burnt by Ghast"
+                    - determine "<player.name> were hit hot by Ghast"
+                }
+            - case "<player.name> was blown up by Creeper":
+                - random {
+                    - determine "<player.name> did not hear the SSSsss from Creeper"
+                    - determine "<player.name> tried to hug a Creeper"
+                    - determine "<player.name> became gunpowder with Creeper"
+                    - determine "<player.name> was allahu akbar<&sq>ed by Creeper"
+                    - determine "<player.name> was fragged by Creeper"
+                }
+            # Shot by (Something)
+            - case "<player.name> was shot by Skeleton":
+                - random {
+                    - determine "<player.name> was sniped by Skeleton"
+                    - determine "<player.name> was no-scoped by Skeleton"
+                    - determine "<player.name> took an arrow by Skeleton"
+                }
+            - case "<player.name> was shot by Arrow":
+                - random {
+                    - determine "<player.name> got trapped with a Dispenser"
+                    - determine "<player.name> was no-scoped by a Dispenser"
+                    - determine "<player.name> activated a trap and died"
+                }
+            # Players are always last checked (Shot by)
+            - case "<player.name> was shot by <context.damager.name.to_titlecase>":
+                - random {
+                    - determine "<player.name> was head-shotted by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got assasinated by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> did not see the arrow from <context.damager.name.to_titlecase>"
+                    - determine "<player.name> had too many shots from <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got quick-scoped by <context.damager.name.to_titlecase>"
+                }
+            # Slain by (something)
+            - case "<player.name> was slain by Zombie Pigman":
+                - random {
+                    - determine "<player.name> made a mistake by attacking Zombie Pigman"
+                    - determine "<player.name> accidentely attacked Zombie Pigman"
+                    - determine "<player.name> disturbed a Zombie Pigman"
+                }
+            - case "<player.name> was slain by Zombie":
+                - random {
+                    - determine "<player.name> was ambushed by Zombie"
+                    - determine "<player.name>'s brain was eaten by Zombie"
+                    - determine "<player.name> were overun by Zombie"
+                }
+            - case "<player.name> was slain by Enderman":
+                - random {
+                    - determine "<player.name> was teleported away by an Enderman"
+                    - determine "<player.name> had been taken to the void"
+                    - determine "<player.name> looked at an Enderman"
+                    - determine "<player.name> stared to much at an Enderman"
+                    - determine "<player.name> looked upon the face of slender and met its ender"
+                }
+            # Players are always last checked (Slain by)
+            - case "<player.name> was slain by <context.damager.name.to_titlecase>":
+                - random {
+                    - determine "<player.name> was crushed by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was slished by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> has fallen to <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was spiltted by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> has been cut off by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got wrecked by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got dominated by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was overwhelmed by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> had a fight by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> tried to fight by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got owned by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> got rekt<&sq>ed by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was GG<&sq>ed by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was rejected by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was executed by <context.damager.name.to_titlecase>"
+                    - determine "<player.name> was pwned by <context.damager.name.to_titlecase>"
+                }
+            - case "<player.name> got finished off by <context.damager.name.to_titlecase>":
+                - random {
+                    - determine "<player.name> was shutdown by <context.damager.name.to_titlecase>"
+                    - determine "<player.name><&sq>s head was claimed by <context.damager.name.to_titlecase>"
+                }
+            # If the death is unknown. Display the normal message instead.
+            # Use <context.cause> and <player.name> to debug the message.
+            # Also check out http://minecraft.gamepedia.com/Health#Death_messages
+            - default:
+                - determine "<context.message>"

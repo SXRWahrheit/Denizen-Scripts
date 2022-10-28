@@ -1,0 +1,38 @@
+config:
+    availability:
+        offering_npc: WarmasterReinwald
+    requirements:
+        quests_completed:
+        - "LichHunt"
+    rewards:
+        money: 750
+        quest_points: 8
+        items:
+        - <item[diamond[quantity=64]]>
+        - <mythic_item[BurnishedHelm]>
+        - <mythic_item[BurnishedChest]>
+        - <mythic_item[BurnishedLegs]>
+        - <mythic_item[BurnishedBoots]>
+        scripts:
+        - EliteHuntCompletion
+    material: diamond_sword
+    quit_step: EliteHuntOffer
+messages:
+    offer: "<dark_green>Warmaster Reinwald<white>: Those Elite-level monsters aren't going anywhere, and we need your help to fight them off. Get to it."
+    completion: "<dark_green>Warmaster Reinwald<white>: Phenomenal work - you're getting quite good at this. I think you're ready for a new adventure! Go and find the Royal Geographer."
+player_data:
+    EliteHunt:
+        name: Hunt down the Elite monsters
+        description: "Hunt down Elite monsters for Warmaster Reinwald."
+        stages:
+            1:
+                description: "Hunt Elites in the Prosperus wilderness and beyond. Elite monsters are more common in other, more dangerous dimensions."
+                objectives:
+                    1:
+                        name: "Kill Elite monsters"
+                        progress: 0
+                        total: 25
+                        data:
+                            type: quest_elitehunt
+                progress: 0
+                total: 1
