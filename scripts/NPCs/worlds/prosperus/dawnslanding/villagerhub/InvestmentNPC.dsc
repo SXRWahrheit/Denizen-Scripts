@@ -11,7 +11,7 @@ Investment_NPC_Assignment:
 Investment_NPC_Format:
     type: format
     debug: false
-    format: "<dark_green>Feste, Fortune's Herald<&f><&co> <[text]>"
+    format: <dark_green>Feste, Fortune's Herald<&f><&co> <[text]>
 
 Investment_NPC_Inventory_Prompts:
     type: inventory

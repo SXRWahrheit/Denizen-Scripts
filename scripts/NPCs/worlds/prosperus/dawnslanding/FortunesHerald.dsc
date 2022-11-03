@@ -12,7 +12,7 @@ FortunesHeraldAssignment:
 FortunesHeraldformat:
     type: format
     debug: false
-    format: "<dark_green>Feste, Fortune's Herald<white><&co> <[text]>"
+    format: <dark_green>Feste, Fortune's Herald<white><&co> <[text]>
 
 FortunesHeraldInteract:
     type: interact

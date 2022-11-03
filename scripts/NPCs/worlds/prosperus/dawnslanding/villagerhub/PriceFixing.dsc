@@ -25,7 +25,7 @@ Upgrade_Check:
     script:
     - define current_tier <yaml[VillagerPrices].read[investments.current_tier]>
     - define progress <yaml[VillagerPrices].read[investments.progress]>
-    - define cost <yaml[VillagerPrices].read[investment_tiers.<[current_tier].add[1]>.cost>
+    - define cost <yaml[VillagerPrices].read[investment_tiers.<[current_tier].add[1]>.cost]>
     - define upgrade_amount <[cost].sub[<[progress]>]>
 
 Supply_And_Demand:
@@ -36,10 +36,11 @@ Supply_And_Demand:
         - if <util.time_now.format[EEE]> != Fri:
             - stop
         - announce to_console "Villager price fixing event run"
-        - if <yaml[VillagerPrices].read[investments.current_tier]> >= 1:
+        - if <yaml[VillagerPrices].read[investments.current_tier]> > 1:
             - yaml id:VillagerPrices set investments.current_tier:<yaml[VillagerPrices].read[investments.current_tier].sub[1]>
         - announce to_console "New price tier is <yaml[VillagerPrices].read[investments.current_tier]>"
         - yaml id:VillagerPrices set investments.progress:0
+        - yaml savefile:scriptdata/worlds/prosperus/dawnslanding/VillagerPrices.yml id:VillagerPrices
 
 Trade_Pricing_Task:
     type: task
