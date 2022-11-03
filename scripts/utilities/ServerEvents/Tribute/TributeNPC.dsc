@@ -8,15 +8,16 @@ TributeAssignment:
         - teleport npc <npc.anchor[tributenpc]>
         - trigger name:proximity toggle:true
         - trigger name:chat toggle:true
+        - trigger name:click toggle:true
 
 tribute_npc_format:
     type: format
     debug: false
-    format: "<&2>Oracle of the Gods<&f><&co> <[text]>"
+    format: <&2>Oracle of the Gods<&f><&co> <[text]>
 
 TributeNPC:
     type: interact
-    debug: false
+    debug: true
     steps:
         General*:
             proximity trigger:
