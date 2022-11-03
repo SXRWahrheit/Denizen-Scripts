@@ -7,7 +7,7 @@ TowerOfTheGodsCommand:
     aliases:
     - towerofthegods
     permission: denizen.godstower
-    permission message: "Sorry, you can't warp to the Tower of the Gods!"
+    permission message: Sorry, you can't warp to the Tower of the Gods!
     script:
     - teleport <player> GodsTower
     - if <player.world.name> == infinitus:
@@ -21,7 +21,7 @@ DeathTowerCommand:
     aliases:
     - towerofdeath
     permission: denizen.deathtower
-    permission message: "Sorry, you can't warp to the Death Tower!"
+    permission message: Sorry, you can't warp to the Death Tower!
     script:
     - teleport <player> deathtower
     - if <player.world.name> == infinitus:
@@ -35,7 +35,7 @@ BoatRace1Command:
     aliases:
     - boatrace
     permission: denizen.boatrace-1
-    permission-message: "Sorry, you can't warp to the boat race!"
+    permission-message: Sorry, you can't warp to the boat race!
     script:
     - teleport <player> boatrace-1
     - wait 20t
