@@ -12,14 +12,14 @@ Economy_Script_Handler:
     digits: 0
     # Format the standard output for the money in human-readable format. Use "<amount>" for the actual amount to display.
     # Fully supports tags.
-    format: <amount>g
+    format: <[amount]>g
     # A tag that returns the balance of a linked player. Use a 'proc[]' tag if you need more complex logic.
     # Must return a decimal number.
     balance: <player.flag[money]>
     # A tag that returns a boolean indicating whether the linked player has the amount specified by auto-tag "<amount>".
     # Use a 'proc[]' tag if you need more complex logic.
     # Must return 'true' or 'false'.
-    has: <player.flag[money].is[or_more].than[<amount>]>
+    has: <player.flag[money].is[or_more].than[<[amount]>]>
     # A script that removes the amount of money needed from a player.
     # Note that it's generally up to the systems calling this script to verify that the amount can be safely withdrawn, not this script itself.
     # However you may wish to verify that the player has the amount required within this script.
