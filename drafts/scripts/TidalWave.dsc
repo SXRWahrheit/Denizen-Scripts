@@ -11,7 +11,7 @@ WaveShooter:
     - define source_position <[caster].location>
     - define wave_width 5
     - define wave_total <[wave_width].mul[2]>
-    - define origin_list li@
+    - define origin_list <list>
     - define speed 0.5
     - define wave_landing 5
     - define wave_length 30
@@ -22,7 +22,7 @@ WaveShooter:
         - define origin_list <[origin_list].include[<[source].sub[<[total_offset]>]>]>
     # shooting repeat
     - repeat <[wave_length].div[<[speed]>]>:
-        - define entities li@
+        - define entities <list>
         - define total_forward <[forward].mul[<[value]>].mul[<[speed]>]>
 #        - define total_landing <[forward].mul[<[value]>].mul[<[speed]>].mul[<[wave_landing]>]>
         - foreach <[origin_list]> as:locations:
@@ -31,7 +31,7 @@ WaveShooter:
             - foreach <entry[Wave].shot_entities> as:shot_blocks:
                 - yaml id:WaveManager set <[shot_blocks].uuid>:RemoveOnLand
             - if <[locations].find.living_entities.within[1.0].exclude[<[caster]>].deduplicate.size> > 0:
-                - define entities <[entities].include.[<[locations].find.living_entities.within[1.0]>].exclude[<[caster]>].deduplicate>
+                - define entities <[entities].include[<[locations].find.living_entities.within[1.0].if_null[<list>]>].exclude[<[caster]>].deduplicate>
             - if <[entities].size> > 0:
                 - foreach <[entities]> as:HitEntity:
                     - shoot <[HitEntity]> origin:<[HitEntity].location> destination:<[HitEntity].location.add[0,10,0]>
