@@ -101,9 +101,9 @@ QuestAdmin_Command:
         - narrate "<red>Invalid target specified; <bold><context.args.get[1]><red> did not match any player"
         - stop
     - define data <[target].uuid>_quest_data
-    - if !<yaml.list.contains[<[data]>]> && <server.has_file[playerdata/<[target].uuid>/quest_data.yml]>:
+    - if !<yaml.list.contains[<[data]>]> && <util.has_file[playerdata/<[target].uuid>/quest_data.yml]>:
         - ~yaml load:playerdata/<player.uuid>/quest_data.yml id:<[data]>
-    - else if !<server.has_file[playerdata/<player.uuid>/quest_data.yml]>:
+    - else if !<util.has_file[playerdata/<player.uuid>/quest_data.yml]>:
         - narrate "<red>Player does not have quest data file!"
         - stop
     - narrate "<green><bold><context.args.get[1]> quests"

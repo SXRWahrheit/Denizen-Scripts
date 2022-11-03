@@ -1,10 +1,10 @@
 QuestNameFormat:
     type: format
-    format: "<green>Quest: <gold><[text]>"
+    format: <green>Quest: <gold><[text]>
 
 QuestDescriptionFormat:
     type: format
-    format: "<aqua>Description:<&r> <[text]>"
+    format: <aqua>Description:<&r> <[text]>
 
 QuestDataHandler:
     debug: false
@@ -13,7 +13,7 @@ QuestDataHandler:
     events:
         on player joins:
         - define data <player.uuid>_quest_data
-        - if <server.has_file[playerdata/<player.uuid>/quest_data.yml]>:
+        - if <util.has_file[playerdata/<player.uuid>/quest_data.yml]>:
             - ~yaml load:playerdata/<player.uuid>/quest_data.yml id:<[data]>
         - else:
             - yaml create id:<[data]>

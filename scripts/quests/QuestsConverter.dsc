@@ -6,7 +6,7 @@ QuestDataConverter:
         - wait 2s
         - define data <player.uuid>_quest_data
         - define olddata <player.uuid>_quest_data_old
-        - if <server.has_file[../Quests/data/<player.uuid>.yml]> && !<player.has_flag[old_quests_data_converted]>:
+        - if <util.has_file[../Quests/data/<player.uuid>.yml]> && !<player.has_flag[old_quests_data_converted]>:
             - yaml load:../Quests/data/<player.uuid>.yml id:<[olddata]>
             - yaml set id:<[data]> career.quest_points:<yaml[<[olddata]>].read[quest-points]>
             - foreach <yaml[<[olddata]>].read[completed-Quests]> as:CompletedQuest:
@@ -27,7 +27,7 @@ QuestsDataConverterTaskUnsafe:
     script:
     - define data <player.uuid>_quest_data
     - define olddata <player.uuid>_quest_data_old
-    - if <server.has_file[../Quests/data/<player.uuid>.yml]>:
+    - if <util.has_file[../Quests/data/<player.uuid>.yml]>:
         - yaml load:../Quests/data/<player.uuid>.yml id:<[olddata]>
         - yaml set id:<[data]> career.quest_points:<yaml[<[olddata]>].read[quest-points]>
         - foreach <yaml[<[olddata]>].read[completed-Quests]> as:CompletedQuest:
@@ -46,7 +46,7 @@ QuestsDataConverterTask:
     script:
     - define data <player.uuid>_quest_data
     - define olddata <player.uuid>_quest_data_old
-    - if <server.has_file[../Quests/data/<player.uuid>.yml]> && !<player.has_flag[old_quests_data_converted]>:
+    - if <util.has_file[../Quests/data/<player.uuid>.yml]> && !<player.has_flag[old_quests_data_converted]>:
         - yaml load:../Quests/data/<player.uuid>.yml id:<[olddata]>
         - yaml set id:<[data]> career.quest_points:<yaml[<[olddata]>].read[quest-points]>
         - foreach <yaml[<[olddata]>].read[completed-Quests]> as:CompletedQuest:
