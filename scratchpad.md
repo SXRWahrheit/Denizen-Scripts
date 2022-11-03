@@ -204,3 +204,13 @@ Ice platform 10s
  * Statistics
  * Quest progress
  * A la Pokemon league cards
+
+## PvP / PvE Gamemode to-be-named
+
+* A dungeon, with monsters
+* However, players can queue up as opposition monsters as well
+* When the challenging players kill the boss at the end of the dungeon, the monster players get powered up and the challengers must escape the dungeon without dying
+* Until the final boss is killed, the monster players get unlimited respawns
+* Once the boss is killed and the monster players are powered up, it's their last life
+* Choose between classes/builds for your final form
+* Encourage thoughtful team comps through skill choices
