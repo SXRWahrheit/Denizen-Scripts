@@ -33,7 +33,7 @@ DailyLogin:
     script:
     - if <player.has_flag[daily-spin-available]>:
         - flag <player> daily-spin-available:!
-        - run daily-login-spinner
+        - run daily_login_spinner
         - narrate "<&a>You are on day <&b><server.flag[daily-login-count.<player.uuid>]><&a> of <&b>28<&a> for daily login rewards!"
     - else:
         - narrate "<&c>Sorry, your daily login reward is unavailable!"
@@ -143,7 +143,7 @@ elite_spinner_inventory:
 
 
 
-daily-login-spinner:
+daily_login_spinner:
     type: task
     debug: false
     speed: 0
@@ -223,30 +223,30 @@ daily-login-spinner:
         - inventory set d:<inventory[daily-spinner.<player.uuid>]> o:<[daily-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:10
 #       - inventory set d:<inventory[daily-spinner.<player.uuid>]> o:<[daily-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:28 #use this one instead of the above when we implement the custom menu
         - wait <util.e.power[<[value].mul[0.125].sub[3]>].round_up>t
-    - if <player.open_inventory.slot[14].scriptname> == VETERANBOX:
-#   - if <player.open_inventory.slot[32].scriptname> == VETERANBOX: #use this one instead of the above when we implement the custom menu
+    - if <player.open_inventory.slot[14].script.name> == VETERANBOX:
+#   - if <player.open_inventory.slot[32].script.name> == VETERANBOX: #use this one instead of the above when we implement the custom menu
         - flag <player> cannot_close_inv:!
         - inventory close
         - note remove as:daily-spinner.<player.uuid>
-        - run Veteran-Spinner
+        - run veteran_spinner
         - stop
-    - else if <player.open_inventory.slot[14].scriptname> == ELITEBOX:
-#   - else if <player.open_inventory.slot[32].scriptname> == ELITEBOX: #use this one instead of the above when we implement the custom menu
+    - else if <player.open_inventory.slot[14].script.name> == ELITEBOX:
+#   - else if <player.open_inventory.slot[32].script.name> == ELITEBOX: #use this one instead of the above when we implement the custom menu
         - flag <player> cannot_close_inv:!
         - inventory close
         - note remove as:daily-spinner.<player.uuid>
-        - run Elite-Spinner
+        - run elite_spinner
         - stop
     - else:
         - wait 1s
-        - narrate "<&a>You got <&f><[daily-roll-list].get[54].as_item.display||<[daily-roll-list].get[54].as_item.formatted.to_titlecase>><&a>!"
-        - announce to_console "<player.name> got <[daily-roll-list].get[54].as_item.display||<[daily-roll-list].get[54].as_item.formatted.to_titlecase>>"
+        - narrate "<&a>You got <&f><[daily-roll-list].get[54].as[item].display||<[daily-roll-list].get[54].as[item].formatted.to_titlecase>><&a>!"
+        - announce to_console "<player.name> got <[daily-roll-list].get[54].as[item].display||<[daily-roll-list].get[54].as[item].formatted.to_titlecase>>"
         - give <[daily-roll-list].get[54]>
         - note remove as:daily-spinner.<player.uuid>
         - flag <player> cannot_close_inv:!
         - inventory close
 
-Veteran-Spinner:
+veteran_spinner:
     type: task
     debug: false
     speed: 0
@@ -262,28 +262,28 @@ Veteran-Spinner:
     # Pick 60 random items from the weighted list
     - define roll-size 60
     - define veteran-roll-list <[veteran-display-list].random[60]>
-    - note <inventory[veteran_spinner_inventory]> as:veteran-spinner.<player.uuid>
-    - inventory open d:veteran-spinner.<player.uuid>
+    - note <inventory[veteran_spinner_inventory]> as:veteran_spinner.<player.uuid>
+    - inventory open d:veteran_spinner.<player.uuid>
     # Roll
     - repeat 50:
-        - inventory set d:veteran-spinner.<player.uuid> o:<[veteran-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:10
-#       - inventory set d:veteran-spinner.<player.uuid> o:<[veteran-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:28 #use this one instead of the above when we implement the custom menu
+        - inventory set d:veteran_spinner.<player.uuid> o:<[veteran-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:10
+#       - inventory set d:veteran_spinner.<player.uuid> o:<[veteran-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:28 #use this one instead of the above when we implement the custom menu
         - wait <util.e.power[<[value].mul[0.125].sub[3]>].round_up>t
-    - if <player.open_inventory.slot[14].scriptname> == ELITEBOX:
-#   - if <player.open_inventory.slot[32].scriptname> == ELITEBOX: #use this one instead of the above when we implement the custom menu
+    - if <player.open_inventory.slot[14].script.name> == ELITEBOX:
+#   - if <player.open_inventory.slot[32].script.name> == ELITEBOX: #use this one instead of the above when we implement the custom menu
         - flag <player> cannot_close_inv:!
-        - note remove as:veteran-spinner.<player.uuid>
-        - run Elite-Spinner
+        - note remove as:veteran_spinner.<player.uuid>
+        - run elite_spinner
     - else:
         - wait 1s
-        - narrate "<&a>You got <&f><[veteran-roll-list].get[54].as_item.display||<[veteran-roll-list].get[54].as_item.formatted.to_titlecase>><&a>!"
-        - announce to_console "<player.name> got <[veteran-roll-list].get[54].as_item.display||<[veteran-roll-list].get[54].as_item.formatted.to_titlecase>>"
+        - narrate "<&a>You got <&f><[veteran-roll-list].get[54].as[item].display||<[veteran-roll-list].get[54].as[item].formatted.to_titlecase>><&a>!"
+        - announce to_console "<player.name> got <[veteran-roll-list].get[54].as[item].display||<[veteran-roll-list].get[54].as[item].formatted.to_titlecase>>"
         - give <[veteran-roll-list].get[54]>
         - flag <player> cannot_close_inv:!
-        - note remove as:veteran-spinner.<player.uuid>
+        - note remove as:veteran_spinner.<player.uuid>
         - inventory close
 
-Elite-Spinner:
+elite_spinner:
     type: task
     debug: false
     speed: 0
@@ -298,40 +298,40 @@ Elite-Spinner:
     # Pick 60 random items from the weighted list
     - define roll-size 60
     - define elite-roll-list <[elite-display-list].random[60]>
-    - note <inventory[elite_spinner_inventory]> as:elite-spinner.<player.uuid>
-    - inventory open d:elite-spinner.<player.uuid>
+    - note <inventory[elite_spinner_inventory]> as:elite_spinner.<player.uuid>
+    - inventory open d:elite_spinner.<player.uuid>
     - flag <player> cannot_close_inv:1
     # Roll
     - repeat 50:
-        - inventory set d:elite-spinner.<player.uuid> o:<[elite-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:10
-#       - inventory set d:elite-spinner.<player.uuid> o:<[elite-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:28  #use this one instead of the above when we implement the custom menu
+        - inventory set d:elite_spinner.<player.uuid> o:<[elite-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:10
+#       - inventory set d:elite_spinner.<player.uuid> o:<[elite-roll-list].get[<[value]>].to[<[value].add[8]>]> slot:28  #use this one instead of the above when we implement the custom menu
         - wait <util.e.power[<[value].mul[0.125].sub[3]>].round_up>t
 
     - wait 1s
-    - narrate "<&a>You got <&f><[elite-roll-list].get[54].as_item.display||<[elite-roll-list].get[54].as_item.formatted.to_titlecase>><&a>!"
-    - announce to_console "<player.name> got <[elite-roll-list].get[54].as_item.display||<[elite-roll-list].get[54].as_item.formatted.to_titlecase>>"
+    - narrate "<&a>You got <&f><[elite-roll-list].get[54].as[item].display||<[elite-roll-list].get[54].as[item].formatted.to_titlecase>><&a>!"
+    - announce to_console "<player.name> got <[elite-roll-list].get[54].as[item].display||<[elite-roll-list].get[54].as[item].formatted.to_titlecase>>"
     - give <[elite-roll-list].get[54]>
     - flag <player> cannot_close_inv:!
-    - note remove as:elite-spinner.<player.uuid>
+    - note remove as:elite_spinner.<player.uuid>
     - inventory close
 
-Spinner_Anti-Cheat:
+Spinner_Anti_Cheat:
     type: world
     debug: false
     events:
         on player clicks in inventory:
         - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == veteran-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == elite-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
             - determine cancelled
         on player drags in inventory:
         - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == veteran-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == elite-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
             - determine cancelled
         on player closes inventory:
         - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
@@ -340,15 +340,15 @@ Spinner_Anti-Cheat:
                 - inventory open d:daily-spinner.<player.uuid>
                 - stop
             - flag <player> cannot_close_inv:!
-        - else if <context.inventory.note_name||null> == veteran-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
             - if <player.has_flag[cannot_close_inv]>:
                 - wait 1t
-                - inventory open d:veteran-spinner.<player.uuid>
+                - inventory open d:veteran_spinner.<player.uuid>
                 - stop
             - flag <player> cannot_close_inv:!
-        - else if <context.inventory.note_name||null> == elite-spinner.<player.uuid>:
+        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
             - if <player.has_flag[cannot_close_inv]>:
                 - wait 1t
-                - inventory open d:elite-spinner.<player.uuid>
+                - inventory open d:elite_spinner.<player.uuid>
                 - stop
             - flag <player> cannot_close_inv:!
