@@ -47,7 +47,7 @@ BoatRace2Command:
     description: Warp to the frozen caves boat race.
     usage: /boatrace-2
     permission: denizen.boatrace-2
-    permission-message: "Sorry, you can't warp to the boat race!"
+    permission-message: Sorry, you can't warp to the boat race!
     script:
     - teleport <player> boatrace-2
     - wait 20t
