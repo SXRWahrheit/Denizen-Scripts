@@ -5,7 +5,7 @@ PatronChoice:
     description: Choose Duke or Duchess.
     usage: /patronchoice Duke or /patronchoice Duchess
     permission: group.patron
-    permission message: "Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads"
+    permission message: Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads
     script:
     - if <context.args.get[1]||null> == Duke:
         - group add Duke
@@ -46,7 +46,7 @@ DukeChoice:
     description: Choose the Duke title.
     usage: /duke
     permission: group.patron
-    permission message: "Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads"
+    permission message: Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads
     script:
     - group add Duke
     - group remove Duchess
@@ -65,7 +65,7 @@ DuchessChoice:
     description: Choose the Duchess title.
     usage: /duchess
     permission: group.patron
-    permission message: "Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads"
+    permission message: Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads
     script:
     - group add Duchess
     - group remove Duke
