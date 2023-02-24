@@ -9,19 +9,16 @@ Item_Tier_Fixer:
     type: task
     debug: false
     script:
-    - foreach <player.inventory.list_contents.filter_tag[<[filter_value].lore.contains_any_text[Veteran|Elite|Champion]||null>].filter_tag[<[filter_value].has_nbt[item_tier].not>]>:
+    - foreach <player.inventory.list_contents.filter_tag[<[filter_value].lore.contains_any_text[Veteran|Elite|Champion].if_null[false]>].filter_tag[<[filter_value].has_flag[item_tier].not>]>:
         - if <[value].lore.contains_text[Veteran]>:
-            - if <[value].nbt||null>:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:<[value].nbt.include[item_tier/Veteran]>
-            - else:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:item_tier/Veteran
+            - inventory flag slot:<player.inventory.find_item[<[value]>]> item_tier:Veteran
         - else if <[value].lore.contains_text[Elite]>:
-            - if <[value].nbt||null>:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:<[value].nbt.include[item_tier/Elite]>
-            - else:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:item_tier/Elite
+            - inventory flag slot:<player.inventory.find_item[<[value]>]> item_tier:Elite
         - else if <[value].lore.contains_text[Champion]>:
-            - if <[value].nbt||null>:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:<[value].nbt.include[item_tier/Champion]>
-            - else:
-                - inventory adjust slot:<player.inventory.find[<[value]>]> nbt:item_tier/Champion
+            - inventory flag slot:<player.inventory.find_item[<[value]>]> item_tier:Champion
+    - foreach <player.inventory.list_contents.filter_tag[<[filter_value].nbt.exists>].filter_tag[<[filter_value].has_flag[nbt_converted].not>]> as:item:
+        - foreach <[item].nbt> as:nbt:
+            - define slot <player.inventory.find_item[<[item]>]>
+            - inventory flag slot:<[slot]> <[item].nbt.get[<[loop_index]>].before[/]>:<[item].nbt.get[<[loop_index]>].after[/]>
+            - inventory adjust slot:<[slot]> remove_nbt
+            - inventory flag slot:<[slot]> nbt_converted
