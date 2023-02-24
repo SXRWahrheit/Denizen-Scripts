@@ -3,7 +3,7 @@ wand_ready_check:
     debug: false
     events:
         # Affects behavior; use an early-firing priority
-        on player left clicks priority:-15:
+        on player clicks block priority:-15:
         - if <player.item_in_hand.nbt[weapon_type]||null> == wand && <player.has_flag[attack_cooldown].not>:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
             - flag <player> wand_cast:true duration:1s

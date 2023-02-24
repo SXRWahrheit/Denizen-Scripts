@@ -4,33 +4,33 @@
 # @version 1.0
 # @last-updated December 16 2014
 
-"Bookkeeper Assign":
+Bookkeeper_Assign:
     type: assignment
     interact scripts:
     - Bookkeeper
     actions:
         on assignment:
-        - run "Bookkeeper Assigned" instant
-"Bookkeeper Format":
+        - run Bookkeeper_Assigned instant
+Bookkeeper_Format:
     type: format
-    format: "<gray>Bookkeeper<white><&co> <[text]>"
-"Bookkeeper Assigned":
+    format: <gray>Bookkeeper<white><&co> <[text]>
+Bookkeeper_Assigned:
     type: task
     script:
     - teleport npc location:<npc.anchor[bookkeeper]>
     - trigger name:proximity toggle:true radius:3
-"Library Win":
+library_win:
     type: task
     script:
     - flag server mazeclear:1
     - announce "<green><player.name> has conquered The Grand Library! It is now clear."
     - flag server maze-challenger:!
     - flag server maze-challenger-name:!
-"Bookkeeper":
+Bookkeeper:
     type: interact
     steps:
         'Victory*':
             click trigger:
                 script:
                 - if <player.uuid> == <server.flag[maze-challenger]>:
-                  - run "Library Win"
+                  - run library_win

@@ -1,5 +1,5 @@
 gold_rate_data:
-    type: yaml data
+    type: data
     debug: false
     gold_multiplier_active: false
     gold_rate_multiplier: 1

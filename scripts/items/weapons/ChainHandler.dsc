@@ -3,18 +3,18 @@ chains_ready_check:
     debug: false
     events:
         # Affects targets rather than amounts; use an early-firing priority
-        on player damages entity priority:-15:
-        - if <player.item_in_hand.nbt[weapon_type]||null> == chains && <player.has_flag[attack_cooldown].not>:
+        after player damages entity priority:-15:
+        - if <player.item_in_hand.flag[weapon_type].if_null[null]> == chains && <player.has_flag[attack_cooldown].not>:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
-            - hurt <context.damage> <player.location.find.entities.within[2].exclude[<context.damager>|<context.entity>]> source:<player> cause:entity_attack
+            - hurt <context.damage> <player.location.find_entities.within[2].exclude[<context.damager>|<context.entity>]> source:<player> cause:entity_attack
             - playeffect effect:crit at:<context.entity.location> visibility:500 quantity:100 offset:1.5,1.5,1.5
-        - else if <player.item_in_hand.nbt[weapon_type]||null> == chains:
+        - else if <player.item_in_hand.flag[weapon_type].if_null[null]> == chains:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
-        on player left clicks:
-        - if <player.item_in_hand.nbt[weapon_type]||null> == chains:
+        after player left clicks block:
+        - if <player.item_in_hand.flag[weapon_type].if_null[null]> == chains:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
-        on player right clicks:
-        - if <player.item_in_hand.nbt[weapon_type]||null> == chains && <player.has_flag[attack_cooldown].not> && <player.has_flag[chains_cooldown].not>:
+        after player right clicks block:
+        - if <player.item_in_hand.flag[weapon_type].if_null[null]> == chains && <player.has_flag[attack_cooldown].not> && <player.has_flag[chains_cooldown].not>:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
             - if <player.location.distance_squared[<player.target.location||null>]||100> <= 91:
                 - animate <player> arm_swing

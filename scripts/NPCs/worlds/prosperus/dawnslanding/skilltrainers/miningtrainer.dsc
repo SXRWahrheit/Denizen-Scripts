@@ -22,13 +22,13 @@ MiningMasterFormat:
                     - define data <player.uuid>_quest_data
                     - define quest_internalname:MeetSkillTrainers
                     - define objective:2
-                    - if <yaml[<[data]>].contains[quests.active.<[quest_internalname]>]> && <yaml[<[data]>].read[quests.active.<[quest_internalname]>.objective.<[objective]>].progress> == 0:
+                    - if <yaml[<[data]>].contains[quests.active.<[quest_internalname]>]> && <yaml[<[data]>].read[quests.active.<[quest_internalname]>.objective.<[objective]>.progress]> == 0:
                         - yaml set id:<[data]> quests.active.<[quest_internalname]>.objective.<[objective]>.progress:1
                         - narrate format:MiningMasterFormat "Oh. Hi, <player.name>. Don't see too many folks out this far. The Quest Master sent you? Well, that's nice. If you've got gold, I can teach you some mining skills."
                         - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]>
                     - else:
                         - narrate format:MiningMasterFormat "Hello stonesmasher! Want to learn about mining? I'll help you break some rocks. Right click me."
-                    - narrate "<grey>Right click the Head Miner for training!"
+                    - narrate "<gray>Right click the Head Miner for training!"
                 exit:
                     script:
                     - narrate format:MiningMasterFormat "Happy caving!"

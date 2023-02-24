@@ -9,7 +9,7 @@ BlacksmithAssignment:
 
 BlacksmithFormat:
     type: format
-    format: "<dark_green>Blacksmith<white><&co> <[text]>"
+    format: <dark_green>Blacksmith<white><&co> <[text]>
 
 BlacksmithInteract:
     type: interact

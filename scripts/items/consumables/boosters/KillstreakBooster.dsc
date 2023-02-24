@@ -1,3 +1,3 @@
 KillstreakBooster:
-    type: yaml data
+    type: data
     debug: false

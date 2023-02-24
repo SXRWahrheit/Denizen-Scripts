@@ -4,20 +4,20 @@
 # @version 1.0
 # @last-updated June 27 2013
 
-"Destiny":
+Destiny:
     type: assignment
     interact scripts:
     - Busta Move
     actions:
         on assignment:
-        - runtask 'script:Dance with me' instant
-        
-"Dance with me":
+        - run Dance_with_me
+
+Dance_With_Me:
     type: task
     script:
     - trigger name:proximity toggle:true cooldown:0.1s radius:3
-    
-"Get Funky":
+
+Get_Funky:
     type: task
     script:
     - sit location:287.5,79,129.5,prosperus
@@ -27,8 +27,9 @@
     - wait 11s
     - wait 10.75s
     - stand
-    - if <flag.p:strip1> == 1 runtask "script:Get Funky" "queue:<util.random.uuid>"
-"Busta Move":
+    - if <player.flag[strip1]> == 1:
+        - run Get_Funky
+Busta_Move:
     type: interact
     steps:
         'Dirty Dancing*':
@@ -36,10 +37,10 @@
                 entry:
                     radius: 3
                     script:
-                    - runtask "script:Get Funky" instant
-                    - flag strip1:1
+                    - run Get_Funky
+                    - flag <player> strip1:1
                 exit:
                     radius: 3
                     script:
                     - stand
-                    - flag strip1:0
+                    - flag <player> strip1:1

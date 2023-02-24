@@ -4,7 +4,7 @@
 # @version 1.2
 # @last-updated September 30th 2017
 
-"Shooting Range":
+Shooting_Range:
     type: assignment
     interact scripts:
     - Target Practice
@@ -12,9 +12,9 @@
         on assignment:
         - run Slingshot
 
-"Range Master Format":
+Range_Master_Format:
     type: format
-    format: "<gray>Range Master<white><&co> <[text]>"
+    format: <gray>Range Master<white><&co> <[text]>
 
 Slingshot:
     type: task
@@ -23,7 +23,7 @@ Slingshot:
     - trigger name:proximity toggle:true cooldown:0.1s radius:3
     - trigger name:chat toggle:true cooldown:0.1s radius:3
 
-"Minecart Listener":
+Minecart_listener:
     type: world
     events:
         on player destroys minecart:
@@ -32,13 +32,13 @@ Slingshot:
             - if <player.name> == <server.flag[active-player]>:
                 - flag server minecarts-hit:++
 
-"Roll Carts":
+Roll_Carts:
     type: task
     script:
     - if <server.flag[range-runs]||0> < 10:
         - flag server range-runs:++
         - switch location:<npc.anchor[Minecart<util.random.int[1].to[5]><util.random.int[1].to[2]>]> state:on duration:0.5
-        - run "script:Roll Carts" delay:6
+        - run Roll_carts delay:6
     - else:
         - flag server range-runs:!
         - flag server range-level:!
@@ -48,7 +48,7 @@ Slingshot:
         - execute as_server "warp <player.name> shootingrange"
         - zap "script:Target Practice" "step:In Range"
 
-"Target Practice":
+Target_Practice:
     type: interact
     steps:
         'In Range*':
@@ -80,4 +80,4 @@ Slingshot:
                 - execute as_server "warp <player.name> shootingrange-1"
                 - flag server active-player:<player.name>
                 - flag server minecarts-hit:0
-                - run "script:Roll Carts"
+                - run Roll_Carts

@@ -1,4 +1,4 @@
-"Excavation Master":
+Excavation_Master:
     type: assignment
     interact scripts:
     - Excavation
@@ -7,12 +7,12 @@
         - teleport npc <npc.anchor[excavationmaster]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
-    
+
 ExcavationMasterFormat:
     type: format
-    format: "<gray>Head Excavator<white><&co> <[text]>"
+    format: <gray>Head Excavator<white><&co> <[text]>
 
-"Excavation":
+Excavation:
     type: interact
     steps:
         'Player Seen*':
@@ -22,21 +22,21 @@ ExcavationMasterFormat:
                     - define data <player.uuid>_quest_data
                     - define quest_internalname:MeetSkillTrainers
                     - define objective:3
-                    - if <yaml[<[data]>].contains[quests.active.<[quest_internalname]>]> && <yaml[<[data]>].read[quests.active.<[quest_internalname]>.objective.<[objective]>].progress> == 0:
+                    - if <yaml[<[data]>].contains[quests.active.<[quest_internalname]>]> && <yaml[<[data]>].read[quests.active.<[quest_internalname]>.objective.<[objective]>.progress]> == 0:
                         - yaml set id:<[data]> quests.active.<[quest_internalname]>.objective.<[objective]>.progress:1
                         - narrate format:ExcavationMasterFormat "Hey there <player.name>! Quest Master sent you? Right on. I can teach you some excavation skills in exchange for gold."
                         - run QuestStageProgressHandler def:<[quest_internalname]>|<[objective]>
                     - else:
                         - narrate format:ExcavationMasterFormat "Hey there dirt grub. Want to learn about excavation? I'll teach ya."
-                    - narrate "<grey>Right click the Head Excavator for training!"
+                    - narrate "<gray>Right click the Head Excavator for training!"
                 exit:
                     script:
                     - narrate format:ExcavationMasterFormat "Come back in the mud soon."
             click trigger:
                 script:
                 - narrate format:ExcavationMasterFormat "Alright, let's get you some training. I'll give you 100 Excavation XP for 1 gold. Say how much gold you want to spend, or anything else to cancel."
-                - zap 'step:Payment'
-        'Payment':
+                - zap Excavation Payment
+        Payment:
             chat trigger:
                 'Confirm':
                     trigger: I'd like to pay /REGEX:\d+/ gold.
@@ -55,7 +55,7 @@ ExcavationMasterFormat:
                         - narrate format:ExcavationMasterFormat "You don't have that much gold."
                     - zap 'step:Player Seen'
                 'Fail':
-                    trigger: "/REGEX:.+/"
+                    trigger: /REGEX:.+/
                     script:
                     - narrate format:ExcavationMasterFormat "I don't think that's a number. Sorry, I can't work with that."
                     - zap 'step:Player Seen'

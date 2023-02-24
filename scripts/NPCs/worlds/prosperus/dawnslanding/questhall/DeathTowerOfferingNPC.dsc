@@ -7,10 +7,10 @@ DeathTowerOfferingNPCAssignment:
         - teleport npc location:<npc.anchor[DeathTowerOfferingNPC]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
-    
+
 DeathTowerOfferingNPCFormat:
     type: format
-    format: "<gray>He Jumps Once<white><&co> <[text]>"
+    format: <gray>He Jumps Once<white><&co> <[text]>
 
 DeathTowerOfferingNPCInteract:
     type: interact

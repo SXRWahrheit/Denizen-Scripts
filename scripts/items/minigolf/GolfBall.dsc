@@ -16,13 +16,13 @@ GolfBall_Toss_Only:
     events:
         on player right clicks block with:golfball*:
         - if <context.item.flag[expiration].is_before[<util.time_now>]||false>:
-            - take scriptname:<context.item.scriptname>
+            - take scriptname:<context.item.script.name>
             - narrate "<gray>Your mini-golf ball flies off into the distance..."
         - determine cancelled
         on player places player_head:
-        - if <context.item_in_hand.has_flag[unplaceable]> && <context.item_in_hand.scriptname.contains_any_text[golfball]||null>:
+        - if <context.item_in_hand.has_flag[unplaceable]> && <context.item_in_hand.script.name.contains_any_text[golfball]||null>:
             - if <context.item_in_hand.flag[expiration].is_before[<util.time_now>]||false>:
-                - take scriptname:<context.item_in_hand.scriptname>
+                - take scriptname:<context.item_in_hand.script.name>
                 - narrate "<gray>Your mini-golf ball flies off into the distance..."
             - determine cancelled
 

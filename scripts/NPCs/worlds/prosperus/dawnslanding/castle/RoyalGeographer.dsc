@@ -12,7 +12,7 @@ RoyalGeographerAssignment:
 RoyalGeographerFormat:
     type: format
     debug: false
-    format: "<dark_green>Royal Geographer<white><&co> <[text]>"
+    format: <dark_green>Royal Geographer<white><&co> <[text]>
 
 RoyalGeographerInteract:
     type: interact
@@ -78,7 +78,7 @@ RoyalGeographerInteract:
                     - stop
                 - if <yaml[<[data]>].read[quests.active.<[quest_internalname]>.current_stage]> == 1:
                     - inject UnlockAvenfeldQuestDeliveryHandler
-                
+
         FindFireTempleOffer:
             proximity trigger:
                 entry:

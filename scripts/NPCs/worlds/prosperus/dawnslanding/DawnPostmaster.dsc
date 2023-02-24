@@ -7,10 +7,10 @@ DawnPostmasterAssignment:
         - teleport npc location:<npc.anchor[dawnpostmaster]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
-    
+
 DawnPostmasterFormat:
     type: format
-    format: "<darkgreen>Dawn Postmaster<white><&co> <[text]>"
+    format: <dark_green>Dawn Postmaster<white><&co> <[text]>
 
 DawnPostmasterInteract:
     type: interact
@@ -38,12 +38,13 @@ DawnPostmasterInteract:
             click trigger:
                 script:
                 - narrate format:PlayerChatformat "He sure did!"
-                - run QuestAcceptHandlerQuestCompletionHandler def:MeetPostmaster
+                - run QuestAcceptHandler def:MeetPostmaster
                 - zap GenericDialogue
         GenericDialogue:
             proximity trigger:
                 entry:
                     script:
+                    - define data <player.uuid>_quest_data
                     - if <yaml[<[data]>].contains[quests.active.FindDawnPostmaster]>:
                         - narrate format:DawnPostmasterFormat "Oh, hello! The Quest Master sent you, huh? That's so nice of him, he's always looking out for me."
                     - else:
@@ -51,7 +52,7 @@ DawnPostmasterInteract:
             click trigger:
                 script:
                 - narrate format:PlayerChatformat "He sure did!"
-                - run QuestAcceptHandlerQuestCompletionHandler def:MeetPOstmaster
+                - run QuestAcceptHandler def:MeetPOstmaster
                 - zap TeachDawnPostmasterActive
             chat trigger:
                 TeachDawnPostmasterOffer:

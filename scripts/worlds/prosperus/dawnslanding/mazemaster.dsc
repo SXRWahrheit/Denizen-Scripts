@@ -9,11 +9,11 @@ GrandLibrarian:
     - Librarian
     actions:
         on assignment:
-        - run "Library Assign" instant
+        - run library_assign
 LibrarianFormat:
     type: format
-    format: "<gray>Grand Librarian<white><&co> <[text]>"
-LibraryASsign:
+    format: <gray>Grand Librarian<white><&co> <[text]>
+Library_Assign:
     type: task
     script:
     - teleport npc location:<npc.anchor[mazemaster]>

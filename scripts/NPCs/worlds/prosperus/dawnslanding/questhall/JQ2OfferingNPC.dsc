@@ -7,10 +7,10 @@ JQ2OfferingNPCAssignment:
         - teleport npc location:<npc.anchor[JQ2OfferingNPC]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
-    
+
 JQ2OfferingNPCFormat:
     type: format
-    format: "<gray>He Jumps Twice<white><&co> <[text]>"
+    format: <gray>He Jumps Twice<white><&co> <[text]>
 
 JQ2OfferingNPCInteract:
     type: interact
