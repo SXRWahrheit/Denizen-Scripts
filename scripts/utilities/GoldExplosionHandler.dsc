@@ -158,9 +158,9 @@ veteran_gold_explosion:
     debug: false
     events:
         on entity dies:
-        - if !<context.entity.name.starts_with[<&9>]||null>:
+        - if !<context.entity.name.starts_with[<&9>].if_null[null]>:
             - stop
-        - else if <context.entity.name.starts_with[<&9>]||null>:
+        - else if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - if <script[gold_rate_data].data_key[gold_multiplier_active]>:
                 - define multiplier <script[gold_rate_data].data_key[gold_rate_multiplier].mul[<player.flag[player_gold_rate]>]||1>
             - else:
@@ -177,9 +177,9 @@ elite_gold_explosion:
     debug: false
     events:
         on entity dies:
-        - if !<context.entity.name.starts_with[<&d>]||null>:
+        - if !<context.entity.name.starts_with[<&d>].if_null[null]>:
             - stop
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
             - if <script[gold_rate_data].data_key[gold_multiplier_active]>:
                 - define multiplier <script[gold_rate_data].data_key[gold_rate_multiplier].mul[<player.flag[player_gold_rate]>]||1>
             - else:

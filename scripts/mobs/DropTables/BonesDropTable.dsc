@@ -4,11 +4,11 @@ veteran_bones_drop:
     debug: false
     events:
         on entity killed by player:
-        - if !<context.entity.name.starts_with[<&9>]||null>:
+        - if !<context.entity.name.starts_with[<&9>].if_null[null]>:
             - stop
         - if <context.entity.location.is_within[arena_avenfeld]>:
             - stop
-        - else if <context.entity.name.starts_with[<&9>]||null>:
+        - else if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - define multiplier:<proc[DropMultiplierHandler]>
             - drop VeteranToken location:<context.entity.location>
             - if <util.random.int[1].to[4]> <= <[multiplier]>:
@@ -19,11 +19,11 @@ elite_bones_drop:
     debug: false
     events:
         on entity killed by player:
-        - if !<context.entity.name.starts_with[<&d>]||null>:
+        - if !<context.entity.name.starts_with[<&d>].if_null[null]>:
             - stop
         - if <context.entity.location.is_within[arena_avenfeld]>:
             - stop
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
             - define multiplier:<proc[DropMultiplierHandler]>
             - drop VeteranToken quantity:6 location:<context.entity.location>
             - if <util.random.int[1].to[4]> <= <[multiplier]>:

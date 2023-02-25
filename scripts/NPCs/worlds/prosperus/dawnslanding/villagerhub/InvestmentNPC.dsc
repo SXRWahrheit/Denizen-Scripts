@@ -131,7 +131,7 @@ Investment_NPC_Interact:
                     trigger: /REGEX:\d+/
                     hide trigger message: true
                     script:
-                    - define donation_amount <context.message.abs||null>
+                    - define donation_amount <context.message.abs.if_null[null]>
                     - if !<[donation_amount].is_decimal>:
                         - narrate format:Investment_NPC_Format "You'd like to contribute <italic>how much<white> gold exeactly? Speak up."
                         - stop

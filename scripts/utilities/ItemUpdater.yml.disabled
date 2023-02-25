@@ -6,7 +6,7 @@
 ##        - foreach <context.inventory.list_contents>
 ##        {
 ##            # Imbued Sword
-##            - if <[value].lore.parse[escaped]||null> == "li@&ss6This blade has a mystic presence&dot"
+##            - if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This blade has a mystic presence&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackSpeed/mainhand/1/-0.57|generic&dotattackDamage/mainhand/0/12.5 save:imbued_sword
 ##                - inventory set origin:<entry[imbued_sword].result> destination:<player.inventory> slot:<[loop_index]>
@@ -14,7 +14,7 @@
 ###                - inventory set origin:<entry[imbued_sword_lore.result]> destination:<player.inventory> slot:<[loop_index]>
 ##            }
 ##            # Old Imbued Sword
-##            - if <[value].lore.parse[escaped]||null> == "li@&ss6A powerful sword dropped by a monster in the pale moonlight&dot"
+##            - if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6A powerful sword dropped by a monster in the pale moonlight&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackSpeed/mainhand/1/-0.57|generic&dotattackDamage/mainhand/0/12.5 save:imbued_sword
 ##                - inventory set origin:<entry[imbued_sword].result> destination:<player.inventory> slot:<[loop_index]>
@@ -22,7 +22,7 @@
 ###                - inventory set origin:<entry[imbued_sword_lore.result]> destination:<player.inventory> slot:<[loop_index]>
 ##            }
 ##            # Imbued Axe
-##            else if <[value].lore.parse[escaped]||null> == "li@&ss6This axe has a mystic presence&dot"
+##            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This axe has a mystic presence&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.73|generic&dotattackDamage/mainhand/0/13.5|generic&dotarmorToughness/mainhand/0/2.0 save:imbued_axe
 ##                - inventory set origin:<entry[imbued_axe].result> destination:<player.inventory> slot:<[loop_index]>
@@ -30,19 +30,19 @@
 ###                - inventory set origin:<entry[imbued_axe_lore].result> destination:<player.inventory> slot:<[loop_index]>
 ##            }
 ##            # Burnished Sword
-##            else if <[value].lore.parse[escaped]||null> == "li@&ss6This blade seeps magical energy&dot"
+##            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This blade seeps magical energy&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackDamage/mainhand/0/13.5 save:burnished_sword
 ##                - inventory set origin:<entry[burnished_sword].result> destination:<player.inventory> slot:<[loop_index]>
 ##            }
 ##            # Burnished Axe
-##            else if <[value].lore.parse[escaped]||null> == "li@&ssd&ssoElite|&ss6This axe seeps magical energy&dot"
+##            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ssd&ssoElite|&ss6This axe seeps magical energy&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.7|generic&dotattackDamage/mainhand/0/14.5|generic&dotarmorToughness/mainhand/0/3.0 save:burnished_axe
 ##                - inventory set origin:<entry[burnished_axe].result> destination:<player.inventory> slot:<[loop_index]>
 ##            }
 ##            # Skeletal Dark Knight's Blade
-##            else if <[value].lore.parse[escaped]||null> == "li@&ssd&ssoElite|&ss6A shimmering blade used by dark knights&dot"
+##            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ssd&ssoElite|&ss6A shimmering blade used by dark knights&dot"
 ##            {
 ##                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.6|generic&dotattackDamage/mainhand/0/13.0|generic&dotarmor/mainhand/0/4.0 save:sdk_blade
 ##                - inventory set origin:<entry[sdk_blade].result> destination:<player.inventory> slot:<[loop_index]>
@@ -52,7 +52,7 @@
 #        - foreach <player.inventory.list_contents>
 #        {
 #            # Imbued Sword
-#            - if <[value].lore.parse[escaped]||null> == "li@&ss6This blade has a mystic presence&dot"
+#            - if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This blade has a mystic presence&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackSpeed/mainhand/1/-0.57|generic&dotattackDamage/mainhand/0/12.5 save:imbued_sword
 #                - inventory set origin:<entry[imbued_sword].result> destination:<player.inventory> slot:<[loop_index]>
@@ -60,7 +60,7 @@
 ##                - inventory set origin:<entry[imbued_sword_lore.result]> destination:<player.inventory> slot:<[loop_index]>
 #            }
 #            # Old Imbued Sword
-#            - if <[value].lore.parse[escaped]||null> == "li@&ss6A powerful sword dropped by a monster in the pale moonlight&dot"
+#            - if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6A powerful sword dropped by a monster in the pale moonlight&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackSpeed/mainhand/1/-0.57|generic&dotattackDamage/mainhand/0/12.5 save:imbued_sword
 #                - inventory set origin:<entry[imbued_sword].result> destination:<player.inventory> slot:<[loop_index]>
@@ -68,7 +68,7 @@
 ##                - inventory set origin:<entry[imbued_sword_lore.result]> destination:<player.inventory> slot:<[loop_index]>
 #            }
 #            # Imbued Axe
-#            else if <[value].lore.parse[escaped]||null> == "li@&ss6This axe has a mystic presence&dot"
+#            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This axe has a mystic presence&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.73|generic&dotattackDamage/mainhand/0/13.5|generic&dotarmorToughness/mainhand/0/2.0 save:imbued_axe
 #                - inventory set origin:<entry[imbued_axe].result> destination:<player.inventory> slot:<[loop_index]>
@@ -76,19 +76,19 @@
 ##                - inventory set origin:<entry[imbued_axe_lore].result> destination:<player.inventory> slot:<[loop_index]>
 #            }
 #            # Burnished Sword
-#            else if <[value].lore.parse[escaped]||null> == "li@&ss6This blade seeps magical energy&dot"
+#            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ss6This blade seeps magical energy&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotmovementSpeed/mainhand/1/0.1|generic&dotattackDamage/mainhand/0/13.5 save:burnished_sword
 #                - inventory set origin:<entry[burnished_sword].result> destination:<player.inventory> slot:<[loop_index]>
 #            }
 #            # Burnished Axe
-#            else if <[value].lore.parse[escaped]||null> == "li@&ssd&ssoElite|&ss6This axe seeps magical energy&dot"
+#            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ssd&ssoElite|&ss6This axe seeps magical energy&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.7|generic&dotattackDamage/mainhand/0/14.5|generic&dotarmorToughness/mainhand/0/3.0 save:burnished_axe
 #                - inventory set origin:<entry[burnished_axe].result> destination:<player.inventory> slot:<[loop_index]>
 #            }
 #            # Skeletal Dark Knight's Blade
-#            else if <[value].lore.parse[escaped]||null> == "li@&ssd&ssoElite|&ss6A shimmering blade used by dark knights&dot"
+#            else if <[value].lore.parse[escaped].if_null[null]> == "li@&ssd&ssoElite|&ss6A shimmering blade used by dark knights&dot"
 #            {
 #                - adjust <[value]> nbt_attributes:li@generic&dotattackSpeed/mainhand/1/-0.6|generic&dotattackDamage/mainhand/0/13.0|generic&dotarmor/mainhand/0/4.0 save:sdk_blade
 #                - inventory set origin:<entry[sdk_blade].result> destination:<player.inventory> slot:<[loop_index]>

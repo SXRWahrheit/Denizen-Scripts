@@ -109,7 +109,7 @@ Anti_Spawner_YAML:
             - yaml id:antispawner-flags set entities.spawned-by-spawner:<-:<[entity].uuid>
 
         #on mythicmobs lootdrop:
-        #- if <yaml[antispawner-flags].read[entities.spawned-by-spawner].contains[<context.activemob.uuid||null>]||null>:
+        #- if <yaml[antispawner-flags].read[entities.spawned-by-spawner].contains[<context.activemob.uuid.if_null[null]>].if_null[null]>:
 #       #     - announce to_console "[DEBUG] MythicMobs YAML spawner"
         #    - determine <list[]>
         #    - yaml id:antispawner-flags set entities.spawned-by-spawner:<-:<context.activemob.uuid>

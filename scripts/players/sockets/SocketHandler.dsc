@@ -216,7 +216,7 @@ prismatic_seer_inventory_handler:
             - inventory close
             - narrate format:prismatic_seer_format "Sorry, you don't have enough materials for that!"
             - stop
-        - if <player.inventory.list_contents.filter[nbt[sockets_can_add]].size||null> >= 1:
+        - if <player.inventory.list_contents.filter[nbt[sockets_can_add]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to add a socket to."
             - note <inventory[sockets_can_add_inventory]> as:sockets_can_add.<player.uuid>
             - inventory open d:sockets_can_add.<player.uuid>
@@ -231,7 +231,7 @@ prismatic_seer_inventory_handler:
         - announce to_console <player.inventory.list_contents>
         # Add a check to ensure that there is a gem matching the available sockets before opening the inventory?
         # We're not stopping them from closing it so it might just not matter
-        - if <player.inventory.list_contents.filter[nbt[sockets_open]].size||null> >= 1:
+        - if <player.inventory.list_contents.filter[nbt[sockets_open]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to add a gem to."
             - flag <player> sockets_gem_add_item:!
             - flag <player> sockets_gem_add_item_empty:!
@@ -247,7 +247,7 @@ prismatic_seer_inventory_handler:
         - wait 1t
         - inventory close
         - announce to_console <player.inventory.list_contents>
-        - if <player.inventory.list_contents.filter[nbt[sealed_potential]].size||null> >= 1:
+        - if <player.inventory.list_contents.filter[nbt[sealed_potential]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to unlock the potential of."
             - note <inventory[potential_inventory]> as:sealed_potential.<player.uuid>
             - inventory open d:sealed_potential.<player.uuid>
@@ -301,7 +301,7 @@ prismatic_seer_socket_add_handler:
     debug: false
     events:
         on player clicks in inventory:
-        - if <context.inventory.note_name||null> != sockets_can_add.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> != sockets_can_add.<player.uuid>:
             - stop
         - determine passively cancelled
         - wait 1t
@@ -333,7 +333,7 @@ prismatic_seer_socket_add_handler:
                 - define type <tern[<util.random.decimal.is[less].than[0.7]>].pass[defense].fail[utility]>
                 - define item:<[item].with[nbt=socket<[socket_target]>_type/<[type]>]>
             - define item:<[item].with[nbt=sockets_open/true]>
-            - if <[item].nbt[sockets_current]||null> == <[item].nbt[sockets_max]>:
+            - if <[item].nbt[sockets_current].if_null[null]> == <[item].nbt[sockets_max]>:
                 - define item <[item].with[remove_nbt=sockets_can_add]>
             ## Let's do the lore now y'all
             # Find the locked socket line
@@ -365,7 +365,7 @@ prismatic_seer_socket_potential_handler:
         champion: 5
     events:
         on player clicks in inventory:
-        - if <context.inventory.note_name||null> != sealed_potential.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> != sealed_potential.<player.uuid>:
             - stop
         - determine passively cancelled
         - wait 1t
@@ -408,7 +408,7 @@ prismatic_seer_gem_add_item_handler:
     events:
         # Inventory manager for list of items with open sockets to add a gem to
         on player clicks in inventory:
-        - if <context.inventory.note_name||null> != sockets_open.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> != sockets_open.<player.uuid>:
             - stop
         - determine passively cancelled
         - wait 1t
@@ -429,7 +429,7 @@ prismatic_seer_gem_add_item_handler:
             - flag <player> sockets_gem_add_item_slot_type_list:<[item_sockets_type_list]>
             - define item_sockets_type_list <[item_sockets_type_list].deduplicate>
             - foreach <[item_sockets_type_list]>:
-                - define valid_gems <[valid_gems].include[<player.inventory.list_contents.filter[nbt[gem_type].is[==].to[<context.item.nbt[<[value]>]>]]||null>]>
+                - define valid_gems <[valid_gems].include[<player.inventory.list_contents.filter[nbt[gem_type].is[==].to[<context.item.nbt[<[value]>]>]].if_null[null]>]>
                 - define item_sockets_types <[item_sockets_types].include[<context.item.nbt[<[value]>]>]>
             - flag <player> sockets_gem_add_item_types:!|:<[item_sockets_types]>
             - define valid_gems <[valid_gems].deduplicate>
@@ -462,11 +462,11 @@ prismatic_seer_gem_add_gem_handler:
     events:
         # Inventory manager for list of gems that can be added to the item in question
         on player clicks in inventory:
-        - if <context.inventory.note_name||null> != sockets_gem_add.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> != sockets_gem_add.<player.uuid>:
             - stop
         - determine passively cancelled
         - wait 1t
-        - if <player.flag[sockets_gem_add_item_types].contains[<context.item.nbt[gem_type]||null>]>:
+        - if <player.flag[sockets_gem_add_item_types].contains[<context.item.nbt[gem_type].if_null[null]>]>:
             # Returns "li@socket1_empty|socket2_empty" etc
             - define former_item:<player.flag[sockets_gem_add_item].as_item>
             - define item:<player.flag[sockets_gem_add_item].as_item>
@@ -478,7 +478,7 @@ prismatic_seer_gem_add_gem_handler:
                 # Get the NBT value of the item's socket with <player.flag[sockets_gem_add_item].as_item.nbt[<[value-type]>]>
                 - define value-empty <[value]>
                 - define value-type <[value].replace[empty].with[type]>
-                - if <[item].nbt[<[value-type]>]> == <context.item.nbt[gem_type]||null>:
+                - if <[item].nbt[<[value-type]>]> == <context.item.nbt[gem_type].if_null[null]>:
                     - inventory close
                     - note remove as:sockets_gem_add.<player.uuid>
                     # Take the item and gem

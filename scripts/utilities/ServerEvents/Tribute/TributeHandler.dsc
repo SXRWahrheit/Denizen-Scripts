@@ -116,11 +116,11 @@ Tribute_DropTable_Veteran:
         on entity killed by player:
         - if !<yaml[events].read[tribute.active]>:
             - stop
-        - if !<context.entity.name.starts_with[<&9>]||null>:
+        - if !<context.entity.name.starts_with[<&9>].if_null[null]>:
             - stop
         - if <context.entity.location.is_within[arena_avenfeld]>:
             - stop
-        - else if <context.entity.name.starts_with[<&9>]||null>:
+        - else if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - if <server.has_flag[tribute_power_hour]>:
                 - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[2]>
             - else:
@@ -133,11 +133,11 @@ Tribute_DropTable_Elite:
         on entity killed by player:
         - if !<yaml[events].read[tribute.active]>:
             - stop
-        - if !<context.entity.name.starts_with[<&d>]||null>:
+        - if !<context.entity.name.starts_with[<&d>].if_null[null]>:
             - stop
         - if <context.entity.location.is_within[arena_avenfeld]>:
             - stop
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
             - if <server.has_flag[tribute_power_hour]>:
                 - drop GodsTribute location:<context.entity.location> quantity:<util.random.int[1].to[4]>
             - else:
@@ -169,7 +169,7 @@ Tribute_Drops_Harvesting:
             - stop
         - if !<yaml[harvesting].read[materials].contains[<context.material.name>]>:
             - stop
-        - if <context.material.age||0> != <context.material.maximum_age||null>:
+        - if <context.material.age||0> != <context.material.maximum_age.if_null[null]>:
             - stop
         - if <util.random.int[1].to[200]> <= 1:
             - announce to_console "Tribute drop for <player.name> caused by gaining harvesting exp"
@@ -188,7 +188,7 @@ Tribute_Drops_Foraging:
             - stop
         - if !<yaml[foraging].read[materials].contains[<context.material.name>]>:
             - stop
-        - if <context.material.age||0> != <context.material.maximum_age||null>:
+        - if <context.material.age||0> != <context.material.maximum_age.if_null[null]>:
             - stop
         - if <util.random.int[1].to[200]> <= 1:
             - announce to_console "Tribute drop for <player.name> caused by gaining foraging exp"

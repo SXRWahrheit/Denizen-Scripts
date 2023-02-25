@@ -29,7 +29,7 @@ UnlockShockwaveQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockShockwave
-    - if <player.item_in_hand.scriptname||null> == crystallizedexperiencebillet:
+    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencebillet:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:

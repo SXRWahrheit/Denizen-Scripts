@@ -9,7 +9,7 @@ Bones_Fixer:
     type: task
     debug: false
     script:
-    - define list <player.inventory.list_contents.filter_tag[<[filter_value].script.name.is[==].to[VeteranToken]||null>]>
+    - define list <player.inventory.list_contents.filter_tag[<[filter_value].script.name.is[==].to[VeteranToken].if_null[null]>]>
     - if !<[list].is_empty>:
         - foreach <[list]>:
             - if <[value].all_raw_nbt> == <item[VeteranToken].all_raw_nbt>:

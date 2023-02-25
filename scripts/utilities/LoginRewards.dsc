@@ -320,33 +320,33 @@ Spinner_Anti_Cheat:
     debug: false
     events:
         on player clicks in inventory:
-        - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> == daily-spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == veteran_spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == elite_spinner.<player.uuid>:
             - determine cancelled
         on player drags in inventory:
-        - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> == daily-spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == veteran_spinner.<player.uuid>:
             - determine cancelled
-        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == elite_spinner.<player.uuid>:
             - determine cancelled
         on player closes inventory:
-        - if <context.inventory.note_name||null> == daily-spinner.<player.uuid>:
+        - if <context.inventory.note_name.if_null[null]> == daily-spinner.<player.uuid>:
             - if <player.has_flag[cannot_close_inv]>:
                 - wait 1t
                 - inventory open d:daily-spinner.<player.uuid>
                 - stop
             - flag <player> cannot_close_inv:!
-        - else if <context.inventory.note_name||null> == veteran_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == veteran_spinner.<player.uuid>:
             - if <player.has_flag[cannot_close_inv]>:
                 - wait 1t
                 - inventory open d:veteran_spinner.<player.uuid>
                 - stop
             - flag <player> cannot_close_inv:!
-        - else if <context.inventory.note_name||null> == elite_spinner.<player.uuid>:
+        - else if <context.inventory.note_name.if_null[null]> == elite_spinner.<player.uuid>:
             - if <player.has_flag[cannot_close_inv]>:
                 - wait 1t
                 - inventory open d:elite_spinner.<player.uuid>

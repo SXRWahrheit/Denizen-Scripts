@@ -16,10 +16,10 @@ Champion_Spawn_Handler:
         on entity killed by player in:avenfeld:
         - define world avenfeld
         # Veteran
-        - if <context.entity.name.starts_with[<&9>]||null>:
+        - if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - flag server champion_spawner_<[world]>:+:1 duration:3m
             - announce to_console "Veteran killed in <[world]>, 1 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
         # Elite
             - flag server champion_spawner_<[world]>:+:5 duration:3m
             - announce to_console "Elite killed in <[world]>, 5 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
@@ -39,10 +39,10 @@ Champion_Spawn_Handler:
         on entity killed by player in:heavens:
         - define world heavens
         # Veteran
-        - if <context.entity.name.starts_with[<&9>]||null>:
+        - if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - flag server champion_spawner_<[world]>:+:1 duration:3m
             - announce to_console "Veteran killed in <[world]>, 1 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
         # Elite
             - flag server champion_spawner_<[world]>:+:5 duration:3m
             - announce to_console "Elite killed in <[world]>, 5 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
@@ -62,10 +62,10 @@ Champion_Spawn_Handler:
         on entity killed by player in:prosperus_nether:
         - define world prosperus_nether
         # Veteran
-        - if <context.entity.name.starts_with[<&9>]||null>:
+        - if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - flag server champion_spawner_<[world]>:+:1 duration:3m
             - announce to_console "Veteran killed in <[world]>, 1 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
         # Elite
             - flag server champion_spawner_<[world]>:+:5 duration:3m
             - announce to_console "Elite killed in <[world]>, 5 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
@@ -85,10 +85,10 @@ Champion_Spawn_Handler:
         on entity killed by player in:prosperus_the_end:
         - define world prosperus_the_end
         # Veteran
-        - if <context.entity.name.starts_with[<&9>]||null>:
+        - if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - flag server champion_spawner_<[world]>:+:1 duration:3m
             - announce to_console "Veteran killed in <[world]>, 1 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
         # Elite
             - flag server champion_spawner_<[world]>:+:5 duration:3m
             - announce to_console "Elite killed in <[world]>, 5 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
@@ -108,10 +108,10 @@ Champion_Spawn_Handler:
         on entity killed by player in:etherea:
         - define world prosperus_the_end
         # Veteran
-        - if <context.entity.name.starts_with[<&9>]||null>:
+        - if <context.entity.name.starts_with[<&9>].if_null[null]>:
             - flag server champion_spawner_<[world]>:+:1 duration:3m
             - announce to_console "Veteran killed in <[world]>, 1 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"
-        - else if <context.entity.name.starts_with[<&d>]||null>:
+        - else if <context.entity.name.starts_with[<&d>].if_null[null]>:
         # Elite
             - flag server champion_spawner_<[world]>:+:5 duration:3m
             - announce to_console "Elite killed in <[world]>, 5 added to champion spawner and total is <server.flag[champion_spawner_<[world]>]>, mob name was <context.entity.name>"

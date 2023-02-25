@@ -4,7 +4,7 @@ Magic_Power_Handler:
     debug: false
     definitions: magic_type
     script:
-    - define set_list <player.equipment.parse[nbt[armor_set]||null].deduplicate>
+    - define set_list <player.equipment.parse[nbt[armor_set].if_null[null]].deduplicate>
     - if <[set_list]> == <list[null]>:
         - define set_list <list[]>
     - if <[set_list].is_empty> && !<player.has_flag[<[magic_type]>_magic_power]>:
@@ -12,7 +12,8 @@ Magic_Power_Handler:
     - else:
         - define power <player.equipment.parse[nbt[<[magic_type]>_magic_power]||0].sum.add[<player.flag[<[magic_type]>_magic_power]||0>].add[100]>
     - if !<[set_list].is_empty>:
-        - define power <[power].add[<proc[<[value]>_armor_set_bonuses].context[<player.equipment.parse[nbt[armor_set]].filter[matches[<[value]>]].size>]>]>
+        - foreach <[set_list].deduplicate>:
+            - define power <[power].add[<proc[<[value]>_armor_set_bonuses].context[<player.equipment.parse[nbt[armor_set]].filter[matches[<[value]>]].size>]>]>
     - determine <[power]>
 
     ## Use this to get all of the magic powers for some reason
@@ -23,7 +24,7 @@ Magic_Power_Handler:
     #        - define power <[equipment].nbt_keys.filter[matches[[a-zA-Z]+_magic_power]].get[<[loop_index]>]>
     #        - define <[power]> <[power].add[<[equipment].nbt[<[power]>]>||0]>
     #    - define set_list <[set_list].include[<[value].nbt[armor_set]>]>
-    #- foreach <[set_list].deduplicated>:
+    #- foreach <[set_list].deduplicate>:
     #    - define fire_magic_power <[fire_magic_power].add[<proc[<[value]>_armor_set_bonuses].context[<[set_list].find_all[<[value]>].size>]>
 
 Spell_Loader:
@@ -38,7 +39,7 @@ Spell_Loader:
 #    debug: false
 #    events:
 #        on magicspells player casts spell:
-#        - if <yaml[spells-elemental].read[<context.spell>.spell-magic-type]||null> == null:
+#        - if <yaml[spells-elemental].read[<context.spell>.spell-magic-type].if_null[null]> == null:
 #            - stop
 #        - else:
 #            - determine power:<proc[Magic_Power_Handler].context[<yaml[spells-elemental].read[<context.spell>.spell-magic-type]>]||1>

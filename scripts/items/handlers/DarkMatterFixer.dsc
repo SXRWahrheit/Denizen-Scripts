@@ -9,7 +9,7 @@ Dark_Matter_Fixer:
     type: task
     debug: false
     script:
-    - define list <player.inventory.list_contents.filter_tag[<[filter_value].script.name.is[==].to[SocketMaker]||null>]>
+    - define list <player.inventory.list_contents.filter_tag[<[filter_value].script.name.is[==].to[SocketMaker].if_null[null]>]>
     - if !<[list].is_empty>:
         - foreach <[list]>:
             - if <[value].all_raw_nbt> == <item[SocketMaker].all_raw_nbt>:

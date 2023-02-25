@@ -25,8 +25,8 @@ Damage_Tracker_Handler_Flags:
         #    - narrate "- <player.flag[damagetracker_<[damager]>_name]><reset>: <player.flag[damagetracker_<[damager]>_damage]> damage"
 
         on player damaged:
-        - if <context.damager||null> == null:
-            - define "name:<script.data_key[names.<context.cause||null>]||<context.cause.to_titlecase.replace[_].with[ ]>>"
+        - if <context.damager.if_null[null]> == null:
+            - define "name:<script.data_key[names.<context.cause.if_null[null]>]||<context.cause.to_titlecase.replace[_].with[ ]>>"
             - define cause:<context.cause>
         - else:
             - define cause:<context.damager>

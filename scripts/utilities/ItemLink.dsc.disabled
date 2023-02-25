@@ -22,7 +22,7 @@ link_command:
     script:
     - if <context.server>:
         - stop
-    - choose <context.args.first||null>:
+    - choose <context.args.first.if_null[null]>:
         - case hotbar:
             - if <player.inventory.list_contents.get[1].to[9].exclude[i@air].is_empty>:
                 - narrate '<&c>You cannot link an empty hotbar!'
@@ -69,7 +69,7 @@ link_messagetodiscord:
     - define item_info '<[item].formatted.to_titlecase>'
     - if <[item].quantity> == 1:
         - define item_info '<[item_info].after[ ]>'
-    - if <[type]||null> == null:
+    - if <[type].if_null[null]> == null:
         - discord id:sxr message channel:191040977652285450 '<player.name> is linking their **<[item].display.strip_color||<[item_info]>>** (<[item].quantity>x<tern[<[item].has_display>]: <[item_info]>||>)!'
     - else:
         - discord id:sxr message channel:191040977652285450 '<player.name> is linking their <[type]> **<[item].display.strip_color||<[item_info]>>** (<[item].quantity>x<tern[<[item].has_display>]: <[item_info]>||>)!'

@@ -117,7 +117,7 @@ QuestStageProgressHandler:
             - run QuestCompletionHandler def:<[quest_internalname]>
     # Display remaining objectives
     ## TODO: Replace with a foreach and conditional formatting for completed objectives
-    - else if <[objective]||null> > 0:
+    - else if <[objective].if_null[null]> > 0:
         - narrate format:QuestNameFormat <[quest].get[name]>
         - narrate "• <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[name]>: <[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[progress]>/<[quest].get[stages].get[<[current_stage]>].get[objectives].get[<[objective]>].get[total]>"
 
@@ -343,7 +343,7 @@ QuestResetTimeHandler:
     # Handles quest reset times
     script:
     - define data <player.uuid>_quest_data
-    - choose <yaml[<[quest_internalname]>].read[config.reset.period]||null>:
+    - choose <yaml[<[quest_internalname]>].read[config.reset.period].if_null[null]>:
         - case 7d:
             - if <util.time_now.day_of_week> == 5 && <util.time_now.hour> >= 19:
                 - yaml id:<[data]> set quests.completed.<[quest_internalname]>.reset_time:<util.time_now.next_day_of_week[Friday].add[7d].add[19h].sub[5m]>
@@ -471,13 +471,13 @@ QuestGUIItemBuilder:
     - define item_lore <[item_lore].include[<&sp>]>
     # Rewards
     - define item_lore <[item_lore].include[<green>Rewards:]>
-    - if <yaml[<[quest_internalname]>].read[config.rewards.money]||null> != null:
+    - if <yaml[<[quest_internalname]>].read[config.rewards.money].if_null[null]> != null:
         - define lore_money "<gold>• <yaml[<[quest_internalname]>].read[config.rewards.money]> gold"
         - define item_lore <[item_lore].include[<[lore_money]>]>
-    - if <yaml[<[quest_internalname]>].read[config.rewards.quest_points]||null> != null:
+    - if <yaml[<[quest_internalname]>].read[config.rewards.quest_points].if_null[null]> != null:
         - define lore_quest_points "<gold>• <yaml[<[quest_internalname]>].read[config.rewards.quest_points]> quest points"
         - define item_lore <[item_lore].include[<[lore_quest_points]>]>
-    - if <yaml[<[quest_internalname]>].read[config.rewards.items]||null> != null:
+    - if <yaml[<[quest_internalname]>].read[config.rewards.items].if_null[null]> != null:
         - define lore_items <list[]>
         - foreach <yaml[<[quest_internalname]>].parsed_key[config.rewards.items]>:
             - define lore_items "<[lore_items].include[<gold>• <[value].quantity||1>x <[value].display.if_null[<[value].material.name.replace_text[_].with[<&sp>].to_titlecase>]>]>"
@@ -486,7 +486,7 @@ QuestGUIItemBuilder:
     # Line wrapping time!
     - define item_lore <proc[lore_builder].context[<list[40].include_single[<[item_lore]>]>]>
     #- define item_lore <proc[lore_builder].context[40|<[item_lore].escaped>]>
-    - if <item[<[quest_internalname]>_gui_item]||null> != null:
+    - if <item[<[quest_internalname]>_gui_item].if_null[null]> != null:
         - define base_item <item[<[quest_internalname]>_gui_item]>
         - if <[base_item].is_enchanted>:
             - define item_enchantments <[base_item].enchantment_map>

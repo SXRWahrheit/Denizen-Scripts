@@ -14,5 +14,5 @@ SkeletalRogueHuntHandler:
         - define objective 1
         - if <yaml[<[data]>].contains[quests.active.SkeletalRogueHunt].not>:
             - stop
-        - if <context.entity.mythicmob.internal_name||null> == SkeletalRogue:
+        - if <context.entity.mythicmob.internal_name.if_null[null]> == SkeletalRogue:
             - inject QuestObjectiveProgressHandler instantly

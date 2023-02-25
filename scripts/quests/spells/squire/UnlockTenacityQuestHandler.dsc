@@ -27,7 +27,7 @@ UnlockTenacityQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockTenacity
-    - if <player.item_in_hand.scriptname||null> == crystallizedexperiencebillet:
+    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencebillet:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:

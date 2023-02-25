@@ -7,7 +7,7 @@ PatronChoice:
     permission: group.patron
     permission message: Sorry, you're not a patron! Back us on Patreon: https://patreon.com/summacrossroads
     script:
-    - if <context.args.get[1]||null> == Duke:
+    - if <context.args.get[1].if_null[null]> == Duke:
         - group add Duke
         - group remove Duchess
         - group remove GenerousDuchess
@@ -18,7 +18,7 @@ PatronChoice:
         - else if <player.in_group[generouspatron]>:
             - group add GenerousDuke
         - narrate "<&a>Congratulations, you are now a Duke!"
-    - if <context.args.get[1]||null> == Duchess:
+    - if <context.args.get[1].if_null[null]> == Duchess:
         - group add Duchess
         - group remove Duke
         - group remove GenerousDuke
@@ -29,7 +29,7 @@ PatronChoice:
         - else if <player.in_group[generouspatron]>:
             - group add GenerousDuchess
         - narrate "<&a>Congratulations, you are now a Duchess!"
-    - if <context.args.get[1]||null> == Patron:
+    - if <context.args.get[1].if_null[null]> == Patron:
         - group remove Duke
         - group remove GenerousDuke
         - group remove EsteemedDuke

@@ -20,7 +20,7 @@ GolfBall_Toss_Only:
             - narrate "<gray>Your mini-golf ball flies off into the distance..."
         - determine cancelled
         on player places player_head:
-        - if <context.item_in_hand.has_flag[unplaceable]> && <context.item_in_hand.script.name.contains_any_text[golfball]||null>:
+        - if <context.item_in_hand.has_flag[unplaceable]> && <context.item_in_hand.script.name.contains_any_text[golfball].if_null[null]>:
             - if <context.item_in_hand.flag[expiration].is_before[<util.time_now>]||false>:
                 - take scriptname:<context.item_in_hand.script.name>
                 - narrate "<gray>Your mini-golf ball flies off into the distance..."

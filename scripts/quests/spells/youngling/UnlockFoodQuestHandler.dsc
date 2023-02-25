@@ -50,7 +50,7 @@ UnlockFoodQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockFood
-    - if <player.item_in_hand.script.name||null> == crystallizedexperiencesliver:
+    - if <player.item_in_hand.script.name.if_null[null]> == crystallizedexperiencesliver:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:

@@ -27,7 +27,7 @@ UnlockGustQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockGust
-    - if <player.item_in_hand.scriptname||null> == crystallizedexperiencechunk:
+    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencechunk:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:

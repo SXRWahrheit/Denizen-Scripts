@@ -10,7 +10,7 @@ PatreonRoleSync:
             - wait 1s
             - discord id:sxr remove_role user:<context.new_message.author.id> role:191040935633616896,458328476248965120 group:191040935633616896
         - else if <context.new_message.text.split[<&sp>].get[1]> == !linkminecraft:
-            - if <server.match_offline_player[<context.new_message.text.split[<&sp>].get[2]>]||null> != null:
+            - if <server.match_offline_player[<context.new_message.text.split[<&sp>].get[2]>].if_null[null]> != null:
                 - flag server discord-user_<context.new_message.author.id>.minecraft-player:<server.match_offline_player[<context.new_message.text.split[<&sp>].get[2]>]>
                 - discord id:sxr add_role user:<context.new_message.author.id> role:191040935633616896,458328476248965120 group:191040935633616896
                 - wait 1s

@@ -3,7 +3,7 @@ WaveShooter:
     definitions: caster
     speed: 0
     script:
-    - if <[caster]||null> == null:
+    - if <[caster].if_null[null]> == null:
         - define caster <player>
     - define source <[caster].location.with_pitch[0]>
     - define forward <[source].direction.vector>

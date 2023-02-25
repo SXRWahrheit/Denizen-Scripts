@@ -6,18 +6,18 @@ skin_url_handler:
     debug: false
     events:
         on npc command:
-            - if <c.args.get[1].to_lowercase||null> != skin:
+            - if <c.args.get[1].to_lowercase.if_null[null]> != skin:
                 - stop
-            - if !<li@-u|--url.contains[<c.args.get[2].to_lowercase||null>]>:
+            - if !<li@-u|--url.contains[<c.args.get[2].to_lowercase.if_null[null]>]>:
                 - stop
             - determine passively fulfilled
 
-            - define url <c.args.get[3]||null>
+            - define url <c.args.get[3].if_null[null]>
             - define model <c.args.get[4].to_lowercase||empty>
             - if <c.server>:
-                - define npc <server.selected_npc||null>
+                - define npc <server.selected_npc.if_null[null]>
             - else:
-                - define npc <player.selected_npc||null>
+                - define npc <player.selected_npc.if_null[null]>
 
             - if <[npc]> == null:
                 - narrate "<&a>You must have an NPC selected to execute that command."
@@ -73,4 +73,4 @@ skin_url_task:
         - if <[model]> == slim:
             - define req "<[req]>?model=slim"
         - ~webget <[req]> "post:url=<[url]>" timeout:5s save:res
-        - flag server <[key]>:<entry[res].result||null>
+        - flag server <[key]>:<entry[res].result.if_null[null]>

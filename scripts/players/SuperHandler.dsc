@@ -13,7 +13,7 @@ super_reset_on_equip:
     debug: false
     events:
         on player equips chestplate:
-        - if <context.new_item.nbt[item_tier]||null> == legendary:
+        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
             - yaml id:super-counter set energy.<player.uuid>:0
             - yaml id:super-counter set super-ready.<player.uuid>:0
             - yaml id:super-counter set super-activated.<player.uuid>:0
@@ -26,7 +26,7 @@ Super_Enable_On_Login:
     events:
         on player joins:
         - wait 20t
-        - if <player.equipment_map.get[chestplate].nbt[item_tier]||null> == legendary:
+        - if <player.equipment_map.get[chestplate].nbt[item_tier].if_null[null]> == legendary:
             - wait 100t
             - yaml id:super-counter set energy.<player.uuid>:0
             - bossbar create super-bar.<player.uuid> players:<player> "title:Super Energy" progress:0 color:BLUE style:SEGMENTED_10
@@ -43,7 +43,7 @@ Damage_Super_Charge:
     debug: false
     events:
         on player damages entity:
-        - if <context.damager.equipment_map.get[chestplate].nbt[item_tier]||null> == legendary:
+        - if <context.damager.equipment_map.get[chestplate].nbt[item_tier].if_null[null]> == legendary:
             - if <yaml[super-counter].read[super-activated.<player.uuid>]> == 0:
                 - if <yaml[super-counter].read[energy.<player.uuid>]||0> < 300:
 #                    - narrate "Damage logged as <context.final_damage>"
@@ -71,10 +71,10 @@ super_bossbar:
     debug: false
     events:
         on player equips chestplate:
-        - if <context.new_item.nbt[item_tier]||null> == legendary:
+        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
             - bossbar create super-bar.<player.uuid> players:<player> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
         on player unequips chestplate:
-        - if <context.new_item.nbt[item_tier]||null> == legendary:
+        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
             - bossbar remove super-bar.<player.uuid>
 
 super_conditions:

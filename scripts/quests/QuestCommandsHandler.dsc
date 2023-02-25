@@ -53,7 +53,7 @@ QuestQuitCommand:
         - define quest_internalname <yaml[<[data]>].read[quests.active].keys.first>
         - define quest <yaml[<[data]>].read[quests.active.<[quest_internalname]>]>
         - inject QuestQuitHandler
-    - else if <context.args.get[1]||null>:
+    - else if <context.args.get[1].if_null[null]>:
         - foreach <yaml[<[data]>].read[quests.active]> as:quest:
             - if <[quest].get[name].contains_text[<context.args.get[1]>]>:
                 - define match_list:->:<[quest]>

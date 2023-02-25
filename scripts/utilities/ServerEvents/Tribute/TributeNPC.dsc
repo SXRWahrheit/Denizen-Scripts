@@ -123,7 +123,7 @@ Tribute_Inventory_Handler:
         - determine passively cancelled
         - wait 1t
         - inventory close
-        - if <yaml[events].read[tribute.<player.flag[blessing_selection]||null>.rate]||null> == 4:
+        - if <yaml[events].read[tribute.<player.flag[blessing_selection].if_null[null]>.rate].if_null[null]> == 4:
             - narrate format:tribute_npc_format "The Gods are already offering as much of this blessing as they deem this world worthy of."
             - wait 0.7s
             - narrate format:tribute_npc_format "Would you like to pray for a different blessing?"
@@ -140,7 +140,7 @@ Tribute_Inventory_Handler:
         - determine passively cancelled
         - wait 1t
         - inventory close
-        - if <yaml[events].read[tribute.<player.flag[blessing_selection]||null>.rate]||null> == 4:
+        - if <yaml[events].read[tribute.<player.flag[blessing_selection].if_null[null]>.rate].if_null[null]> == 4:
             - narrate format:tribute_npc_format "The Gods are already offering as much of this blessing as they deem this world worthy of."
             - wait 0.7s
             - narrate format:tribute_npc_format "Would you like to pray for a different blessing?"
@@ -157,7 +157,7 @@ Tribute_Inventory_Handler:
         - determine passively cancelled
         - wait 1t
         - inventory close
-        - if <yaml[events].read[tribute.<player.flag[blessing_selection]||null>.rate]||null> == 4:
+        - if <yaml[events].read[tribute.<player.flag[blessing_selection].if_null[null]>.rate].if_null[null]> == 4:
             - narrate format:tribute_npc_format "The Gods are already offering as much of this blessing as they deem this world worthy of."
             - wait 0.7s
             - narrate format:tribute_npc_format "Would you like to pray for a different blessing?"

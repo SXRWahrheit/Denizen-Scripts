@@ -16,7 +16,7 @@ chains_ready_check:
         after player right clicks block:
         - if <player.item_in_hand.flag[weapon_type].if_null[null]> == chains && <player.has_flag[attack_cooldown].not> && <player.has_flag[chains_cooldown].not>:
             - flag <player> attack_cooldown:true duration:<player.attack_cooldown_max_duration>
-            - if <player.location.distance_squared[<player.target.location||null>]||100> <= 91:
+            - if <player.location.distance_squared[<player.target.location.if_null[null]>]||100> <= 91:
                 - animate <player> arm_swing
                 - push <player> destination:<player.target.location> no_damage
                 - narrate "<&a>You grapple your target and rush toward them!"

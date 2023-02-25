@@ -14,5 +14,5 @@ LichHuntHandler:
         - define objective 1
         - if <yaml[<[data]>].contains[quests.active.LichHunt].not>:
             - stop
-        - if <context.entity.mythicmob.internal_name||null> == Lich:
+        - if <context.entity.mythicmob.internal_name.if_null[null]> == Lich:
             - inject QuestObjectiveProgressHandler instantly

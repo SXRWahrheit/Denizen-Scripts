@@ -54,7 +54,7 @@ Money_Command:
         - narrate "You have <player.money> gold"
         - stop
     - if <context.args.size> > 0 && <context.args.get[1]> != top:
-        - define player <server.match_offline_player[<context.args.get[2]>]||null>
+        - define player <server.match_offline_player[<context.args.get[2]>].if_null[null]>
         - if <[player]> == null:
             - narrate "<red>Invalid player specified! <context.args.get[2]> is not a valid username!"
         - if <context.args.get[1]> == balance:
