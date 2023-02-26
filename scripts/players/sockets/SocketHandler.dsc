@@ -1,11 +1,11 @@
-# Add NBT to items for # of sockets available / total
-# Use NBT to manage sockets
+# Add flags to items for # of sockets available / total
+# Use flags to manage sockets
 # Use events to handle socket effects
 # Numbered sockets on each item to handle types separately from current sockets
 # Be sure to check each specific numbered slot to avoid exploits
 
-### Relevant NBT values:
-## Item (weapon/armor) NBT
+### Relevant flag values:
+## Item (weapon/armor) flags
 # equipment_type (VALUE) | Whether equipment is a weapon or armor, e.g. "weapon"/"armor"
 # item_tier (VALUE) | The item's tier, e.g. "veteran"/"elite"/"champion"
 # sealed_potential (BOOLEAN) | Whether the item has Sealed Potential. Items with Sealed Potential should have no socket data; data will be wiped on unlock.
@@ -16,10 +16,10 @@
 # socket#_type (VALUE) | The type of a socket, e.g. socket1_type "attack"/"defense"/"utility"
 # socket#_gem (VALUE) | The actual gem inserted into a socket e.g. "crit_chance"/"health_on_hit"/"speed_on_hit"
 # socket#_empty (BOOLEAN) | True if the numbered socket is empty
-## Gem NBT
+## Gem flags
 # gem_type (VALUE) | The type of a gem, e.g. "attack"/"defense"/"utility"
 # gem_specific (VALUE) | The actual gem e.g. "crit_chance"/"health_on_hit"/"speed_on_hit"
-# gem_attribute# (VALUE) | NBT attributes to be applied to item upon socketing
+# gem_attribute# (VALUE) | Attributes to be applied to item upon socketing
 
 
 
@@ -116,12 +116,12 @@ prismatic_seer:
 
 prismatic_seer_format:
     type: format
-    format: "<dark_green>Prismatic Seer<white><&co> <[text]>"
+    format: <dark_green>Prismatic Seer<white><&co> <[text]>
 
 sockets:
     type: interact
     steps:
-        "Player Seen*":
+        Player_Seen*:
             proximity trigger:
                 entry:
                     script:
@@ -216,7 +216,7 @@ prismatic_seer_inventory_handler:
             - inventory close
             - narrate format:prismatic_seer_format "Sorry, you don't have enough materials for that!"
             - stop
-        - if <player.inventory.list_contents.filter[nbt[sockets_can_add]].size.if_null[null]> >= 1:
+        - if <player.inventory.list_contents.filter[flag[sockets_can_add]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to add a socket to."
             - note <inventory[sockets_can_add_inventory]> as:sockets_can_add.<player.uuid>
             - inventory open d:sockets_can_add.<player.uuid>
@@ -231,7 +231,7 @@ prismatic_seer_inventory_handler:
         - announce to_console <player.inventory.list_contents>
         # Add a check to ensure that there is a gem matching the available sockets before opening the inventory?
         # We're not stopping them from closing it so it might just not matter
-        - if <player.inventory.list_contents.filter[nbt[sockets_open]].size.if_null[null]> >= 1:
+        - if <player.inventory.list_contents.filter[flag[sockets_open]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to add a gem to."
             - flag <player> sockets_gem_add_item:!
             - flag <player> sockets_gem_add_item_empty:!
@@ -247,7 +247,7 @@ prismatic_seer_inventory_handler:
         - wait 1t
         - inventory close
         - announce to_console <player.inventory.list_contents>
-        - if <player.inventory.list_contents.filter[nbt[sealed_potential]].size.if_null[null]> >= 1:
+        - if <player.inventory.list_contents.filter[flag[sealed_potential]].size.if_null[null]> >= 1:
             - narrate format:prismatic_seer_format "Okay, now select which of your valid items you'd like to unlock the potential of."
             - note <inventory[potential_inventory]> as:sealed_potential.<player.uuid>
             - inventory open d:sealed_potential.<player.uuid>
@@ -266,7 +266,7 @@ sockets_can_add_inventory:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     procedural items:
-    - determine <player.inventory.list_contents.filter[nbt[sockets_can_add]]>
+    - determine <player.inventory.list_contents.filter[flag[sockets_can_add]]>
 
 sockets_open_inventory:
     type: inventory
@@ -280,7 +280,7 @@ sockets_open_inventory:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     procedural items:
-    - determine <player.inventory.list_contents.filter[nbt[sockets_open]]||air>
+    - determine <player.inventory.list_contents.filter[flag[sockets_open]]||air>
 
 potential_inventory:
     type: inventory
@@ -294,7 +294,7 @@ potential_inventory:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     procedural items:
-    - determine <player.inventory.list_contents.filter[nbt[sealed_potential]]||air>
+    - determine <player.inventory.list_contents.filter[flag[sealed_potential]]||air>
 
 prismatic_seer_socket_add_handler:
     type: world
@@ -306,47 +306,46 @@ prismatic_seer_socket_add_handler:
         - determine passively cancelled
         - wait 1t
         # Checks if item has locked sockets that can be opened
-        - if <context.item.has_nbt[sockets_can_add]>:
+        - if <context.item.has_flag[sockets_can_add]>:
             - define item <context.item>
             - take raw_exact:<context.item> from:<player.inventory>
             - take scriptname:SocketMaker quantity:<server.flag[SocketAddCost]>
             - take scriptname:CrystallizedExperienceIngot quantity:1
             # Add 1 to the number of sockets currently on the item
-            - define item:<[item].with[nbt=sockets_current/<[item].nbt[sockets_current].add[1]>]>
+            - define item:<[item].with_flag[sockets_current:<[item].flag[sockets_current].if_null[0].add[1]>]>
             # If the item already has sockets...
-            - if <[item].nbt_keys.filter[matches[socket[0-9]+_type]].alphanumeric.size> > 0:
+            - if <[item].list_flags.filter[matches[socket[0-9]+_type]].alphanumeric.size> > 0:
                 # Find the last existing socket#_type line
-                - define sockets_last_type <[item].nbt_keys.filter[matches[socket[0-9]+_type]].alphanumeric.last>
+                - define sockets_last_type <[item].list_flags.filter[matches[socket[0-9]+_type]].alphanumeric.last>
                 # Set the socket# target as the number from the last socket#_type plus one
                 - define socket_target <[sockets_last_type].replace[regex:socket([0-9]+)_type].with[$1].add[1]>
             - else:
                 - define socket_target 1
             # Add a new empty socket at the targeted number
-            - define item:<[item].with[nbt=socket<[socket_target]>_empty/true]>
+            - define item:<[item].with_flag[socket<[socket_target]>_empty:true]>
             # Different socket rolls for weapons and armor
             # In the future, use additional if checks within this section to differentiate classes of weapons or armor for use with Potential
             # Note that this is only for locked sockets - can also just drop weapons and armor with all-unlocked sockets
-            - if <[item].nbt[equipment_type]> == weapon:
-                - define type <tern[<util.random.decimal.is[less].than[0.7]>].pass[attack].fail[utility]>
-                - define item:<[item].with[nbt=socket<[socket_target]>_type/<[type]>]>
-            - if <[item].nbt[equipment_type]> == armor:
-                - define type <tern[<util.random.decimal.is[less].than[0.7]>].pass[defense].fail[utility]>
-                - define item:<[item].with[nbt=socket<[socket_target]>_type/<[type]>]>
-            - define item:<[item].with[nbt=sockets_open/true]>
-            - if <[item].nbt[sockets_current].if_null[null]> == <[item].nbt[sockets_max]>:
-                - define item <[item].with[remove_nbt=sockets_can_add]>
+            - if <[item].flag[equipment_type]> == weapon:
+                - define type <tern[<util.random_decimal.is[less].than[0.7]>].pass[attack].fail[utility]>
+                - define item:<[item].with_flag[socket<[socket_target]>_type:<[type]>]>
+            - if <[item].flag[equipment_type]> == armor:
+                - define type <tern[<util.random_decimal.is[less].than[0.7]>].pass[defense].fail[utility]>
+                - define item:<[item].with_flag[socket<[socket_target]>_type:<[type]>]>
+            - define item:<[item].with_flag[sockets_open:true]>
+            - if <[item].flag[sockets_current].if_null[0]> == <[item].flag[sockets_max]>:
+                - define item <[item].with_flag[sockets_can_add:!]>
             ## Let's do the lore now y'all
             # Find the locked socket line
             - define locked_socket_line <[item].lore.find_partial[LOCKED]>
             # Define the appropriate line based on socket type
-            - if <[item].nbt[socket<[socket_target]>_type]> == attack:
+            - if <[item].flag[socket<[socket_target]>_type]> == attack:
                 - define "socket_new_lore:<&c>EMPTY<&co> ATTACK"
-            - if <[item].nbt[socket<[socket_target]>_type]> == defense:
+            - if <[item].flag[socket<[socket_target]>_type]> == defense:
                 - define "socket_new_lore:<&9>EMPTY<&co> DEFENSE"
-            - if <[item].nbt[socket<[socket_target]>_type]> == utility:
+            - if <[item].flag[socket<[socket_target]>_type]> == utility:
                 - define "socket_new_lore:<&a>EMPTY<&co> UTILITY"
-            - adjust <[item]> lore:<[item].lore.set[<[socket_new_lore]>].at[<[locked_socket_line]>]> save:edited
-            - define item:<entry[edited].result>
+            - define item <[item].with[lore=<[item].lore.set[<[socket_new_lore]>].at[<[locked_socket_line]>]>]>
             # Finally, give the new item
             - give <[item]> to:<player.inventory>
             - inventory close
@@ -373,24 +372,24 @@ prismatic_seer_socket_potential_handler:
             - inventory close
             - narrate format:prismatic_seer_format "Sorry, you don't have enough materials for that!"
             - stop
-        - if <context.item.has_nbt[sealed_potential]>:
+        - if <context.item.has_Flag[sealed_potential]>:
             - define item <context.item>
             - take raw_exact:<context.item> from:<player.inventory>
-            - define max_sockets <script.data_key[max_sockets.<context.item.nbt[item_tier]>]>
-            - define item <[item].with[remove_nbt=sealed_potential]>
-            - foreach <[item].nbt_keys.filter[matches[socket[0-9]+_empty]].alphanumeric>:
-                - define item <[item].with[remove_nbt=<[value]>]>
-            - foreach <[item].nbt_keys.filter[matches[socket[0-9]+_type]].alphanumeric>:
-                - define item <[item].with[remove_nbt=<[value]>]>
-            - foreach <[item].nbt_keys.filter[matches[socket[0-9]+_gem]].alphanumeric>:
-                - define item <[item].with[remove_nbt=<[value]>]>
-            - define item <[item].with[remove_nbt=sockets_open]>
-            - define item:<[item].with[nbt=sockets_can_add/true]>
-            - define item:<[item].with[nbt=sockets_current/0]>
-            - define item:<[item].with[nbt=sockets_max/<util.random.int[1].to[<[max_sockets]>]>]>
+            - define max_sockets <script.data_key[max_sockets.<context.item.flag[item_tier]>]>
+            - define item <[item].with_flag[sealed_potential:!]>
+            - foreach <[item].list_flags.filter[matches[socket[0-9]+_empty]].alphanumeric>:
+                - define item <[item].with_flag[<[value]>:!]>
+            - foreach <[item].list_flags.filter[matches[socket[0-9]+_type]].alphanumeric>:
+                - define item <[item].with_flag[<[value]>:!]>
+            - foreach <[item].list_flags.filter[matches[socket[0-9]+_gem]].alphanumeric>:
+                - define item <[item].with_flag[<[value]>:!]>
+            - define item <[item].with_flag[sockets_open:!]>
+            - define item <[item].with_flag[sockets_can_add]>
+            - define item <[item].with_flag[sockets_current:0]>
+            - define item <[item].with_flag[sockets_max:<util.random.int[1].to[<[max_sockets]>]>]>
             - define potential_line "<[item].lore.find_partial[Sealed Potential]>"
             - define item <[item].with[lore=<[item].lore.set[<&6>Sockets].at[<[potential_line]>]>]>
-            - define item <[item].with[lore=<[item].lore.pad_right[<[item].nbt[sockets_max].add[<[potential_line]>]>].with[<&8>LOCKED]>]>
+            - define item <[item].with[lore=<[item].lore.pad_right[<[item].flag[sockets_max].add[<[potential_line]>]>].with[<&8>LOCKED]>]>
             - inventory close
             - note remove as:sealed_potential.<player.uuid>
             - give <[item]>
@@ -414,23 +413,23 @@ prismatic_seer_gem_add_item_handler:
         - wait 1t
         - inventory close d:sockets_open.<player.uuid>
         - note remove as:sockets_open.<player.uuid>
-        - if <context.item.has_nbt[sockets_open]>:
+        - if <context.item.has_flag[sockets_open]>:
             - define item_sockets_type_list <list[]>
             - define item_sockets_empty <list[]>
             - define valid_gems <list[]>
             - define item_sockets_types <list[]>
             - flag <player> sockets_gem_add_item:<context.item>
             # Should save a list of empty sockets e.g. "li@socket1_empty|socket2_empty" etc.
-            - flag <player> sockets_gem_add_item_empty:!|:<context.item.nbt_keys.filter[matches[socket[0-9]+_empty]].alphanumeric>
-            - define item_sockets_empty <context.item.nbt_keys.filter[matches[socket[0-9]+_empty]].alphanumeric>
-            # Returns the empty socket nbt keys, swapped to "type" e.g. "li@socket1_type|socket2_type" etc.
+            - flag <player> sockets_gem_add_item_empty:!|:<context.item.list_flags.filter[matches[socket[0-9]+_empty]].alphanumeric>
+            - define item_sockets_empty <context.item.list_flags.filter[matches[socket[0-9]+_empty]].alphanumeric>
+            # Returns the empty socket flags, swapped to "type" e.g. "li@socket1_type|socket2_type" etc.
             - define item_sockets_type_list <[item_sockets_empty].parse[replace[empty].with[type]]>
             # Should save a list of empty socket type keys e.g. "li@socket1_type|socket2_type" etc.
             - flag <player> sockets_gem_add_item_slot_type_list:<[item_sockets_type_list]>
             - define item_sockets_type_list <[item_sockets_type_list].deduplicate>
             - foreach <[item_sockets_type_list]>:
-                - define valid_gems <[valid_gems].include[<player.inventory.list_contents.filter[nbt[gem_type].is[==].to[<context.item.nbt[<[value]>]>]].if_null[null]>]>
-                - define item_sockets_types <[item_sockets_types].include[<context.item.nbt[<[value]>]>]>
+                - define valid_gems <[valid_gems].include[<player.inventory.list_contents.filter[flag[gem_type].is[==].to[<context.item.flag[<[value]>]>]].if_null[null]>]>
+                - define item_sockets_types <[item_sockets_types].include[<context.item.flag[<[value]>]>]>
             - flag <player> sockets_gem_add_item_types:!|:<[item_sockets_types]>
             - define valid_gems <[valid_gems].deduplicate>
             - if <[valid_gems].size> >= 1:
@@ -466,38 +465,33 @@ prismatic_seer_gem_add_gem_handler:
             - stop
         - determine passively cancelled
         - wait 1t
-        - if <player.flag[sockets_gem_add_item_types].contains[<context.item.nbt[gem_type].if_null[null]>]>:
+        - if <player.flag[sockets_gem_add_item_types].contains[<context.item.flag[gem_type].if_null[null]>]>:
             # Returns "li@socket1_empty|socket2_empty" etc
-            - define former_item:<player.flag[sockets_gem_add_item].as_item>
-            - define item:<player.flag[sockets_gem_add_item].as_item>
-            - foreach <player.flag[sockets_gem_add_item_empty].as_list>:
+            - define former_item <player.flag[sockets_gem_add_item].as[item]>
+            - define item <player.flag[sockets_gem_add_item].as[item]>
+            - foreach <player.flag[sockets_gem_add_item_empty].as[list]>:
                 ## We're finally adding the gem to the item!
                 # <[value-empty]> is socket1_empty etc
                 # <[value-type]> is socket1_type etc
                 # <[item]> is the selected item
-                # Get the NBT value of the item's socket with <player.flag[sockets_gem_add_item].as_item.nbt[<[value-type]>]>
+                # Get the flag value of the item's socket with <player.flag[sockets_gem_add_item].flag[<[value-type]>]>
                 - define value-empty <[value]>
                 - define value-type <[value].replace[empty].with[type]>
-                - if <[item].nbt[<[value-type]>]> == <context.item.nbt[gem_type].if_null[null]>:
+                - if <[item].flag[<[value-type]>]> == <context.item.flag[gem_type].if_null[null]>:
                     - inventory close
                     - note remove as:sockets_gem_add.<player.uuid>
                     # Take the item and gem
                     - take raw_exact:<[item]> from:<player.inventory>
                     - take raw_exact:<context.item> from:<player.inventory>
-                    ## Adjust the NBT data
-                    # Delete the NBT for the empty socket being filled
-                    - define item <[item].with[remove_nbt=<[value]>]>
-                    # Add NBT to indicate the gem being added
-                    - define item <[item].with[nbt=<[value].replace[empty].with[gem]>/<context.item.nbt[gem_specific]>]>
-                    ## Handle any NBT attributes, if they exist
-                    - define nbt_attributes_list:<context.item.nbt_keys.filter[matches[gem_attribute[0-9]+]].alphanumeric>
-                    - foreach <[nbt_attributes_list]>:
-                        #- announce to_console "NBT <context.item.nbt[<[value]>]>"
-                        - define attribute_location:<[item].nbt_attributes.as_list.parse[unescaped].find_partial[<context.item.nbt[<[value]>].before_last[/].unescaped>]||0>
-                        - if <[attribute_location]> >= 1:
-                            - define item <[item].with[nbt_attributes=<[item].nbt_attributes.as_list.set[<[item].nbt_attributes.as_list.get[<[attribute_location]>].before_last[/]>/<context.item.nbt[<[value]>].after_last[/].add[<[item].nbt_attributes.as_list.get[<[attribute_location]>].after_last[/]>]>].at[<[attribute_location]>]>]>
-                        - else:
-                            - define item <[item].with[nbt_attributes=<[item].nbt_attributes.as_list.include[<context.item.nbt[<[value]>]>]>]>
+                    ## Adjust the flag data
+                    # Delete the flag for the empty socket being filled
+                    - define item <[item].with_flag[<[value]>:!]>
+                    # Add flag to indicate the gem being added
+                    - define item <[item].with_flag[<[value].replace[empty].with[gem]>:<context.item.flag[gem_specific]>]>
+                    ## Handle any attributes, if they exist
+                    - define attributes_list <context.item.flag[gem_attributes]>
+                    - foreach <[attributes_list]> as:attribute:
+                        - define item <[item].with[add_attribute_modifiers:<[attribute]>]>
                     ## Adjust the lore
                     # First line after "<&6>Sockets"
                     - define first_socket_line <[item].lore.find_partial[Sockets]>
@@ -505,17 +499,16 @@ prismatic_seer_gem_add_gem_handler:
                     - define socket_target <[value-empty].replace[regex:socket([0-9]+)_empty].with[$1].add[<[first_socket_line]>]>
                     # Set up the lore line for the socket
                     # Can probably eliminate this if chain if gems have standardized colors for their names
-                    - if <context.item.nbt[gem_type]> == attack:
+                    - if <context.item.flag[gem_type]> == attack:
                         - define socket_new_line:<&c><context.item.display.strip_color>
-                    - else if <context.item.nbt[gem_type]> == defense:
+                    - else if <context.item.flag[gem_type]> == defense:
                         - define socket_new_line:<&9><context.item.display.strip_color>
-                    - else if <context.item.nbt[gem_type]> == utility:
+                    - else if <context.item.flag[gem_type]> == utility:
                         - define socket_new_line:<&a><context.item.display.strip_color>
-                    - adjust <[item]> lore:<[item].lore.set[<[socket_new_line]>].at[<[socket_target]>]> save:edited
-                    - define item:<entry[edited].result>
+                    - define item <[item].with[lore=<[item].lore.set[<[socket_new_line]>].at[<[socket_target]>]>]>
                     # Check whether any open sockets remain; if not, remove sockets_open
-                    - if <[item].nbt_keys.filter[matches[socket[0-9]+_empty]].alphanumeric.size> == 0:
-                        - define item <[item].with[remove_nbt=sockets_open]>
+                    - if <[item].list_flags.filter[matches[socket[0-9]+_empty]].alphanumeric.size> == 0:
+                        - define item <[item].with_flag[sockets_open:!]>
                     # Give the new item
                     - give <[item]>
                         #- narrate format:prismatic_seer_format "This is where I tell you that I added the gem to the socket!"

@@ -13,7 +13,7 @@ super_reset_on_equip:
     debug: false
     events:
         on player equips chestplate:
-        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
+        - if <context.new_item.flag[item_tier].if_null[null]> == legendary:
             - yaml id:super-counter set energy.<player.uuid>:0
             - yaml id:super-counter set super-ready.<player.uuid>:0
             - yaml id:super-counter set super-activated.<player.uuid>:0
@@ -26,7 +26,7 @@ Super_Enable_On_Login:
     events:
         on player joins:
         - wait 20t
-        - if <player.equipment_map.get[chestplate].nbt[item_tier].if_null[null]> == legendary:
+        - if <player.equipment_map.get[chestplate].flag[item_tier].if_null[null]> == legendary:
             - wait 100t
             - yaml id:super-counter set energy.<player.uuid>:0
             - bossbar create super-bar.<player.uuid> players:<player> "title:Super Energy" progress:0 color:BLUE style:SEGMENTED_10
@@ -35,7 +35,7 @@ Super_Enable_On_Login:
 #            - narrate "Super energy reset"
 #            - narrate "Super energy is <yaml[super-counter].read[energy.<player.uuid>]>"
         on player quits:
-        - if <player.equipment_map.get[chestplate].nbt[item_tier]> == legendary:
+        - if <player.equipment_map.get[chestplate].flag[item_tier]> == legendary:
             - bossbar remove super-bar.<player.uuid>
 
 Damage_Super_Charge:
@@ -43,7 +43,7 @@ Damage_Super_Charge:
     debug: false
     events:
         on player damages entity:
-        - if <context.damager.equipment_map.get[chestplate].nbt[item_tier].if_null[null]> == legendary:
+        - if <context.damager.equipment_map.get[chestplate].flag[item_tier].if_null[null]> == legendary:
             - if <yaml[super-counter].read[super-activated.<player.uuid>]> == 0:
                 - if <yaml[super-counter].read[energy.<player.uuid>]||0> < 300:
 #                    - narrate "Damage logged as <context.final_damage>"
@@ -71,61 +71,46 @@ super_bossbar:
     debug: false
     events:
         on player equips chestplate:
-        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
+        - if <context.new_item.flag[item_tier].if_null[null]> == legendary:
             - bossbar create super-bar.<player.uuid> players:<player> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
         on player unequips chestplate:
-        - if <context.new_item.nbt[item_tier].if_null[null]> == legendary:
+        - if <context.new_item.flag[item_tier].if_null[null]> == legendary:
             - bossbar remove super-bar.<player.uuid>
 
-super_conditions:
-    type: world
-    debug: false
-    events:
-        on mm denizen condition:
-            - if <context.condition> == super-charged:
-                - if <yaml[super-counter].read[super-ready.<context.entity.uuid>]||0> < 1:
-                    - determine false
-            - if <context.condition> == super-activated:
-                - if <yaml[super-counter].read[super-activated.<context.entity.uuid>]||0> == 0:
-                    - determine false
-            - if <context.condition> == super-energy-remaining:
-                - if <yaml[super-counter].read[energy.<context.entity.uuid>]||0> < 1:
-                    - determine false
-
-super_activtion_mechanic:
-    type: world
-    debug: false
-    events:
-        on mm denizen mechanic:
-            - if <context.skill> == super-activate:
-                - if <yaml[super-counter].read[super-activated.<context.caster.uuid>]> == 0:
-#                    - announce to_console "Super activation event running"
-                    - bossbar update super-bar.<context.caster.uuid> "title:<yellow>SUPER ACTIVE!"
-                    - title "title:<yellow>SUPER ACTIVATED!" fade_in:1s stay:2s fade_out:1s targets:<context.caster>
-                    - yaml id:super-counter set super-activated.<context.caster.uuid>:1
-                    - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
-#                        - announce to_console "Super energy less than one, resetting"
-                        - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
-                        - yaml id:super-counter set energy.<context.caster.uuid>:0
-                        - yaml id:super-counter set super-ready.<context.caster.uuid>:0
-                        - yaml id:super-counter set super-activated.<context.caster.uuid>:0
-                    - while <yaml[super-counter].read[energy.<context.caster.uuid>].is[more].than[0]>:
-#                        - announce to_console "While loop run"
-                        - playeffect <context.caster.location> effect:ENCHANTMENT_TABLE visibility:500 quantity:40 offset:1,1,1 data:5
-                        - bossbar update super-bar.<context.caster.uuid> "title:<yellow>SUPER ACTIVE!" progress:<yaml[super-counter].read[energy.<context.caster.uuid>].div[300.0]>
-                        - yaml id:super-counter set energy.<context.caster.uuid>:<yaml[super-counter].read[energy.<context.caster.uuid>].sub[1.0]>
-                        - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
-#                            - announce to_console "Super energy less than one in while loop, resetting"
-                            - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
-                            - yaml id:super-counter set energy.<context.caster.uuid>:0
-                            - yaml id:super-counter set super-ready.<context.caster.uuid>:0
-                            - yaml id:super-counter set super-activated.<context.caster.uuid>:0
-                        - wait 5t
-                - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
-#                    - announce to_console "Super energy less than one, resetting"
-                    - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
-                    - yaml id:super-counter set energy.<context.caster.uuid>:0
-                    - yaml id:super-counter set super-ready.<context.caster.uuid>:0
-                    - yaml id:super-counter set super-activated.<context.caster.uuid>:0
-            - if <context.skill> == super-swing:
-                - yaml id:super-counter set energy.<context.caster.uuid>:<yaml[super-counter].read[energy.<context.caster.uuid>].sub[<context.args>]>
+#super_activtion_mechanic:
+#    type: world
+#    debug: false
+#    events:
+#        on mm denizen mechanic:
+#            - if <context.skill> == super-activate:
+#                - if <yaml[super-counter].read[super-activated.<context.caster.uuid>]> == 0:
+##                    - announce to_console "Super activation event running"
+#                    - bossbar update super-bar.<context.caster.uuid> "title:<yellow>SUPER ACTIVE!"
+#                    - title "title:<yellow>SUPER ACTIVATED!" fade_in:1s stay:2s fade_out:1s targets:<context.caster>
+#                    - yaml id:super-counter set super-activated.<context.caster.uuid>:1
+#                    - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
+##                        - announce to_console "Super energy less than one, resetting"
+#                        - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
+#                        - yaml id:super-counter set energy.<context.caster.uuid>:0
+#                        - yaml id:super-counter set super-ready.<context.caster.uuid>:0
+#                        - yaml id:super-counter set super-activated.<context.caster.uuid>:0
+#                    - while <yaml[super-counter].read[energy.<context.caster.uuid>].is[more].than[0]>:
+##                        - announce to_console "While loop run"
+#                        - playeffect <context.caster.location> effect:ENCHANTMENT_TABLE visibility:500 quantity:40 offset:1,1,1 data:5
+#                        - bossbar update super-bar.<context.caster.uuid> "title:<yellow>SUPER ACTIVE!" progress:<yaml[super-counter].read[energy.<context.caster.uuid>].div[300.0]>
+#                        - yaml id:super-counter set energy.<context.caster.uuid>:<yaml[super-counter].read[energy.<context.caster.uuid>].sub[1.0]>
+#                        - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
+##                            - announce to_console "Super energy less than one in while loop, resetting"
+#                            - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
+#                            - yaml id:super-counter set energy.<context.caster.uuid>:0
+#                            - yaml id:super-counter set super-ready.<context.caster.uuid>:0
+#                            - yaml id:super-counter set super-activated.<context.caster.uuid>:0
+#                        - wait 5t
+#                - if <yaml[super-counter].read[energy.<context.caster.uuid>]> < 1:
+##                    - announce to_console "Super energy less than one, resetting"
+#                    - bossbar update super-bar.<context.caster.uuid> "title:Super Energy" progress:0.0 color:BLUE style:SEGMENTED_10
+#                    - yaml id:super-counter set energy.<context.caster.uuid>:0
+#                    - yaml id:super-counter set super-ready.<context.caster.uuid>:0
+#                    - yaml id:super-counter set super-activated.<context.caster.uuid>:0
+#            - if <context.skill> == super-swing:
+#                - yaml id:super-counter set energy.<context.caster.uuid>:<yaml[super-counter].read[energy.<context.caster.uuid>].sub[<context.args>]>

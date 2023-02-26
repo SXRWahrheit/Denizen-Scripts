@@ -4,7 +4,7 @@
 # @version 1.0
 # @last-updated Feb 17 2013
 
-"Arena Master":
+Arena_master:
     type: assignment
     interact scripts:
     - Round 1
@@ -19,10 +19,10 @@ SummonPlayersArena:
     - trigger name:proximity toggle:true cooldown:0.1s radius:3
     - trigger name:chat toggle:true cooldown:0.1s radius:3
 
-"Round 1":
+Round_1:
     type: interact
     steps:
-        'Player Seen*':
+        'Player_Seen*':
             proximity trigger:
                 entry:
                     radius: 3
@@ -47,4 +47,4 @@ SummonPlayersArena:
                 script:
                 - narrate "<gray>Arena Master<&co> <white>Alright, here you go. Right click a sign and then punch the iron block."
                 - execute as_player "ma join Underdome"
-                - zap 'step:Player Seen'
+                - zap step:Player_Seen

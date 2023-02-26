@@ -2,7 +2,7 @@ boatlauncher:
     type: world
     debug: false
     events:
-        on player enters notable cuboid:
+        on player enters boatlauncher2:
         - if <context.cuboids.contains_text[boatlauncher2]>:
             - wait 5t
             - define vehicle <player.vehicle>

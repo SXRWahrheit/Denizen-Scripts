@@ -11,13 +11,13 @@ ArcaneForgerAssignment:
 ArcaneForgerFormat:
     type: format
     debug: false
-    format: "<dark_green>Arcane Forger<white><&co> <[text]>"
+    format: <dark_green>Arcane Forger<white><&co> <[text]>
 
 ArcaneForgerInteract:
     type: interact
     debug: false
     steps:
-        "Player Seen*":
+        "Player_Seen*":
             proximity trigger:
                 entry:
                     script:

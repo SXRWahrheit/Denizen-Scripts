@@ -12,7 +12,7 @@ SageOfWaterAssignment:
 SageOfWaterFormat:
     type: format
     debug: false
-    format: "<dark_green>Sage of Water<white><&co> <[text]>"
+    format: <dark_green>Sage of Water<white><&co> <[text]>
 
 SageOfWaterInteract:
     type: interact

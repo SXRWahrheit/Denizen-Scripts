@@ -7,7 +7,7 @@ Impact_Cast:
         - if <context.skill> == impact-cast:
             - define caster <context.caster>
 #            - narrate "Impact cast" targets:<[caster]>
-            - if <[caster].as_player.has_flag[impact-activated]>:
+            - if <[caster].has_flag[impact-activated]>:
 #                - narrate "Caster already had the flag" targets:<[caster]>
                 - stop
 #            - define cost 125
@@ -19,7 +19,7 @@ Impact_Cast:
 #            - narrate "Wait finished" targets:<[caster]>
 #            - narrate "<[caster].as_player.has_flag[impact-activated]>" targets:<[caster]>
 #            - narrate "<[caster]>" targets:<[caster]>
-            - if <[caster].as_player.has_flag[impact-activated]>:
+            - if <[caster].has_flag[impact-activated]>:
 #                - narrate "Caster has flag, adjusting values" targets:<[caster]>
                 - flag <[caster]> impact-activated:!
                 - adjust <[caster]> gravity:true
@@ -31,7 +31,7 @@ Impact_Swing:
         - if <context.skill> == impact-swing:
             - define caster <context.caster>
 #            - define cost 200
-            - if <[caster].as_player.has_flag[impact-activated]>:
+            - if <[caster].has_flag[impact-activated]>:
 #                - yaml id:super-counter set energy.<context.caster.uuid>:<yaml[super-counter].read[energy.<context.caster.uuid>].sub[<[cost]>]>
                 - adjust <[caster]> gravity:true
                 - adjust <[caster]> velocity:<[caster].location.with_pose[<[caster].location.pitch.abs>,<[caster].location.yaw>].direction.vector.mul[5]>

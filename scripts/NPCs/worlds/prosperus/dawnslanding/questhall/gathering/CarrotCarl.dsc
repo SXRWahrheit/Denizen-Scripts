@@ -10,7 +10,7 @@ CarrotCarlAssignment:
 
 CarrotCarlFormat:
     type: format
-    format: "<gray>Carrot Carl<white><&co> <[text]>"
+    format: <gray>Carrot Carl<white><&co> <[text]>
 
 CarrotCarlInteract:
     type: interact

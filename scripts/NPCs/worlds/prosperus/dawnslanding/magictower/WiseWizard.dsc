@@ -13,7 +13,7 @@ WiseWizardAssignment:
 WiseWizardFormat:
     type: format
     debug: false
-    format: "<dark_green>Wise Wizard<white><&co> <[text]>"
+    format: <dark_green>Wise Wizard<white><&co> <[text]>
 
 WiseWizardInteract:
     type: interact

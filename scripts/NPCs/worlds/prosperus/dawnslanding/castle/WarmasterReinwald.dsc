@@ -13,7 +13,7 @@ WarmasterReinwaldAssignment:
 WarmasterReinwaldFormat:
     type: format
     debug: false
-    format: "<dark_green>Warmaster Reinwald<white><&co> <[text]>"
+    format: <dark_green>Warmaster Reinwald<white><&co> <[text]>
 
 WarmasterReinwaldInteract:
     type: interact

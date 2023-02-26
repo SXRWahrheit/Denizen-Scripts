@@ -27,12 +27,12 @@ UnlockFarmQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockFarm
-    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencechunk:
+    - if <player.item_in_hand.script.name.if_null[null]> == crystallizedexperiencechunk:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:
         - narrate format:StoicSageFormat "You can get a Chunk of Crystallized Experience from the Arch Artificer. When you've got one, bring it over."
-        
+
 UnlockFarmCompletion:
     type: task
     debug: false

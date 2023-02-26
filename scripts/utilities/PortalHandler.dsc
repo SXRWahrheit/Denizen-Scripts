@@ -1,24 +1,24 @@
-"Heavens Portal Creation":
+Heavens_Portal_creation:
     type: world
     debug: false
     events:
-        on player right clicks quartz_block with flint_and_steel in prosperus:
+        on player right clicks quartz_block with:flint_and_steel in:prosperus:
         - if <context.location.add[0,1,0].material.name> != air:
             - stop
         - if <context.location.add[1,0,0].material.name> == quartz_block && <context.location.add[-1,0,0].material.name> == quartz_block:
-            - define axis-pos l@1,0,0
-            - define axis-neg l@-1,0,0
+            - define axis-pos <location[1,0,0]>
+            - define axis-neg <location[-1,0,0]>
             - define axis-data 1
         - else if <context.location.add[0,0,1].material.name> == quartz_block && <context.location.add[0,0,-1].material.name> == quartz_block:
-            - define axis-pos l@0,0,1
-            - define axis-neg l@0,0,-1
+            - define axis-pos <location[0,0,1]>
+            - define axis-neg <location[0,0,-1]>
             - define axis-data 2
-        - else
+        - else:
             - stop
         - define origin <context.location.add[0,1,0]>
         - define node <[origin]>
-        - define air-list li@
-        - define y-list li@
+        - define air-list <list>
+        - define y-list <list>
         - define y-max <[origin].y>
         - define y-min <[origin].y>
         - define x-max <[origin].x>
@@ -59,37 +59,37 @@
                     - define node <[node].add[<[axis-neg]>]>
                 - if <[node].material.name> != quartz_block:
                     - stop
-        - modifyblock <[air-list]> m@end_gateway,<[axis-data]> no_physics
+        - modifyblock <[air-list]> end_gateway,<[axis-data]> no_physics
 #        - announce to_console "cu@<[x-min].add[<[axis-neg].x>]>,<[y-min].add[-1]>,<[z-min].add[<[axis-neg].z>]>,prosperus|<[x-max].add[<[axis-pos].x>]>,<[y-max].add[1]>,<[z-max].add[<[axis-pos].z>]>,prosperus as:heavens-portal-<util.random.duuid>"
-        - note cu@<[x-min].add[<[axis-neg].x>]>,<[y-min].add[-1]>,<[z-min].add[<[axis-neg].z>]>,prosperus|<[x-max].add[<[axis-pos].x>]>,<[y-max].add[1]>,<[z-max].add[<[axis-pos].z>]>,prosperus as:heavens-portal-<util.random.duuid>
-"Heavens Portal Removal":
+        - note <cuboid[<[x-min].add[<[axis-neg].x>]>,<[y-min].add[-1]>,<[z-min].add[<[axis-neg].z>]>,prosperus|<[x-max].add[<[axis-pos].x>]>,<[y-max].add[1]>,<[z-max].add[<[axis-pos].z>]>,prosperus]> as:heavens-portal-<util.random.duuid>
+Heavens_Portal_Removal:
     type: world
     debug: false
     events:
         on player breaks end_gateway:
         - if <context.location.cuboids.contains_text[heavens-portal]>:
             - define notable <context.location.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1]>
-            - modifyblock <[notable].blocks[end_gateway]> m@air
-            - note remove as:<[notable].notable_name>
+            - modifyblock <[notable].blocks[end_gateway]> air
+            - note remove as:<[notable].note_name>
         on player breaks quartz_block:
         - if <context.location.cuboids.contains_text[heavens-portal]>:
             - define notable <context.location.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1]>
-            - modifyblock <[notable].blocks[end_gateway]> m@air
-            - flag server <context.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1].notable_name>:!
-            - note remove as:<[notable].notable_name>
-"Heavens Portal Entry":
+            - modifyblock <[notable].blocks[end_gateway]> air
+            - flag server <context.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1].note_name>:!
+            - note remove as:<[notable].note_name>
+Heavens_Portal_Entry:
     type: world
     debug: false
     events:
-        on player enters notable cuboid:
+        on player enters heavens-portal*:
         - if <context.cuboids.contains_text[heavens-portal]>:
-            - define target-location l@<context.from.x.div[2].as_int>,<context.from.y.as_int>,<context.from.z.div[2].as_int>,heavens
+            - define target-location <location[<context.from.x.div[2]>,<context.from.y>,<context.from.z.div[2]>,heavens]>
 #            - announce to_console "def target-location: <[target-location]>"
             - define target-material <[target-location].material.name>
 #            - announce to_console "def target-material: <[target-material]>"
-            - define portal <context.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1]>
+            - define portal <context.cuboids.filter[note_name.starts_with[heavens-portal]].get[1]>
 #            - announce to_console "def portal: <[portal]>"
-            - define portal-exit <context.cuboids.filter[notable_name.starts_with[heavens-portal]].get[1].notable_name>
+            - define portal-exit <context.cuboids.filter[note_name.starts_with[heavens-portal]].get[1].note_name>
 #            - announce to_console "def portal-exit: <[portal-exit]>"
             - define portal-unsafe-exit <[portal-exit]>-unsafe
 #            - announce to_console "def portal-unsafe-exit: <[portal-unsafe-exit]>"
@@ -106,7 +106,7 @@
                 - stop
             - if <[target-material]> == air && <[target-location].add[0,-1,0].material.name> != air && <[target-location].add[0,1,0].material.name> == air:
                 - announce to_console "Initial block is safe"
-                - define teleport-location l@<context.from.x.div[2]>,<context.from.y>,<context.from.z.div[2]>,heavens
+                - define teleport-location <location[<context.from.x.div[2]>,<context.from.y>,<context.from.z.div[2]>,heavens]>
                 - wait 1t
                 - teleport <[teleport-location]>
  #               - announce to_console "teleport <[teleport-location]>"
@@ -124,15 +124,15 @@
                 - stop
             - else:
                 - announce to_console "No safe spot, let's glide!"
-                - flag server <[portal-unsafe-exit]>:l@<context.from.x.div[2]>,256,<context.from.z.div[2]>,heavens
-                - define teleport-location l@<context.from.x.div[2]>,256,<context.from.z.div[2]>,heavens
+                - flag server <[portal-unsafe-exit]>:<location[<context.from.x.div[2]>,256,<context.from.z.div[2]>,heavens]>
+                - define teleport-location <location[<context.from.x.div[2]>,256,<context.from.z.div[2]>,heavens]>
                 - wait 1t
                 - teleport <[teleport-location]>
 #                - announce to_console "teleport <[teleport-location]>"
                 - adjust <player> gliding:true
                 - stop
 #            - determine cancelled
-        on player stops gliding in heavens:
+        on player stops gliding in:heavens:
         - if <player.has_flag[player-gliding-chestplate]>:
             - equip <player> chest:<player.flag[player-gliding-chestplate]>
             - flag <player> player-gliding-chestplate:!

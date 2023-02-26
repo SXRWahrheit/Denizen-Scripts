@@ -10,7 +10,7 @@ PumpkinPaulAssignment:
 
 PumpkinPaulFormat:
     type: format
-    format: "<gray>Pumpkin Paul<white><&co> <[text]>"
+    format: <gray>Pumpkin Paul<white><&co> <[text]>
 
 PumpkinPaulInteract:
     type: interact

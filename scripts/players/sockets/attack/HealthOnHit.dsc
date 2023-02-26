@@ -7,7 +7,7 @@ socket_gem_attack_health_on_hit_handler:
         - if <context.damager.equipment.include[<context.damager.item_in_hand>].size> == 0:
             - stop
         - foreach <context.damager.equipment.include[<context.damager.item_in_hand>]>:
-            - define gem_count <[gem_count].add[<[value].nbt.filter[regex_matches[socket[0-9]+_gem/socket_gem_attack_health_on_hit]].size||0>]>
+            - define gem_count <[gem_count].add[<[value].list_flags.filter[regex_matches[socket[0-9]+_gem/socket_gem_attack_health_on_hit]].size||0>]>
         - repeat <[gem_count]>:
             - heal <context.final_damage.div[16]> <context.damager>
 
@@ -22,11 +22,11 @@ socket_gem_attack_health_on_hit:
     - <&f>+1/8 damage dealt healed on hit
     enchantments:
     - MENDING:1
+    flags:
+        uncraftable: true
+        gem_type: attack
+        gem_specific: socket_gem_attack_health_on_hit
     mechanisms:
         hides:
         - attributes
         - enchants
-        nbt:
-        - uncraftable/true
-        - gem_type/attack
-        - gem_specific/socket_gem_attack_health_on_hit

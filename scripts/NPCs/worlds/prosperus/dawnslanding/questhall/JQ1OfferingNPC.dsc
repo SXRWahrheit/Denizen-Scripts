@@ -10,7 +10,7 @@ JQ1OfferingNPCAssignment:
 
 JQ1OfferingNPCFormat:
     type: format
-    format: "<gray>He Jumps Once<white><&co> <[text]>"
+    format: <gray>He Jumps Once<white><&co> <[text]>
 
 JQ1OfferingNPCInteract:
     type: interact

@@ -1,4 +1,4 @@
-"Mining Master":
+Mining_Master:
     type: assignment
     interact scripts:
     - Mining
@@ -7,15 +7,15 @@
         - teleport npc <npc.anchor[miningmaster]>
         - trigger name:proximity state:true
         - trigger name:chat state:true
-    
+
 MiningMasterFormat:
     type: format
-    format: "<gray>Head Miner<white><&co> <[text]>"
+    format: <gray>Head Miner<white><&co> <[text]>
 
-"Mining":
+Mining:
     type: interact
     steps:
-        'Player Seen*':
+        'Player_Seen*':
             proximity trigger:
                 entry:
                     script:
@@ -35,8 +35,8 @@ MiningMasterFormat:
             click trigger:
                 script:
                 - narrate format:MiningMasterFormat "Alright, let's get you some training. I'll give you 100 Mining XP for 1 gold. Say how much gold you want to spend, or anything else to cancel."
-                - zap 'step:Payment'
-        'Payment':
+                - zap step:Payment
+        Payment:
             chat trigger:
                 'Confirm':
                     trigger: I'd like to pay /REGEX:\d+/ gold.
@@ -53,12 +53,12 @@ MiningMasterFormat:
                         - narrate format:MiningMasterFormat "All done. Enjoy."
                     - else:
                         - narrate format:MiningMasterFormat "You don't have that much gold."
-                    - zap 'step:Player Seen'
+                    - zap step:Player_Seen
                 'Fail':
-                    trigger: "/REGEX:.+/"
+                    trigger: /REGEX:.+/
                     script:
                     - narrate format:MiningMasterFormat "I don't think that's a number. Sorry, I can't work with that."
-                    - zap 'step:Player Seen'
+                    - zap step:Player_Seen
             click trigger:
                 script:
                 - narrate format:MiningMasterFormat "Just say how much gold you want to pay for XP, or anything else to cancel."

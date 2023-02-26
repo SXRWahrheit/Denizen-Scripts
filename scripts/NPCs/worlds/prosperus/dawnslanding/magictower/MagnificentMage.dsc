@@ -14,7 +14,7 @@ MagnificentMageAssignment:
 MagnificentMageFormat:
     type: format
     debug: false
-    format: "<dark_green>Magnificent Mage<white><&co> <[text]>"
+    format: <dark_green>Magnificent Mage<white><&co> <[text]>
 
 MagnificentMageInteract:
     type: interact

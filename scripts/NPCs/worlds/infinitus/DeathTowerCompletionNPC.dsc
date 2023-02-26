@@ -10,7 +10,7 @@ DeathTowerFinishingNPCAssignment:
 
 DeathTowerFinishingNPCFormat:
     type: format
-    format: "<gray>He Jumped Death<white><&co> <[text]>"
+    format: <gray>He Jumped Death<white><&co> <[text]>
 
 DeathTowerFinishingNPCInteract:
     type: interact

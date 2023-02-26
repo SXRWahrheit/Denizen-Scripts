@@ -45,7 +45,7 @@ Roll_Carts:
         - flag server range-winnings:<server.flag[minecarts-hit].mul[3]>
         - narrate "format:Range Master Format" "Time's up! You won <server.flag[range-winnings]> gold!"
         - give money quantity:<server.flag[range-winnings]>
-        - execute as_server "warp <player.name> shootingrange"
+        - teleport <player> dawnslanding_shooting_range_finished
         - zap "script:Target Practice" "step:In Range"
 
 Target_Practice:
@@ -77,7 +77,7 @@ Target_Practice:
                 script:
                 - take money quantity:10
                 - narrate "format:Range Master Format" "Okay, you've got 1 minute! Good luck!"
-                - execute as_server "warp <player.name> shootingrange-1"
+                - teleport <player> dawnslanding_shooting_range_start
                 - flag server active-player:<player.name>
                 - flag server minecarts-hit:0
                 - run Roll_Carts

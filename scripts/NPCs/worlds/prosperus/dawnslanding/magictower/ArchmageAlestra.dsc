@@ -14,7 +14,7 @@ ArchmageAlestraAssignment:
 ArchmageAlestraFormat:
     type: format
     debug: false
-    format: "<dark_green>Archmage Alestra<white><&co> <[text]>"
+    format: <dark_green>Archmage Alestra<white><&co> <[text]>
 
 ArchmageAlestraInteract:
     type: interact

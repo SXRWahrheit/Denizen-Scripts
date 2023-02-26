@@ -12,7 +12,7 @@ SageOfFireAssignment:
 SageOfFireFormat:
     type: format
     debug: false
-    format: "<dark_green>Sage of Fire<white><&co> <[text]>"
+    format: <dark_green>Sage of Fire<white><&co> <[text]>
 
 SageOfFireInteract:
     type: interact

@@ -10,7 +10,7 @@ CocoaCalvinAssignment:
 
 CocoaCalvinFormat:
     type: format
-    format: "<gray>Cocoa Calvin<white><&co> <[text]>"
+    format: <gray>Cocoa Calvin<white><&co> <[text]>
 
 CocoaCalvinInteract:
     type: interact

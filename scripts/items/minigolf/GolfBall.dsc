@@ -21,7 +21,7 @@ GolfBall_Toss_Only:
         - determine cancelled
         on player places player_head:
         - if <context.item_in_hand.has_flag[unplaceable]> && <context.item_in_hand.script.name.contains_any_text[golfball].if_null[null]>:
-            - if <context.item_in_hand.flag[expiration].is_before[<util.time_now>]||false>:
+            - if <context.item_in_hand.flag[expiration].is_before[<util.time_now>].if_null[false]>:
                 - take scriptname:<context.item_in_hand.script.name>
                 - narrate "<gray>Your mini-golf ball flies off into the distance..."
             - determine cancelled
@@ -31,7 +31,7 @@ GolfBall_Go_Poof:
     debug: false
     events:
         on player opens inventory:
-        - if !<player.inventory.contains.flagged[expiration]>:
+        - if !<player.inventory.contains_item[item_flagged:expiration]>:
             - stop
         - foreach <player.inventory.list_contents.filter[has_flag[expiration]].filter_tag[<[filter_value].flag[expiration].is_before[<util.time_now>]>]>:
             - take slot:<player.inventory.list_contents.find[<[value]>]> quantity:<[value].quantity>

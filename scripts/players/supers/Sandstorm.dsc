@@ -11,7 +11,7 @@ Sandstorm_Cast:
             - define super-max-energy 300
             - define wait 1
             - define duration-calculated <[super-max-energy].div[<[duration]>].sub[<[super-passive-spending]>].div[20].mul[<[wait]>]>
-            - if <[caster].as_player.has_flag[sandstorm-activated]>:
+            - if <[caster].has_flag[sandstorm-activated]>:
 #               - narrate "Caster already had the flag" targets:<[caster]>
                 - stop
             - flag <[caster]> sandstorm-activated:1

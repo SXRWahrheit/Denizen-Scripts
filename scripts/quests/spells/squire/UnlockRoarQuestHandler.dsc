@@ -11,7 +11,7 @@ UnlockRoarQuestDeliveryHandler:
             - define objective:2
         - case sulphur:
             - define objective:3
-        - case gold_ingot
+        - case gold_ingot:
             - define objective:4
         - default:
             - narrate format:SkilledSorcererFormat "Whenever you've got the items I'm looking for, just hand them over."
@@ -27,12 +27,12 @@ UnlockRoarQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockRoar
-    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencebillet:
+    - if <player.item_in_hand.script.name.if_null[null]> == crystallizedexperiencebillet:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:
         - narrate format:SkilledSorcererFormat "You can get a Billet of Crystallized Experience from the Arch Artificer. When you've got one, bring it over."
-        
+
 UnlockRoarCompletion:
     type: task
     debug: false

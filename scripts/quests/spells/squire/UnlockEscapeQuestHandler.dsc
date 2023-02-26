@@ -27,12 +27,12 @@ UnlockEscapeQuestExperienceDeliveryHandler:
     script:
     - define stage:2
     - define quest_internalname:UnlockEscape
-    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencebillet:
+    - if <player.item_in_hand.script.name.if_null[null]> == crystallizedexperiencebillet:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:
         - narrate format:SkilledSorcererFormat "You can get a Billet of Crystallized Experience from the Arch Artificer. When you've got one, bring it over."
-        
+
 UnlockEscapeCompletion:
     type: task
     debug: false

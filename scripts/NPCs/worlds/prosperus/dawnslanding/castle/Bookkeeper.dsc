@@ -10,7 +10,7 @@ BookkeeperAssignment:
 
 BookkeeperFormat:
     type: format
-    format: "<gray>Bookkeeper<white><&co> <[text]>"
+    format: <gray>Bookkeeper<white><&co> <[text]>
 
 BookkeeperInteract:
     type: interact

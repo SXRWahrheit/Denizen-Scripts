@@ -11,7 +11,7 @@ GolfProAssignment:
 GolfProFormat:
     type: format
     debug: false
-    format: "<dark_green>Golf Pro Gary<white><&co> <[text]>"
+    format: <dark_green>Golf Pro Gary<white><&co> <[text]>
 
 GolfProInteract:
     type: interact

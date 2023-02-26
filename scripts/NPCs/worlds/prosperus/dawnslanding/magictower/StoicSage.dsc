@@ -14,7 +14,7 @@ StoicSageAssignment:
 StoicSageFormat:
     type: format
     debug: false
-    format: "<dark_green>Stoic Sage<white><&co> <[text]>"
+    format: <dark_green>Stoic Sage<white><&co> <[text]>
 
 StoicSageInteract:
     type: interact

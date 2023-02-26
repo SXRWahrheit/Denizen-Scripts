@@ -11,7 +11,7 @@ SwabbyAssignment:
 
 SwabbyFormat:
     type: format
-    format: "<dark_green>Swabby<white><&co> <[text]>"
+    format: <dark_green>Swabby<white><&co> <[text]>
 
 SwabbyInteract:
     type: interact

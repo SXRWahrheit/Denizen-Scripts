@@ -10,7 +10,7 @@ FishingNewbieAssignment:
 
 FishingNewbieFormat:
     type: format
-    format: "<gray>Fishing Newbie<white><&co> <[text]>"
+    format: <gray>Fishing Newbie<white><&co> <[text]>
 
 FishingNewbieInteract:
     type: interact

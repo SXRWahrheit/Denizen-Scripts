@@ -10,7 +10,7 @@ WilWheatonAssignment:
 
 WilWheatonFormat:
     type: format
-    format: "<gray>Wil Wheaton<white><&co> <[text]>"
+    format: <gray>Wil Wheaton<white><&co> <[text]>
 
 WilWheatonInteract:
     type: interact

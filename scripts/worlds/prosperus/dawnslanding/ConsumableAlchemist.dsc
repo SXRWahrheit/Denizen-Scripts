@@ -10,12 +10,12 @@ alchemist_arcaena:
 
 alchemist_arcaena_format:
     type: format
-    format: "<dark_green>Alchemist Arcaena<white><&co> <[text]>"
+    format: <dark_green>Alchemist Arcaena<white><&co> <[text]>
 
 alchemist_arcaena_interact:
     type: interact
     steps:
-        "Player Seen*":
+        "Player_Seen*":
             proximity trigger:
                 entry:
                     script:
@@ -36,11 +36,11 @@ alchemist_arcaena_inventory_menu:
     title: Enchanted Cocktails
     size: 45
     slots:
-    - "[DropRateBooster2xMenu] [] [GoldBooster2xMenu] [] [] [] [] [] []"
-    - "[DropRateBooster4xMenu] [] [GoldBooster4xMenu] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
+    - [DropRateBooster2xMenu] [] [GoldBooster2xMenu] [] [] [] [] [] []
+    - [DropRateBooster4xMenu] [] [GoldBooster4xMenu] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
 
 
 DropRateBooster2xMenu:

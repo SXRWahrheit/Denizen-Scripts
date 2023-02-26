@@ -10,7 +10,7 @@ JQ1CompletionNPCAssignment:
 
 JQ1CompletionNPCFormat:
     type: format
-    format: "<gray>He Jumped Once<white><&co> <[text]>"
+    format: <gray>He Jumped Once<white><&co> <[text]>
 
 JQ1CompletionNPCInteract:
     type: interact

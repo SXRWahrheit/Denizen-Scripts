@@ -12,7 +12,7 @@ SirFirestrideAssignment:
 SirFirestrideFormat:
     type: format
     debug: false
-    format: "<dark_green>Sir Firestride<white><&co> <[text]>"
+    format: <dark_green>Sir Firestride<white><&co> <[text]>
 
 SirFirestrideInteract:
     type: interact

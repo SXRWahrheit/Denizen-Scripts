@@ -11,7 +11,7 @@ ArchArtificerAssignment:
 ArchArtificerFormat:
     type: format
     debug: false
-    format: "<dark_green>Arch Artificer<white><&co> <[text]>"
+    format: <dark_green>Arch Artificer<white><&co> <[text]>
 
 CrystallizedExperienceSliver:
     type: item
@@ -291,7 +291,7 @@ Artificing:
     type: interact
     debug: false
     steps:
-        "Player Seen*":
+        "Player_Seen*":
             proximity trigger:
                 entry:
                     script:

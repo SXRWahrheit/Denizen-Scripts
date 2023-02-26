@@ -10,7 +10,7 @@ PotatoPatrickAssignment:
 
 PotatoPatrickFormat:
     type: format
-    format: "<gray>Potato Patrick<white><&co> <[text]>"
+    format: <gray>Potato Patrick<white><&co> <[text]>
 
 PotatoPatrickInteract:
     type: interact

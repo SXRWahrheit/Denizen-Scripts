@@ -4,7 +4,7 @@ Nature_Grapple_Command:
     description: Uses nature magic to grapple leaves
     usage: /naturegrapple
     permission: naturemagic.naturegrapple
-    permission message: "You haven't learned how to grapple leaves yet!"
+    permission message: You haven't learned how to grapple leaves yet!
     script:
     - if <player.has_flag[naturegrapple_cooldown]>:
         - narrate "<red>You're still channeling your nature magic from the last time you grappled."

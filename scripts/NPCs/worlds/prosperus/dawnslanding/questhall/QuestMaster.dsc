@@ -17,7 +17,7 @@ QuestMasterAssignment:
 QuestMasterFormat:
     type: format
     debug: false
-    format: "<dark_green>Quest Master<white><&co> <[text]>"
+    format: <dark_green>Quest Master<white><&co> <[text]>
 
 FoundSomeDiamonds:
     type: task

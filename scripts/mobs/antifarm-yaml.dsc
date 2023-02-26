@@ -4,7 +4,7 @@ AntiFarm_Proc:
     debug: false
     # usage: <proc[AntiFarm_Proc].context[<EntityTag>]>
     script:
-    - if <yaml[antifarm-flags].read[expirations.<[entity].location.simple>].as_list.size||0> >= 2:
+    - if <yaml[antifarm-flags].read[expirations.<[entity].location.simple>].as[list].size||0> >= 2:
         - determine true
     - else:
         - determine false
@@ -29,13 +29,13 @@ YAML_AntiFarm:
         # Check to see if any timers exist on this block
         - if <yaml[antifarm-flags].contains[expirations.<context.entity.location.simple>]>:
         # If yes, clear any old timers
-            - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.filter[is_before[<util.time_now>]]>
+            - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as[list].filter[is_before[<util.time_now>]]>
 
         # Add a timer for this mob's death
         - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<list[<util.time_now.add[30m]>].include[<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>]||<list[]>>]>
 
         # Check to see whether there are too many timers on this block
-        - if <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.size||0> >= 2:
+        - if <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as[list].size||0> >= 2:
             # Debug messages
 #            - announce to_console "[DEBUG] Normal mobs YAML same location: <context.entity.location.simple>"
 #            - announce to_console "[DEBUG] Normal mobs YAML same location size: <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.size>"
@@ -50,13 +50,13 @@ YAML_AntiFarm:
         # Check to see if any timers exist on this block
         - if <yaml[antifarm-flags].contains[expirations.<context.entity.location.simple>]>:
         # If yes, clear any old timers
-            - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.filter[is_before[<util.time_now>]]>
+            - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as[list].filter[is_before[<util.time_now>]]>
 
         # Add a timer for this mob's death
         - yaml id:antifarm-flags set expirations.<context.entity.location.simple>:<list[<util.time_now.add[30m]>].include[<yaml[antifarm-flags].read[expirations.<context.entity.location.simple>]||<list[]>>]>
 
         # Check to see whether there are too many timers on this block
-        - if <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.size||0> >= 2:
+        - if <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as[list].size||0> >= 2:
             # Debug messages
 #            - announce to_console "[DEBUG] Normal mobs YAML same location: <context.entity.location.simple>"
 #            - announce to_console "[DEBUG] Normal mobs YAML same location size: <yaml[antifarm-flags].read[expirations.<context.entity.location.simple>].as_list.size>"

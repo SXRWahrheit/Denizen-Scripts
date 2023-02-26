@@ -12,7 +12,7 @@ LadyBrightswordAssignment:
 LadyBrightswordFormat:
     type: format
     debug: false
-    format: "<dark_green>Lady Brightsword<white><&co> <[text]>"
+    format: <dark_green>Lady Brightsword<white><&co> <[text]>
 
 LadyBrightswordInteract:
     type: interact

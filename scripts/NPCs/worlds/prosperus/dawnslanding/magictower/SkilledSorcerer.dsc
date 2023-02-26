@@ -14,7 +14,7 @@ SkilledSorcererAssignment:
 SkilledSorcererFormat:
     type: format
     debug: false
-    format: "<dark_green>Skilled Sorcerer<white><&co> <[text]>"
+    format: <dark_green>Skilled Sorcerer<white><&co> <[text]>
 
 SkilledSorcererInteract:
     type: interact

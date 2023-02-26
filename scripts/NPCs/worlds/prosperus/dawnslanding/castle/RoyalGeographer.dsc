@@ -161,6 +161,7 @@ RoyalGeographerWeeklyQuestsCheck:
     type: task
     debug: false
     script:
+    - define data <player.uuid>_quest_data
     - if <yaml[<[data]>].contains[quests.active.EliteHunt]>:
         - if <proc[QuestsAvailableHandler].context[RoyalGeographer]>:
             - narrate format:RoyalGeographerFormat "You're doing a good job hunting those Elites, but I've got more for you, too."

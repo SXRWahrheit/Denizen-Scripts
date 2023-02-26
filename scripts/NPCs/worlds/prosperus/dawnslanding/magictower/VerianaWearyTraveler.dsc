@@ -14,7 +14,7 @@ VerianaAssignment:
 VerianaFormat:
     type: format
     debug: false
-    format: "<dark_green>Veriana<white><&co> <[text]>"
+    format: <dark_green>Veriana<white><&co> <[text]>
 
 VerianaInteract:
     type: interact

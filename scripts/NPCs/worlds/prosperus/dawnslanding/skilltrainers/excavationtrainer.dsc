@@ -15,7 +15,7 @@ ExcavationMasterFormat:
 Excavation:
     type: interact
     steps:
-        'Player Seen*':
+        'Player_Seen*':
             proximity trigger:
                 entry:
                     script:
@@ -53,12 +53,12 @@ Excavation:
                         - narrate format:ExcavationMasterFormat "All done. Enjoy."
                     - else:
                         - narrate format:ExcavationMasterFormat "You don't have that much gold."
-                    - zap 'step:Player Seen'
+                    - zap step:Player_Seen
                 'Fail':
                     trigger: /REGEX:.+/
                     script:
                     - narrate format:ExcavationMasterFormat "I don't think that's a number. Sorry, I can't work with that."
-                    - zap 'step:Player Seen'
+                    - zap step:Player_Seen
             click trigger:
                 script:
                 - narrate format:ExcavationMasterFormat "Just say how much gold you want to pay for XP, or anything else to cancel."

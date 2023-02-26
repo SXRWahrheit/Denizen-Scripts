@@ -82,7 +82,7 @@ Player_Reset:
 #    - wait 1
 #    - execute as_op "/schem load library-blank"
 #    - execute as_op "/paste"
-    - execute as_npc "warp <player.name> library-maze"
+    - teleport <player> library-maze
 #    - execute as_op "cs maze bookshelf 25 25 4"
 #    - execute as_op "region sel library-maze"
 #    - execute as_op "/replace glass air"
@@ -127,7 +127,7 @@ Librarian:
                     - teleport <npc[94]> location:<npc.anchor[maze-gen]>
                     - execute as_npc "cs maze bookshelf 25 25 4 e"
                     - wait 1
-                    - execute as_npc "warp <player.name> library-maze"
+                    - teleport <player> library-maze
                     - teleport <npc[94]> location:<npc.anchor[mazemaster]>
 
                 - else:

@@ -10,7 +10,7 @@ MelonMattAssignment:
 
 MelonMattFormat:
     type: format
-    format: "<gray>Melon Matt<white><&co> <[text]>"
+    format: <gray>Melon Matt<white><&co> <[text]>
 
 MelonMattInteract:
     type: interact

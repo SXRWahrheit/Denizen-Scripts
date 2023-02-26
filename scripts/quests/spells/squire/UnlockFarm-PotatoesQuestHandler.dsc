@@ -1,9 +1,9 @@
-UnlockFarm-PotatoesQuestDeliveryHandler:
+UnlockFarm_PotatoesQuestDeliveryHandler:
     type: task
     debug: false
     script:
     - define stage:1
-    - define quest_internalname:UnlockFarm-Potatoes
+    - define quest_internalname:UnlockFarm_Potatoes
     - choose <player.item_in_hand.material.name>:
         - case redstone:
             - define objective:1
@@ -15,25 +15,25 @@ UnlockFarm-PotatoesQuestDeliveryHandler:
             - define objective:4
         - default:
             - narrate format:SkilledSorcererFormat "Whenever you've got the items I'm looking for, just hand them over."
-            - run QuestProgressHandler def:UnlockFarm-Potatoes
+            - run QuestProgressHandler def:UnlockFarm_Potatoes
             - stop
     - inject QuestItemDeliveryHandler
     - if <[InProgress]>:
         - narrate format:SkilledSorcererFormat <proc[ItemDescriptionHandler_Spells].context[<[delivery_item]>]>
 
-UnlockFarm-PotatoesQuestExperienceDeliveryHandler:
+UnlockFarm_PotatoesQuestExperienceDeliveryHandler:
     type: task
     debug: false
     script:
     - define stage:2
-    - define quest_internalname:UnlockFarm-Potatoes
-    - if <player.item_in_hand.scriptname.if_null[null]> == crystallizedexperiencebillet:
+    - define quest_internalname:UnlockFarm_Potatoes
+    - if <player.item_in_hand.script.name.if_null[null]> == crystallizedexperiencebillet:
         - define objective:1
         - inject QuestItemDeliveryHandler
     - else:
         - narrate format:SkilledSorcererFormat "You can get a Billet of Crystallized Experience from the Arch Artificer. When you've got one, bring it over."
-        
-UnlockFarm-PotatoesCompletion:
+
+UnlockFarm_PotatoesCompletion:
     type: task
     debug: false
     script:
