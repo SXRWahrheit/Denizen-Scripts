@@ -97,7 +97,8 @@ Waypoint_Inventory:
         # Empty list for lore
         - define lore <list>
         # Cost
-        - define cost <player.location.with_world[prosperus].distance[<[destination]>].div[500].add[<player.mcmmo.level.div[25]>].round_up>
+        # Replace .add[50] with power scaling in a later update
+        - define cost <player.location.with_world[prosperus].distance[<[destination]>].div[500].add[50].round_up>
         - if <player.world.name> != prosperus:
             - define cost <[cost].add[5000]>
         - if <player.money.if_null[0]> >= <[cost]>:
