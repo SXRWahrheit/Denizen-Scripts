@@ -14,7 +14,7 @@ Quest_Objective_Item_Delivery_Handler:
     - define material <[objective].deep_get[data.material].if_null[stone]>
     - define item <item[<[material]>]>
     - define lore <list>
-    - define lore "<[lore].include[Progress: <[objective_progress]>/<[objective_total]>]>"
+    - define lore <[lore].include[Progress: <[objective_progress]>/<[objective_total]>]>
     - define item <[item].with[lore=<[lore]>]>
 
     - determine <[item]>

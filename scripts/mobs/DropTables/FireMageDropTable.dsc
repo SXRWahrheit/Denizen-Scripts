@@ -9,7 +9,7 @@ fire_mage_drop:
             - stop
         - else if <proc[AntiFarm_Proc].context[<context.entity>].if_null[null]>:
             - stop
-        - else if "<context.entity.name.starts_with[<&d>Cultist Fire Mage].if_null[null]>":
+        - else if <context.entity.name.starts_with[<&d>Cultist Fire Mage].if_null[null]>:
             - define multiplier:<proc[DropMultiplierHandler]>
             - if <util.random.int[1].to[300]> <= <[multiplier]>:
                 - drop <yaml[droptables].read[fire_mage_weapon_drop_list].random[1]> location:<context.entity.location>

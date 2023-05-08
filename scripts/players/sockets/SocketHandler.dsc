@@ -387,7 +387,7 @@ prismatic_seer_socket_potential_handler:
             - define item <[item].with_flag[sockets_can_add]>
             - define item <[item].with_flag[sockets_current:0]>
             - define item <[item].with_flag[sockets_max:<util.random.int[1].to[<[max_sockets]>]>]>
-            - define potential_line "<[item].lore.find_partial[Sealed Potential]>"
+            - define potential_line <[item].lore.find_partial[Sealed Potential]>
             - define item <[item].with[lore=<[item].lore.set[<&6>Sockets].at[<[potential_line]>]>]>
             - define item <[item].with[lore=<[item].lore.pad_right[<[item].flag[sockets_max].add[<[potential_line]>]>].with[<&8>LOCKED]>]>
             - inventory close

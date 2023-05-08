@@ -66,7 +66,7 @@ YAML_AntiFarm:
 
         # Check for and cancel an empty gold message
         on player receives message:
-        - if "<context.message.contains_text[dropped 0.0 gold]>":
+        - if <context.message.contains_text[dropped 0.0 gold]>:
             - determine CANCELLED
 
 Anti_Spawner_YAML:

@@ -101,11 +101,11 @@ Waypoint_Inventory:
         - if <player.world.name> != prosperus:
             - define cost <[cost].add[5000]>
         - if <player.money.if_null[0]> >= <[cost]>:
-            - define lore "<[lore].include[<gold>Cost: <[cost]>g]>"
-            - define lore "<[lore].include[<green>Can afford]>"
+            - define lore <[lore].include[<gold>Cost: <[cost]>g]>
+            - define lore <[lore].include[<green>Can afford]>
         - else:
-            - define lore "<[lore].include[<gold>Cost: <[cost]>g]>"
-            - define lore "<[lore].include[<red>Cannot afford; only have <gold><player.money.if_null[0]>g<red>]>"
+            - define lore <[lore].include[<gold>Cost: <[cost]>g]>
+            - define lore <[lore].include[<red>Cannot afford; only have <gold><player.money.if_null[0]>g<red>]>
         # Description
         - define description <server.flag[waypoints.<[value]>.description]>
         - define lore <[lore].include[<white><[description]>]>

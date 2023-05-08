@@ -126,7 +126,7 @@ GolfBallInventoryHandler:
             - stop
         - if <player.money> >= 25:
             - take money quantity:25
-            - give "<context.item.with[display=<&a>Mini-golf ball (<player.name>)]>"
+            - give <context.item.with[display=<&a>Mini-golf ball (<player.name>)]>
             - narrate "<gray>You pay 25 gold for your golf ball."
             - narrate format:GolfProFormat "Happy golfing!"
         on player clicks Patron_GolfBall_Inventory_Arrow in GolfBallInventory*:

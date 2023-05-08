@@ -179,13 +179,13 @@ ActiveQuestGUIItemBuilder:
     - define item_lore <[item_lore].include[<white><[quest_description]>]>
     - define item_lore <[item_lore].include[<&sp>]>
     # Stage
-    - define item_lore "<[item_lore].include[<aqua>Stage <[current_stage]>:]>"
+    - define item_lore <[item_lore].include[<aqua>Stage <[current_stage]>:]>
     - foreach <[quest].get[stages].get[<[current_stage]>].get[objectives]>:
         # Green if complete, aqua if not
         - if <[value].get[progress]> == <[value].get[total]>:
-            - define item_lore "<[item_lore].include[<reset><green>• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>]>"
+            - define item_lore <[item_lore].include[<reset><green>• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>]>
         - else:
-            - define item_lore "<[item_lore].include[<reset><aqua>• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>]>"
+            - define item_lore <[item_lore].include[<reset><aqua>• <[value].get[name]>: <[value].get[progress]>/<[value].get[total]>]>
     # Line wrapping time!
     - define item_lore <proc[lore_builder].context[<list[40].include_single[<[item_lore]>]>]>
     # Build the item
@@ -248,7 +248,7 @@ ActiveQuestInventorySelectionHandler:
         # Start with the stage description
         - define stage_progress <[quest].deep_get[stages.<[stage]>.progress]>
         - define stage_total <[quest].deep_get[stages.<[stage]>.total]>
-        - define stage_item "<item[book].with[display_name=<reset><gold><[quest].get[name]>;lore=<list[<reset><aqua>Stage <[Stage]> Objectives|<reset><aqua>Progress: <[stage_progress]>/<[stage_total]>]>;hides=all]>"
+        - define stage_item <item[book].with[display_name=<reset><gold><[quest].get[name]>;lore=<list[<reset><aqua>Stage <[Stage]> Objectives|<reset><aqua>Progress: <[stage_progress]>/<[stage_total]>]>;hides=all]>
         - inventory set d:<[ActiveQuestInventory]> o:<[stage_item]> slot:10
         # Then add the stage requirements
         - foreach <[quest].deep_get[stages.<[stage]>.objectives]>:
@@ -259,11 +259,11 @@ ActiveQuestInventorySelectionHandler:
             - define material <[value].deep_get[data.material]>
             # If the objective is complete, make the item enchanted and green text
             - if <[progress]> >= <[total]>:
-                - define lore_list "<list[].include[<reset><green>Progress: <[progress]>/<[total]>]>"
+                - define lore_list <list[].include[<reset><green>Progress: <[progress]>/<[total]>]>
                 - define item <item[<[material]>].with[display_name=<reset><green><[name]>;lore=<[lore_list]>;hides=all;enchantments=mending=1]>
             # Else, aqua text
             - else:
-                - define lore_list "<list[].include[<reset><aqua>Progress: <[progress]>/<[total]>]>"
+                - define lore_list <list[].include[<reset><aqua>Progress: <[progress]>/<[total]>]>
                 - define item <item[<[material]>].with[display_name=<reset><aqua><[name]>;lore=<[lore_list]>;hides=all].with_flag[active_objective:true].with_flag[quest_internalname:<[quest_internalname]>].with_flag[objective:<[loop_index]>].with_flag[stage:<[stage]>]>
             - inventory set d:<[ActiveQuestInventory]> o:<[item]> slot:<[slot]>
         - inventory open d:<[ActiveQuestInventory]>
@@ -283,7 +283,7 @@ ActiveQuestObjectiveHandler:
         - define obj_name <[value].get[name]>
         - define obj_progress <[value].get[progress]>
         - define obj_total <[value].get[total]>
-        - define item_lore "<[item_lore].include[Progress: <[obj_progress]>/<[obj_total]>]>"
+        - define item_lore <[item_lore].include[Progress: <[obj_progress]>/<[obj_total]>]>
     - define item_material <yaml[<[quest_internalname]>].read[config.material].if_null[paper]>
     - determine <item[<[item_material]>].with[display_name=<reset><gold><[obj_name]>;hides=ALL].with_map[<map.with[lore].as[<[item_lore]>]>].with_flag[quest_internalname:<[quest_internalname]>].with_flag[active_quest:true].with_flag[npc_name:<[npc_name]>]>
 

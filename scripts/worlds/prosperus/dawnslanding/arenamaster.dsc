@@ -22,7 +22,7 @@ SummonPlayersArena:
 Round_1:
     type: interact
     steps:
-        'Player_Seen*':
+        Player_Seen*:
             proximity trigger:
                 entry:
                     radius: 3
@@ -36,15 +36,15 @@ Round_1:
             click trigger:
                 script:
                 - narrate "<gray>Arena Master<&co> <white>If you want to fight, click me again and I'll send you to the prep room."
-                - zap 'step:Game On'
+                - zap Game_On
             chat trigger:
                 'Leave':
-                    trigger: '/leave/'
+                    trigger: /leave/
                     script:
                     - execute as_player spawn
-        'Game On':
+        Game_On:
             click trigger:
                 script:
                 - narrate "<gray>Arena Master<&co> <white>Alright, here you go. Right click a sign and then punch the iron block."
                 - execute as_player "ma join Underdome"
-                - zap step:Player_Seen
+                - zap Player_Seen

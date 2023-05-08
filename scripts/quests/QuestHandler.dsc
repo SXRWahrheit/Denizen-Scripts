@@ -480,7 +480,7 @@ QuestGUIItemBuilder:
     - if <yaml[<[quest_internalname]>].read[config.rewards.items].if_null[null]> != null:
         - define lore_items <list[]>
         - foreach <yaml[<[quest_internalname]>].parsed_key[config.rewards.items]>:
-            - define lore_items "<[lore_items].include[<gold>• <[value].quantity||1>x <[value].display.if_null[<[value].material.name.replace_text[_].with[<&sp>].to_titlecase>]>]>"
+            - define lore_items <[lore_items].include[<gold>• <[value].quantity||1>x <[value].display.if_null[<[value].material.name.replace_text[_].with[<&sp>].to_titlecase>]>]>
             #- define lore_items <[lore_items].include[<[value]>]>
         - define item_lore <[item_lore].include[<[lore_items]>]>
     # Line wrapping time!

@@ -84,14 +84,14 @@ Tribute_Handler:
         - if <yaml[events].read[tribute.active]>:
             - wait 3s
             - clickable TributeEventExplanation for:<player> save:explanation
-            - narrate "<element[<&6>The Gods seek your offerings of Tribute! Collect Tribute and deliver it to the <&2>Oracle of the Gods<&6> in the castle in Dawn's Landing!].on_click[<entry[explanation].command>].on_hover[Click for details!]>"
+            - narrate <element[<&6>The Gods seek your offerings of Tribute! Collect Tribute and deliver it to the <&2>Oracle of the Gods<&6> in the castle in Dawn's Landing!].on_click[<entry[explanation].command>].on_hover[Click for details!]>
             - if <yaml[events].read[tribute.mcmmo.rate]> > 1 || <yaml[events].read[tribute.drops.rate]> > 1 || <yaml[events].read[tribute.experience.rate]> > 1:
                 - narrate "<&a>Current blessings:"
                 #- narrate "<&a>Blessing of Skillfulness: <&6><yaml[events].read[tribute.mcmmo.rate]>x"
                 - narrate "<&a>Blessing of Luck: <&6><yaml[events].read[tribute.drops.rate]>x"
                 - narrate "<&a>Blessing of Wisdom: <&6><yaml[events].read[tribute.experience.rate]>x"
         on player receives message:
-        - if "<context.message.contains_text[mcMMO is currently in an XP rate event]>" && <yaml[events].read[tribute.active]>:
+        - if <context.message.contains_text[mcMMO is currently in an XP rate event]> && <yaml[events].read[tribute.active]>:
             - determine cancelled
 
 Tribute_Power_Hour:
