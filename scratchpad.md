@@ -12,6 +12,11 @@ Stuff I come up with on lunch breaks.
 
 * Prizes spin around the player before landing on the final prize
 
+### Schematic checker
+
+* For a designated location, check the blocks of a schematic relative to the blocks in the area.
+  * To be used for custom features like portals, shrines, etc.
+* Prevent block changes in the area unless the core block is modified actively by a player, and require confirmation to disable the structure
 
 ## Economy
 
