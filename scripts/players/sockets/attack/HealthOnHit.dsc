@@ -4,10 +4,10 @@ socket_gem_attack_health_on_hit_handler:
     events:
         on player damages entity:
         - define gem_count 0
-        - if <context.damager.equipment.include[<context.damager.item_in_hand>].size> == 0:
-            - stop
-        - foreach <context.damager.equipment.include[<context.damager.item_in_hand>]>:
-            - define gem_count <[gem_count].add[<[value].list_flags.filter[regex_matches[socket[0-9]+_gem/socket_gem_attack_health_on_hit]].size||0>]>
+        #- if <context.damager.equipment.include[<context.damager.item_in_hand>].size> == 0:
+        #    - stop
+        #- foreach <context.damager.equipment.include[<context.damager.item_in_hand>]>:
+        #    - define gem_count <[gem_count].add[<[value].list_flags.filter[regex_matches[socket[0-9]+_gem/socket_gem_attack_health_on_hit]].size||0>]>
         - repeat <[gem_count]>:
             - heal <context.final_damage.div[16]> <context.damager>
 
