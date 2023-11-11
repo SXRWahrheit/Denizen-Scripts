@@ -13,12 +13,14 @@ RankupCommand:
         - narrate "<&a>You're currently an <&b>Apprentice<&a>! Here are the requirements to level up to <&b>Knight<&a>:"
         - narrate "<&f>• A sacrifice to the Gods of 500 levels of experience: <tern[<player.xp_level.is[or_more].to[500]>].pass[<green>Ready].fail[<red>Not Ready]>"
         - narrate "<&f>• A sacrifice to the Gods of 100,000 gold: <tern[<player.money.is[or_more].to[100000]>].pass[<green>Ready].fail[<red>Not Ready]>"
+        - narrate "<red>Note: This rank-up is currently disabled as new requirements are being implemented!"
         #- narrate "<&f>• Combined skill level of 5000: <tern[<player.mcmmo.level.is[or_more].to[5000]>].pass[<green>Ready].fail[<red>Not Ready]>"
 
     - else if <player.in_group[Squire]>:
         - narrate "<&a>You're currently a <&b>Squire<&a>! Here are the requirements to level up to <&b>Apprentice<&a>:"
         - narrate "<&f>• A sacrifice to the Gods of 250 levels of experience: <tern[<player.xp_level.is[or_more].to[250]>].pass[<green>Ready].fail[<red>Not Ready]>"
         - narrate "<&f>• A sacrifice to the Gods of 50,000 gold: <tern[<player.money.is[or_more].to[50000]>].pass[<green>Ready].fail[<red>Not Ready]>"
+        - narrate "<red>Note: This rank-up is currently disabled as new requirements are being implemented!"
         #- narrate "<&f>• Combined skill level of 1500: <tern[<player.mcmmo.level.is[or_more].to[1500]>].pass[<green>Ready].fail[<red>Not Ready]>"
 
     - else if <player.in_group[Page]>:
@@ -48,6 +50,7 @@ Rank_Upgrade_Check:
     debug: false
     script:
     - if <player.in_group[Apprentice]>:
+        - stop
         - if <player.money> >= 100000 && <player.xp_level> >= 500:
             - take money quantity:100000
             - experience take level 500
@@ -59,6 +62,7 @@ Rank_Upgrade_Check:
             - announce "<&a><player.name> has been recognized by the Gods and is now a <&b>Knight<&a>!"
             - discord id:sxr message channel:191040977652285450 "**THE GODS SPEAK: Rejoice! <player.name> has been recognized by the Gods and has earned the rank of Knight!**"
     - else if <player.in_group[Squire]>:
+        - stop
         - if <player.money> >= 50000 && <player.xp_level> >= 250:
             - take money quantity:50000
             - experience take level 250
