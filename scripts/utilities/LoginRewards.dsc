@@ -513,14 +513,14 @@ Spinner_Handler:
     - repeat 50:
         - inventory set d:<inventory[daily_spinner.<player.uuid>]> o:<[roll_list].get[<[value]>].to[<[value].add[8]>]> slot:10
         - wait <util.e.power[<[value].mul[0.125].sub[3]>].round_up>t
-    - if <[roll_list].get[54].script.name> == VETERANBOX:
+    - if <[roll_list].get[54].script.name.if_null[null]> == VETERANBOX:
         - flag <player> cannot_close_inv:!
         - inventory close
         - note remove as:daily_spinner.<player.uuid>
         - define sourcelist veteran_list
         - inject spinner_handler
         - stop
-    - else if <[roll_list].get[54].script.name> == ELITEBOX:
+    - else if <[roll_list].get[54].script.name.if_null[null]> == ELITEBOX:
         - flag <player> cannot_close_inv:!
         - inventory close
         - note remove as:daily_spinner.<player.uuid>
