@@ -230,19 +230,19 @@ Tribute_Drops_Lumberjacking:
                 - give GodsTribute
             - narrate "<&a>You found a Tribute to the Gods!"
 
-Tribute_Drops_Digging:
-    type: world
-    debug: false
-    events:
-        on player breaks block with:*_shovel:
-        - if !<yaml[events].read[tribute.active]>:
-            - stop
-        - if !<yaml[digging].read[materials].contains[<context.material.name>]>:
-            - stop
-        - if <util.random.int[1].to[500]> <= 1:
-            - announce to_console "Tribute drop for <player.name> caused by gaining digging exp"
-            - if <server.has_flag[tribute_power_hour]>:
-                - give GodsTribute quantity:2
-            - else:
-                - give GodsTribute
-            - narrate "<&a>You found a Tribute to the Gods!"
+#Tribute_Drops_Digging:
+#    type: world
+#    debug: false
+#    events:
+#        on player breaks block with:*_shovel:
+#        - if !<yaml[events].read[tribute.active]>:
+#            - stop
+#        - if !<yaml[digging].read[materials].contains[<context.material.name>]>:
+#            - stop
+#        - if <util.random.int[1].to[500]> <= 1:
+#            - announce to_console "Tribute drop for <player.name> caused by gaining digging exp"
+#            - if <server.has_flag[tribute_power_hour]>:
+#                - give GodsTribute quantity:2
+#            - else:
+#                - give GodsTribute
+#            - narrate "<&a>You found a Tribute to the Gods!"
