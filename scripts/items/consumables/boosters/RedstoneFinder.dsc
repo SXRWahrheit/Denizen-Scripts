@@ -7,12 +7,12 @@ RedstoneFinderBooster2x:
     data:
         lore_list:
         - <&6>This brew is radiating pure magical energy. Rumor has it that drinking it will attune you to the forces of magic.
+    flags:
+        uncraftable: true
     mechanisms:
         hides:
         - enchants
         - potion_effects
-        nbt:
-        - uncraftable/true
         color: <color[255,0,0]>
         lore: <proc[lore_builder].context[<list[40].include_single[<script.data_key[data.lore_list]>]>]>
 RedstoneFinderBooster4x:
@@ -24,12 +24,12 @@ RedstoneFinderBooster4x:
     data:
         lore_list:
         - <&6>This brew is radiating pure magical energy. Rumor has it that drinking it will greatly attune you to the forces of magic.
+    flags:
+        uncraftable: true
     mechanisms:
         hides:
         - enchants
         - potion_effects
-        nbt:
-        - uncraftable/true
         color: <color[255,0,0]>
         lore: <proc[lore_builder].context[<list[40].include_single[<script.data_key[data.lore_list]>]>]>
 

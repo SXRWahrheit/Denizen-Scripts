@@ -14,9 +14,9 @@ VeteranToken:
     mechanisms:
         hides:
         - enchants
-        nbt:
-        - badlucktoken/veteran
-        - uncraftable/true
+        flags:
+            badlucktoken: veteran
+            uncraftable: true
         lore: <proc[lore_builder].context[<list[40].include_single[<script.data_key[data.lore_list]>]>]>
         custom_model_data: 100001
 

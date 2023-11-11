@@ -24,13 +24,6 @@ Veteran_Air_Helm_sealed_potential:
         - generic.maxHealth/head/0/4.0
         - generic.armorToughness/head/0/2.0
         - generic.armor/head/0/2.0
-        nbt:
-        - equipment_type/armor
-        - item_tier/veteran
-        - sealed_potential/true
-        - armor_set/veteran_air
-        - air_magic_multiplier/0.25
-        - enable_mana/true
 
 Veteran_Air_Chest_sealed_potential:
     type: item
@@ -58,13 +51,6 @@ Veteran_Air_Chest_sealed_potential:
         - generic.maxHealth/chest/0/8.0
         - generic.armorToughness/chest/0/2.0
         - generic.armor/chest/0/4.0
-        nbt:
-        - equipment_type/armor
-        - item_tier/veteran
-        - sealed_potential/true
-        - armor_set/veteran_air
-        - air_magic_multiplier/0.6
-        - enable_mana/true
 
 Veteran_Air_Legs_sealed_potential:
     type: item
@@ -92,13 +78,6 @@ Veteran_Air_Legs_sealed_potential:
         - generic.maxHealth/legs/0/6.0
         - generic.armorToughness/legs/0/2.0
         - generic.armor/legs/0/3.0
-        nbt:
-        - equipment_type/armor
-        - item_tier/veteran
-        - sealed_potential/true
-        - armor_set/veteran_air
-        - air_magic_multiplier/0.4
-        - enable_mana/true
 
 Veteran_Air_Boots_sealed_potential:
     type: item
@@ -126,13 +105,6 @@ Veteran_Air_Boots_sealed_potential:
         - generic.maxHealth/feet/0/2.0
         - generic.armorToughness/feet/0/2.0
         - generic.armor/feet/0/2.0
-        nbt:
-        - equipment_type/armor
-        - item_tier/veteran
-        - sealed_potential/true
-        - armor_set/veteran_air
-        - air_magic_multiplier/0.25
-        - enable_mana/true
 
 elite_windmage_elytra:
     type: item

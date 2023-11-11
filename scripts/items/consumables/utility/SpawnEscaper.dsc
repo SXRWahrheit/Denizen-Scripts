@@ -12,8 +12,6 @@ Adventurers_Crystal:
         uncraftable: true
     mechanisms:
         lore: <proc[lore_builder].context[<list[40].include_single[<script.data_key[data.lore_list]>]>]>
-        nbt:
-        - uncraftable/true
         hides:
         - enchants
         custom_model_data: 100001
