@@ -74,8 +74,8 @@ Money_Command:
                 - narrate "<red>Must specify player and amount, e.g. <green>/money pay Wahrheit 5"
                 - stop
             - if <player.money> >= <context.args.get[3]>:
-                - take money quantity:<context.args.get[3]>
-                - give money quantity:<context.args.get[3]> player:<[recipient]>
+                - money take quantity:<context.args.get[3]>
+                - money give quantity:<context.args.get[3]> players:<[recipient]>
                 - narrate "<green>Transferred <context.args.get[3]> gold to <[recipient].name>"
                 - narrate "<green>Received <context.args.get[3]> gold from <[sender].name>" player:<[recipient]>
                 - stop
@@ -90,7 +90,7 @@ Money_Command:
                 - narrate "<red>Must specify player and amount, e.g. <green>/money give Wahrheit 5"
                 - stop
             - define sender <player>
-            - give money quantity:<context.args.get[3]> player:<[player]>
+            - money give quantity:<context.args.get[3]> players:<[player]>
             - narrate "<green>Gave <context.args.get[3]>g to <[player].name>"
             - narrate "<green>Received <context.args.get[3]> gold from <[sender].name> as a gift from the Gods" player:<[player]>
         - if <context.args.get[1]> == take:
@@ -102,7 +102,7 @@ Money_Command:
                 - stop
             - if <[amount]> > <[player].money>:
                 - narrate "<red>Amount to be taken exceeds player's total balance of <gold><[player].money>g<red>!"
-            - take money quantity:<context.args.get[3]> player:<[player]>
+            - money take quantity:<context.args.get[3]> players:<[player]>
             - narrate "<green>Took <context.args.get[3]>g from <[player].name>"
         - if <context.args.get[1]> == set:
             - if !<player.is_op>:
