@@ -30,6 +30,7 @@ LoginReset:
     description: Reset your daily login reward.
     usage: /loginreset
     debug: false
+    permissions: denizen.admin
     script:
         - flag <player> daily-spin-available:1
         - flag server daily-login.<player.uuid>:1
@@ -474,7 +475,7 @@ daily_login_spinner:
 
     # Define the list to pull from
     - choose <server.flag[daily-login-count.<player.uuid>]>:
-        - case 1 2 3 4 5 6:
+        - case 0 1 2 3 4 5 6:
             - define sourcelist itemlist_week1
         - case 7:
             - define sourcelist itemlist_day7
@@ -501,7 +502,7 @@ Spinner_Handler:
     # Create your list of weighted items
     - define itemlist <list>
     - foreach <script[daily_login_spinner].data_key[data.<[sourcelist]>]> as:entry:
-        - define itemlist <[itemlist].pad_left[<[itemlist].size.add[<[entry].get[weight]>]>].with[<[entry].get[item].as[item].with[quantity=<[entry].get[quantity]>]>]>
+        - define itemlist <[itemlist].pad_left[<[itemlist].size.add[<[entry].get[weight]>]>].with[<[entry].get[item].parsed.as[item].with[quantity=<[entry].get[quantity]>]>]>
 
     # Pick 60 random items from the weighted list
     - define roll_size 60
