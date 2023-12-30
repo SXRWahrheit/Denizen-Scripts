@@ -74,9 +74,9 @@ Waypoint_Inventory:
     type: inventory
     debug: true
     inventory: chest
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E012]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E011]>
+#   title: Waypoints<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[48]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E012]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E011]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E012]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E011]><&chr[F801].repeat[177]><&chr[E01F]>
+    title: Waypoints<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[48]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E012]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E011]><&chr[F801].repeat[177]><&chr[E01F]>
     gui: true
     size: 54
     slots:

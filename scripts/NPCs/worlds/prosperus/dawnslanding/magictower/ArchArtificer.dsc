@@ -112,9 +112,9 @@ ArtificingInventory:
     type: inventory
     inventory: chest
     debug: false
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00F]>
+#   title: Artificing<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[45]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00F]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00F]><&chr[F801].repeat[177]><&chr[E01E]>
+    title: Artificing<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[45]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00F]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [] [] [] [] [] [] [] [] []

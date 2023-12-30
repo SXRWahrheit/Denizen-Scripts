@@ -105,7 +105,7 @@ Tribute_Inventory:
     type: inventory
     inventory: chest
     debug: false
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E022]><&chr[F801].repeat[177]><&chr[E01E]>
+    title: Blessings<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[47]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E022]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [] [] [] [] [] [] [] [] []

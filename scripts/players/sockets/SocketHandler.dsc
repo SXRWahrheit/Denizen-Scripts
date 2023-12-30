@@ -138,15 +138,15 @@ sockets:
 prismatic_seer_menu:
     type: inventory
     inventory: chest
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[151]><gold><&font[sxrmenus]><&chr[E004]><&chr[F801].repeat[17]><white><&font[sxrmenus]><&chr[E005]><&chr[F801].repeat[17]><aqua><&font[sxrmenus]><&chr[E004]>
+#   title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E004]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]><&chr[F801].repeat[151]><gold><&font[sxrmenus]><&chr[E004]><&chr[F801].repeat[17]><white><&font[sxrmenus]><&chr[E005]><&chr[F801].repeat[17]><aqua><&font[sxrmenus]><&chr[E004]>
+    title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]><&chr[F801].repeat[177]><&chr[E004]>
     size: 45
     slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [] [] [socket_potential] [] [socket_add] [] [gem_add] [] []
     - [] [] [] [] [] [] [] [] []
+    - [] [] [socket_potential] [] [socket_add] [] [gem_add] [] []
     - [] [] [] [] [] [] [] [] []
 socket_add:
     type: item
@@ -257,7 +257,9 @@ prismatic_seer_inventory_handler:
 sockets_can_add_inventory:
     type: inventory
     inventory: chest
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   temporary title until hiding player inventory works:
+    title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [air] [air] [air] [air] [air] [air] [air] [air] [air]
@@ -271,7 +273,9 @@ sockets_can_add_inventory:
 sockets_open_inventory:
     type: inventory
     inventory: chest
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   temporary title until hiding player inventory works:
+    title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [air] [air] [air] [air] [air] [air] [air] [air] [air]
@@ -285,7 +289,9 @@ sockets_open_inventory:
 potential_inventory:
     type: inventory
     inventory: chest
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   temporary title until hiding player inventory works:
+    title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [air] [air] [air] [air] [air] [air] [air] [air] [air]
@@ -446,7 +452,9 @@ prismatic_seer_gem_add_item_handler:
 sockets_gem_add_inventory:
     type: inventory
     inventory: chest
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]>
+#   temporary title until hiding player inventory works:
+    title: Item Potential<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[67]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E006]><&chr[F801].repeat[177]><&chr[E01E]>
     size: 45
     slots:
     - [air] [air] [air] [air] [air] [air] [air] [air] [air]

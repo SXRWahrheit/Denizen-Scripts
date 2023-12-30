@@ -36,11 +36,12 @@ ArcaneForgerInventoryMenu:
     type: inventory
     inventory: chest
     debug: false
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00E]><&chr[F801].repeat[133]><blue><&font[sxrmenus]><&chr[E004]><&chr[F801].repeat[17]><&chr[E004]><&chr[F801].repeat[89]><light_purple><&font[sxrmenus]><&chr[E00A]><&chr[F801].repeat[17]><&chr[E00A]>
+#   title: Arcane Forging<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[78]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E000]><&chr[F801].repeat[177]><&chr[E00E]><&chr[F801].repeat[177]><&chr[E005]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E00E]><&chr[F801].repeat[177]><&chr[E01E]><&chr[F801].repeat[133]><blue><&font[sxrmenus]><&chr[E004]><&chr[F801].repeat[17]><&chr[E004]><&chr[F801].repeat[89]><light_purple><&font[sxrmenus]><&chr[E00A]><&chr[F801].repeat[17]><&chr[E00A]>
-    size: 45
+    title: Arcane Forging<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[78]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E000]><&chr[F801].repeat[177]><&chr[E00E]><&chr[F801].repeat[177]><&chr[E005]><&chr[F801].repeat[177]><&chr[E01D]>
+    size: 54
     slots:
+    - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [VeteranToolForge] [] [VeteranWeaponForge] [] [] []
