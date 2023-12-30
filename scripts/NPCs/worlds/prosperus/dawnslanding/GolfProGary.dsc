@@ -59,9 +59,9 @@ GolfBallInventory_Base:
     type: inventory
     inventory: chest
     debug: false
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E009]>
+#   title: Mini-Golf Rentals<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[83]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E009]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E01C]><&chr[F801].repeat[177]><&chr[E009]>
+    title: Mini-Golf Rentals<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[83]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E01C]><&chr[F801].repeat[177]><&chr[E009]>
     size: 54
     slots:
     - [] [] [] [] [] [] [] [] []
@@ -75,9 +75,9 @@ GolfballInventory_Patron:
     type: inventory
     inventory: chest
     debug: false
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E009]>
+#   title: Mini-Golf Rentals<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[83]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E009]>
 #   temporary title until hiding player inventory works:
-    title: <white><&font[sxrmenus]><&chr[F808]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E01C]><&chr[F801].repeat[177]><&chr[E009]>
+    title: Mini-Golf Rentals<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[83]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E007]><&chr[F801].repeat[177]><&chr[E008]><&chr[F801].repeat[177]><&chr[E01C]><&chr[F801].repeat[177]><&chr[E009]>
     size: 54
     slots:
     - [] [] [] [] [] [] [] [] []

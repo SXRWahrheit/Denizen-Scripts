@@ -113,7 +113,7 @@ ActiveQuestInventoryGUIHandler:
         - define inventory <inventory[QuestInventoryGUIBase]>
         - inventory set d:<[inventory]> o:<[inventory_list]> slot:10
         # Active quest title
-        - define name <white><&font[sxrmenus]><&chr[F808]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00C]><&chr[F801].repeat[177]><&chr[E01F]>
+        - define name Active<&chr[00A0]>Quests<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[68]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00C]><&chr[F801].repeat[177]><&chr[E01F]>
         - adjust <[inventory]> title:<[name]>
         - inventory open d:<[inventory]>
         # Check if player has available quests
@@ -149,7 +149,7 @@ AvailableQuestInventoryGUIHandler:
         # Create the inventory using the base and the generated list
         - define inventory <inventory[QuestInventoryGUIBase]>
         # Available quest title
-        - define name <white><&font[sxrmenus]><&chr[F808]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00D]><&chr[F801].repeat[177]><&chr[E01F]>
+        - define name Available<&chr[00A0]>Quests<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[82]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00D]><&chr[F801].repeat[177]><&chr[E01F]>
         - adjust <[inventory]> title:<[name]>
         - inventory open d:<[inventory].include[<[inventory_list]>]>
         # Check if player has active quests
@@ -237,7 +237,7 @@ ActiveQuestInventorySelectionHandler:
         - define quest_internalname <context.item.flag[quest_internalname]>
         - define quest <yaml[<[data]>].read[quests.active.<[quest_internalname]>]>
         # Active quest title
-        - define name <white><&font[sxrmenus]><&chr[F808]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00C]><&chr[F801].repeat[177]><&chr[E01F]>
+        - define name Active<&chr[00A0]>Quests<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[68]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E016]><&chr[F801].repeat[177]><&chr[E00B]><&chr[F801].repeat[177]><&chr[E00C]><&chr[F801].repeat[177]><&chr[E01F]>
         - define stage <[quest].get[current_stage]>
         - flag <player> npc_interact_active_quest:<context.item.flag[quest_internalname]>
         #- zap <context.item.flag[npc_name]>Interact ActiveQuestManagement

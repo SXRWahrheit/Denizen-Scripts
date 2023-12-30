@@ -102,16 +102,13 @@ daily_spinner_inventory:
     type: inventory
     inventory: chest
     debug: false
-    title: <&6><&l>Daily Login Reward
-#   Once the calling-menu-indirectly issue is fixed, we can use the below title for the custom menu (or one of them)
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
+#   title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
 #   temporary title until hiding player inventory works:
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
-    size: 27
-#   size: 45 #use this one instead of the above when we implement the custom menu
+    title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
+    size: 45
     slots:
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
     - [air] [air] [air] [air] [DownArrow] [air] [air] [air] [air]
     - [] [] [] [] [] [] [] [] []
     - [air] [air] [air] [air] [UpArrow] [air] [air] [air] [air]
@@ -120,16 +117,13 @@ veteran_spinner_inventory:
     type: inventory
     inventory: chest
     debug: false
-    title: <&6><&l>Veteran BONUS ROUND
-#   Once the calling-menu-indirectly issue is fixed, we can use the below title for the custom menu (or one of them)
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
+#   title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
 #   temporary title until hiding player inventory works:
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
-    size: 27
-#   size: 45 #use this one instead of the above when we implement the custom menu
+    title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
+    size: 45
     slots:
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
     - [air] [air] [air] [air] [DownArrow] [air] [air] [air] [air]
     - [] [] [] [] [] [] [] [] []
     - [air] [air] [air] [air] [UpArrow] [air] [air] [air] [air]
@@ -138,16 +132,13 @@ elite_spinner_inventory:
     type: inventory
     inventory: chest
     debug: false
-    title: <&6><&l>Elite BONUS ROUND
-#   Once the calling-menu-indirectly issue is fixed, we can use the below title for the custom menu (or one of them)
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
+#   title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]>
 #   temporary title until hiding player inventory works:
-#   title: <white><&font[sxrmenus]><&chr[F808]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
-    size: 27
-#   size: 45 #use this one instead of the above when we implement the custom menu
+    title: Login Rewards<&chr[00A0].repeat[1000]><white><&font[sxrmenus]><&chr[F801].repeat[72]><&chr[F801].repeat[4000]><&chr[F801].repeat[8]><&chr[E002]><&chr[F801].repeat[177]><&chr[E021]><&chr[F801].repeat[177]><&chr[E020]><&chr[F801].repeat[177]><&chr[E01E]>
+    size: 45
     slots:
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
-#   - [air] [air] [air] [air] [air] [air] [air] [air] [air] # uncomment when we implement the custom menu
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
+    - [air] [air] [air] [air] [air] [air] [air] [air] [air]
     - [air] [air] [air] [air] [DownArrow] [air] [air] [air] [air]
     - [] [] [] [] [] [] [] [] []
     - [air] [air] [air] [air] [UpArrow] [air] [air] [air] [air]
@@ -511,7 +502,7 @@ Spinner_Handler:
     - inventory open d:daily_spinner.<player.uuid>
     # Roll
     - repeat 50:
-        - inventory set d:<inventory[daily_spinner.<player.uuid>]> o:<[roll_list].get[<[value]>].to[<[value].add[8]>]> slot:10
+        - inventory set d:<inventory[daily_spinner.<player.uuid>]> o:<[roll_list].get[<[value]>].to[<[value].add[8]>]> slot:28
         - wait <util.e.power[<[value].mul[0.125].sub[3]>].round_up>t
     - if <[roll_list].get[54].script.name.if_null[null]> == VETERANBOX:
         - flag <player> cannot_close_inv:!
